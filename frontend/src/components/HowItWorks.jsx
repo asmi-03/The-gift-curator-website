@@ -24,13 +24,13 @@ export default function HowItWorks({ onNavigate }) {
           <div className="inline-flex p-1.5 rounded-2xl bg-cream-200 border border-cream-300 mt-4">
             <button
               onClick={() => setActiveTab('curate')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 activeTab === 'curate'
-                  ? 'bg-slatewarm-800 text-cream-50 shadow-sm'
-                  : 'text-slatewarm-600 hover:text-slatewarm-900'
+                  ? 'bg-[#7A2832] text-white shadow-sm'
+                  : 'text-[#2E2826] hover:text-[#7A2832]'
               }`}
             >
-              <Sparkles className="w-4 h-4 text-gold-400" />
+              <Sparkles className="w-4 h-4 text-[#FAD02C]" />
               <span>Personalised Concierge (Curate My Gift)</span>
             </button>
             <button
@@ -140,7 +140,7 @@ export default function HowItWorks({ onNavigate }) {
               </div>
               <button
                 onClick={() => onNavigate('curate')}
-                className="shrink-0 px-6 py-3 rounded-xl bg-gold-400 hover:bg-gold-500 text-slatewarm-900 font-semibold text-xs tracking-wide shadow-sm hover:shadow transition-all flex items-center gap-2"
+                className="shrink-0 px-6 py-3.5 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white font-bold text-xs uppercase tracking-wider shadow-sm hover:shadow transition-all flex items-center gap-2"
               >
                 <span>Curate My Gift Now</span>
                 <ArrowRight className="w-4 h-4" />

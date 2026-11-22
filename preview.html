@@ -161,22 +161,48 @@
               Tell us <strong class="text-[#2E2826]">who</strong>, <strong class="text-[#2E2826]">why</strong>, and <strong class="text-[#2E2826]">how much</strong> — The Gift Curator takes care of the what. Explore ready-to-order curated hampers or commission a bespoke concierge gift.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-xl">
-              <button onclick="showTab('hampers')" class="p-6 rounded-2xl bg-white border border-[#EAE2D8] hover:border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group">
-                <div class="text-3xl mb-2">🎁</div>
-                <h3 class="font-serif text-xl font-bold text-[#2E2826]">Our Hampers</h3>
-                <p class="text-xs text-[#524945] mt-1 leading-relaxed">
-                  Pre-curated luxury hampers with upfront AED pricing and prompt Dubai dispatch.
-                </p>
-                <span class="inline-block mt-3 text-xs font-semibold text-[#7A2832] group-hover:underline">Shop Hampers →</span>
+              <button onclick="showTab('hampers')" class="p-6 rounded-2xl bg-white border border-[#EAE2D8] hover:border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between">
+                <div class="space-y-2">
+                  <div class="w-10 h-10 rounded-xl bg-[#FAECE8] text-[#7A2832] flex items-center justify-center text-xl">
+                    🎁
+                  </div>
+                  <div>
+                    <h3 class="font-serif text-2xl font-bold text-[#2E2826]">Shop Ready-to-Gift</h3>
+                    <p class="text-xs text-[#524945] mt-1.5 leading-relaxed">
+                      Pre-curated luxury hampers with upfront AED pricing and prompt Dubai dispatch.
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between text-xs font-bold text-[#7A2832]">
+                  <span class="uppercase tracking-wider">Browse Hampers</span>
+                  <span class="text-base group-hover:translate-x-1 transition-transform">→</span>
+                </div>
               </button>
 
-              <button onclick="showTab('personalised')" class="p-6 rounded-2xl bg-[#2E2826] text-white hover:bg-[#1A1716] shadow-xs hover:shadow-md transition-all text-left group">
-                <div class="text-3xl mb-2">✨</div>
-                <h3 class="font-serif text-xl font-bold text-[#FAF7F2]">Personalised Gifting</h3>
-                <p class="text-xs text-[#D5CEC9] mt-1 leading-relaxed">
-                  Concierge curation tailored to your budget and recipient. Zero advance fee for the concept.
-                </p>
-                <span class="inline-block mt-3 text-xs font-semibold text-[#EAE0D5] group-hover:underline">Start Concierge →</span>
+              <!-- Journey 2: Curate My Gift (High Visibility & Rich Boutique Contrast) -->
+              <button onclick="showTab('personalised')" class="p-6 rounded-2xl bg-[#FFFBF8] border-2 border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <div class="w-10 h-10 rounded-xl bg-[#7A2832] text-white flex items-center justify-center text-xl shadow-xs">
+                      ✨
+                    </div>
+                    <span class="text-[10px] bg-[#7A2832] text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      Bespoke
+                    </span>
+                  </div>
+                  <div>
+                    <h3 class="font-serif text-2xl font-bold text-[#7A2832] group-hover:text-[#682029] transition-colors leading-tight">
+                      Curate My Gift
+                    </h3>
+                    <p class="text-xs font-medium text-[#2E2826] mt-1.5 leading-relaxed">
+                      Concierge curation tailored to your budget and recipient. Zero advance fee for the concept.
+                    </p>
+                  </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0E5DC] flex items-center justify-between text-xs font-bold text-[#7A2832]">
+                  <span class="uppercase tracking-wider">Start 2-Min Brief</span>
+                  <span class="text-base group-hover:translate-x-1 transition-transform">→</span>
+                </div>
               </button>
             </div>
           </div>

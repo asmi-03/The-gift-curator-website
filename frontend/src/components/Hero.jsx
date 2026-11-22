@@ -39,52 +39,54 @@ export default function Hero({ onNavigate }) {
               {/* Journey 1: Ready-to-Gift */}
               <div 
                 onClick={() => onNavigate('shop')}
-                className="group relative cursor-pointer p-5 rounded-2xl bg-white border border-cream-300 hover:border-rosewood-400 shadow-soft hover:shadow-card transition-all text-left flex flex-col justify-between"
+                className="group relative cursor-pointer p-5 rounded-2xl bg-white border border-[#EAE2D8] hover:border-[#7A2832] shadow-soft hover:shadow-card transition-all text-left flex flex-col justify-between"
               >
                 <div className="space-y-2">
-                  <div className="w-10 h-10 rounded-xl bg-rosewood-100 text-rosewood-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-xl bg-[#FAECE8] text-[#7A2832] flex items-center justify-center group-hover:scale-105 transition-transform">
                     <ShoppingBag className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl font-semibold text-slatewarm-800">
+                    <h3 className="font-serif text-2xl font-bold text-[#2E2826] leading-tight">
                       Shop Ready-to-Gift
                     </h3>
-                    <p className="text-xs text-slatewarm-500 mt-1 leading-relaxed">
+                    <p className="text-xs text-[#524945] mt-1.5 leading-relaxed">
                       Instant gratification. Pre-curated boutique hampers with actual AED prices, complete item lists & same-day Dubai delivery.
                     </p>
                   </div>
                 </div>
                 
-                <div className="mt-4 pt-3 border-t border-cream-200 flex items-center justify-between text-xs font-semibold text-rosewood-600">
-                  <span>Browse Catalogue</span>
+                <div className="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between text-xs font-bold text-[#7A2832]">
+                  <span className="uppercase tracking-wider">Browse Catalogue</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
 
-              {/* Journey 2: Curate My Gift */}
+              {/* Journey 2: Curate My Gift (High Visibility & Rich Boutique Contrast) */}
               <div 
                 onClick={() => onNavigate('curate')}
-                className="group relative cursor-pointer p-5 rounded-2xl bg-slatewarm-900 border border-slatewarm-800 hover:border-gold-400 shadow-soft hover:shadow-card transition-all text-left flex flex-col justify-between"
+                className="group relative cursor-pointer p-5 rounded-2xl bg-[#FFFBF8] border-2 border-[#7A2832] shadow-soft hover:shadow-card transition-all text-left flex flex-col justify-between"
               >
                 <div className="space-y-2">
-                  <div className="w-10 h-10 rounded-xl bg-gold-400/20 text-gold-300 flex items-center justify-center group-hover:scale-105 transition-transform">
-                    <Sparkles className="w-5 h-5" />
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-[#7A2832] text-white flex items-center justify-center group-hover:scale-105 transition-transform shadow-xs">
+                      <Sparkles className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="text-[10px] bg-[#7A2832] text-white font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      Bespoke
+                    </span>
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-serif text-xl font-semibold text-cream-50">
-                        Curate My Gift
-                      </h3>
-                      <span className="text-[10px] bg-rosewood-500 text-white px-1.5 py-0.5 rounded font-medium">Bespoke</span>
-                    </div>
-                    <p className="text-xs text-slatewarm-300 mt-1 leading-relaxed">
+                    <h3 className="font-serif text-2xl font-bold text-[#7A2832] group-hover:text-[#682029] transition-colors leading-tight">
+                      Curate My Gift
+                    </h3>
+                    <p className="text-xs font-medium text-[#2E2826] mt-1.5 leading-relaxed">
                       Personalised concierge. Share your recipient, occasion & budget. We propose 1 tailored concept in 2–4h — no deposit required.
                     </p>
                   </div>
                 </div>
                 
-                <div className="mt-4 pt-3 border-t border-slatewarm-700/60 flex items-center justify-between text-xs font-semibold text-gold-300">
-                  <span>Start 2-Min Brief</span>
+                <div className="mt-4 pt-3 border-t border-[#F0E5DC] flex items-center justify-between text-xs font-bold text-[#7A2832]">
+                  <span className="uppercase tracking-wider">Start 2-Min Brief</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
