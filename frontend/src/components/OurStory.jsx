@@ -78,30 +78,46 @@ export default function OurStory({ onNavigate }) {
 
           </div>
 
-          {/* Right Column: Founder Arched Photo Card (Matching Screenshot) */}
+          {/* Right Column: Founder Portrait Card (Simple, Attractive Luxury Border in Full HD) */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm sm:max-w-md p-4 sm:p-5 rounded-t-[160px] rounded-b-3xl bg-[#F6EFE9] border border-[#EAE0D5] shadow-sm text-center">
+            <div className="relative w-full max-w-sm sm:max-w-md p-3 sm:p-4 rounded-t-[170px] rounded-b-3xl bg-white border border-[#E5DACF] shadow-md hover:shadow-lg transition-all text-center group">
               
-              {/* Arched Photo Frame */}
-              <div className="relative mx-auto rounded-t-[140px] rounded-b-2xl overflow-hidden aspect-[4/5] bg-[#EBE2D8] shadow-inner">
-                <img
-                  src="/images/founder-chaitally.jpg"
-                  alt="Chaitally - Founder of The Gift Curator Dubai"
-                  className="w-full h-full object-cover object-top"
-                />
+              {/* Outer Decorative Matting / Inset */}
+              <div className="p-2 sm:p-2.5 rounded-t-[155px] rounded-b-2xl bg-[#F7F2EC] border border-[#EFE8DF]">
+                
+                {/* Arched Photo Frame with Simple Crisp Border */}
+                <div className="relative mx-auto rounded-t-[140px] rounded-b-xl overflow-hidden aspect-[3/4] sm:aspect-[4/5] bg-[#EBE2D8] border border-white shadow-xs">
+                  <img
+                    src="/images/founder-chaitally.jpg"
+                    alt="Chaitally - Founder & Lead Curator, The Gift Curator Dubai"
+                    className="w-full h-full object-cover object-[50%_15%] transition-transform duration-700 group-hover:scale-105"
+                    loading="eager"
+                  />
+                  {/* Subtle warm ambient highlight */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+
               </div>
 
-              {/* Founder Caption */}
-              <div className="pt-4 pb-2 space-y-1">
-                <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#2E2826]">
+              {/* Founder Details & Signature */}
+              <div className="pt-5 pb-3 space-y-1.5 px-2">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FAECE8] text-[#7A2832] text-[10px] font-bold uppercase tracking-wider">
+                  <span>Founder & Lead Curator</span>
+                </div>
+
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#2E2826] tracking-tight">
                   Chaitally
                 </h3>
-                <p className="text-xs sm:text-sm text-[#736862] font-medium tracking-wide">
-                  Founder, The Gift Curator Dubai
+                
+                <p className="text-xs sm:text-sm text-[#524945] font-medium">
+                  The Gift Curator Dubai
                 </p>
-                <span className="inline-block text-[11px] text-[#9E533F] font-serif italic pt-0.5">
-                  Anrudaya Gifts FZE • Dubai, UAE
-                </span>
+
+                <div className="pt-2 flex items-center justify-center gap-3 text-[11px] text-[#9E533F] font-serif italic">
+                  <span className="w-8 h-[1px] bg-[#E0D5C7]"></span>
+                  <span>Anrudaya Gifts FZE • Dubai, UAE</span>
+                  <span className="w-8 h-[1px] bg-[#E0D5C7]"></span>
+                </div>
               </div>
 
             </div>
