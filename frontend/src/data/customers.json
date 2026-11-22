@@ -1,0 +1,67 @@
+[
+  {
+    "id": "CUST-001",
+    "name": "Fatima Al-Maktoum",
+    "phone": "+971 50 892 1144",
+    "email": "fatima.m@example.ae",
+    "location": "Downtown Dubai",
+    "tier": "VIP Client",
+    "totalOrders": 4,
+    "totalSpend": 2480,
+    "lastOrderDate": "2026-11-22",
+    "preferences": "Loves artisanal scents, fig & amber candles, sage green silk ribbons.",
+    "status": "Active"
+  },
+  {
+    "id": "CUST-002",
+    "name": "Marcus Vance",
+    "phone": "+971 55 412 8890",
+    "email": "m.vance@difcpartners.com",
+    "location": "DIFC, Dubai",
+    "tier": "Corporate",
+    "totalOrders": 3,
+    "totalSpend": 3840,
+    "lastOrderDate": "2026-11-22",
+    "preferences": "High-end corporate executive boxes, brass details, luxury Arabic sweets & dates.",
+    "status": "Active"
+  },
+  {
+    "id": "CUST-003",
+    "name": "Sara Al-Hashimi",
+    "phone": "+971 52 733 9012",
+    "email": "sara.hashimi@gmail.com",
+    "location": "Palm Jumeirah",
+    "tier": "Regular",
+    "totalOrders": 2,
+    "totalSpend": 875,
+    "lastOrderDate": "2026-11-21",
+    "preferences": "Baby gifts, pastel color palettes, organic cotton newborn essentials.",
+    "status": "Active"
+  },
+  {
+    "id": "CUST-004",
+    "name": "Elena Rostova",
+    "phone": "+971 58 661 2940",
+    "email": "elena.design@dubaihills.ae",
+    "location": "Dubai Hills Estate",
+    "tier": "VIP Client",
+    "totalOrders": 3,
+    "totalSpend": 1950,
+    "lastOrderDate": "2026-11-19",
+    "preferences": "Luxury spa collections, bath soaks, silk eye masks, champagne ribbons.",
+    "status": "Active"
+  },
+  {
+    "id": "CUST-005",
+    "name": "Tariq Mansoor",
+    "phone": "+971 50 119 4432",
+    "email": "tmansoor@adgm.ae",
+    "location": "Abu Dhabi",
+    "tier": "Corporate",
+    "totalOrders": 5,
+    "totalSpend": 6250,
+    "lastOrderDate": "2026-11-18",
+    "preferences": "Bulk executive gifting, specialty single-origin coffees, custom branding tags.",
+    "status": "Active"
+  }
+]

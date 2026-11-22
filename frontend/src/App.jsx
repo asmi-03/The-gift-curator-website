@@ -11,6 +11,7 @@ import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import PrivacyPolicyModal from './components/PrivacyPolicyModal';
 import OwnerPortalModal from './components/OwnerPortalModal';
+import AdminDashboard from './components/AdminDashboard';
 import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
 import ImageFrame from './components/ImageFrame';
 import { Sparkles, ShoppingBag, ArrowRight } from 'lucide-react';
@@ -22,11 +23,11 @@ export default function App() {
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   const [ownerPortalOpen, setOwnerPortalOpen] = useState(false);
 
-  // Sync with URL hash (e.g. #our-story, #personalised-gifting, #hampers)
+  // Sync with URL hash (e.g. #our-story, #personalised-gifting, #hampers, #admin)
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      const validTabs = ['home', 'hampers', 'personalised-gifting', 'corporate-gifting', 'our-story', 'contact'];
+      const validTabs = ['home', 'hampers', 'personalised-gifting', 'corporate-gifting', 'our-story', 'contact', 'admin'];
       
       if (validTabs.includes(hash)) {
         setActiveTab(hash);
@@ -58,6 +59,11 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // If in Admin Dashboard mode, display full-screen dedicated admin application
+  if (activeTab === 'admin') {
+    return <AdminDashboard onExit={() => switchTab('home')} />;
+  }
+
   return (
     <div className="min-h-screen bg-[#FAF7F2] flex flex-col font-sans text-[#2E2826]">
       
@@ -65,7 +71,7 @@ export default function App() {
       <Navbar 
         onNavigate={switchTab} 
         activeTab={activeTab} 
-        onOpenOwnerPortal={() => setOwnerPortalOpen(true)}
+        onOpenOwnerPortal={() => switchTab('admin')}
       />
 
       <main className="flex-1">
@@ -227,7 +233,7 @@ export default function App() {
       <Footer 
         onNavigate={switchTab}
         onOpenPrivacyModal={() => setPrivacyModalOpen(true)}
-        onOpenOwnerPortal={() => setOwnerPortalOpen(true)}
+        onOpenOwnerPortal={() => switchTab('admin')}
       />
 
       {/* Floating Concierge WhatsApp Widget */}

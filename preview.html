@@ -47,6 +47,8 @@
     .nav-link { position: relative; padding: 4px 0; transition: all 0.2s; color: #3A3330; }
     .nav-link:hover { color: #7A2832; }
     .nav-link.active { font-weight: 500; color: #2E2826; border-bottom: 2px solid #2E2826; }
+    .admin-subtab { display: none; }
+    .admin-subtab.active { display: block; }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col bg-[#FAF7F2]">
@@ -61,12 +63,13 @@
       <div class="flex items-center gap-4 text-xs">
         <span class="text-[#D4AF37]">✨ Handwritten wax-sealed card included</span>
         <a href="https://instagram.com/thegiftcuratordubai" target="_blank" class="hover:underline font-medium">@thegiftcuratordubai</a>
+        <button onclick="showTab('admin')" class="text-xs text-[#D4AF37] hover:underline font-mono">🔒 Admin</button>
       </div>
     </div>
   </div>
 
   <!-- EXACT HEADER MATCHING SCREENSHOT -->
-  <header class="sticky top-0 z-40 bg-[#FAF7F2] border-b border-[#EFEAE2]">
+  <header id="main-header" class="sticky top-0 z-40 bg-[#FAF7F2] border-b border-[#EFEAE2]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
@@ -99,7 +102,7 @@
         </nav>
 
         <!-- Right Solid Burgundy WhatsApp Button -->
-        <div class="hidden lg:flex items-center">
+        <div class="hidden lg:flex items-center gap-3">
           <a 
             href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20ask%20a%20question%20about%20your%20gifting%20services."
             target="_blank"
@@ -135,7 +138,8 @@
       <button onclick="showTab('personalised'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Personalised Gifting</button>
       <button onclick="showTab('corporate'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Corporate Gifting</button>
       <button onclick="showTab('story'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Our Story</button>
-      <button onclick="showTab('contact'); toggleMobileMenu()" class="block w-full text-left py-2">Contact</button>
+      <button onclick="showTab('contact'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Contact</button>
+      <button onclick="showTab('admin'); toggleMobileMenu()" class="block w-full text-left py-2 font-bold text-[#7A2832]">🔒 Admin Dashboard</button>
     </div>
   </header>
 
@@ -161,6 +165,7 @@
               Tell us <strong class="text-[#2E2826]">who</strong>, <strong class="text-[#2E2826]">why</strong>, and <strong class="text-[#2E2826]">how much</strong> — The Gift Curator takes care of the what. Explore ready-to-order curated hampers or commission a bespoke concierge gift.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-xl">
+              <!-- Journey 1: Ready-to-Gift -->
               <button onclick="showTab('hampers')" class="p-6 rounded-2xl bg-white border border-[#EAE2D8] hover:border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between">
                 <div class="space-y-2">
                   <div class="w-10 h-10 rounded-xl bg-[#FAECE8] text-[#7A2832] flex items-center justify-center text-xl">
@@ -195,7 +200,7 @@
                       Curate My Gift
                     </h3>
                     <p class="text-xs font-medium text-[#2E2826] mt-1.5 leading-relaxed">
-                      Concierge curation tailored to your budget and recipient. Zero advance fee for the concept.
+                      Personalised concierge. Share your recipient, occasion & budget. We propose 1 tailored concept in 2–4h — no deposit required.
                     </p>
                   </div>
                 </div>
@@ -268,237 +273,13 @@
             </div>
             <!-- Photo insertion note for user -->
             <div class="text-xs bg-[#F4EDE5] border border-[#E0D5C7] rounded-xl px-4 py-2.5 text-[#524945] max-w-md">
-              💡 <strong>Easy Photo Addition:</strong> Drop images in <code class="bg-white px-1.5 py-0.5 rounded font-mono text-[11px]">PRODUCT_IMAGES/</code>. The grid columns stay aligned automatically!
+              💡 <strong>Admin Control:</strong> Add hampers, change prices, and upload photos directly in the <button onclick="showTab('admin')" class="text-[#7A2832] font-bold underline">Admin Portal</button>.
             </div>
           </div>
 
-          <!-- Product Grid - Columns Preserved Perfectly (grid-cols-1 sm:grid-cols-2 lg:grid-cols-4) -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            <!-- Card 1 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-01.svg" 
-                  alt="The Serenity Haven Hamper" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-01.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  Same-Day
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Wellness & Self-Care</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">The Serenity Haven</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Artisan soy candle, lavender mist, organic herbal tea & raw honeycomb.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 385</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20The%20Serenity%20Haven%20(AED%20385)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-02.svg" 
-                  alt="Arabian Oud & Amber Indulgence" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-02.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  Luxury
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Heritage & Luxe</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Oud & Amber Indulgence</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Smoked amber diffuser, brass bakhoor burner, Emirates medjool dates & brass tray.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 520</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Oud%20%26%20Amber%20Indulgence%20(AED%20520)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-03.svg" 
-                  alt="The Connoisseur's Coffee Ritual" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-03.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  Gourmet
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Gourmet & Rituals</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Coffee Ritual</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Dubai micro-lot single origin beans, handcrafted ceramic dripper & dark truffles.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 340</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Coffee%20Ritual%20(AED%20340)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-04.svg" 
-                  alt="Sweet Welcome Baby Hamper" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-04.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  Newborn
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Baby & New Parents</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Sweet Welcome Baby</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">GOTS certified organic cotton swaddle, wooden teething ring & natural baby balm.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 420</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Sweet%20Welcome%20Baby%20(AED%20420)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-05.svg" 
-                  alt="The Golden Celebration Box" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-05.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  Bestseller
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Milestones</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">The Golden Celebration</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Artisan non-alcoholic sparkling grape beverage, crystal flutes & artisan gold chocolates.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 490</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Golden%20Celebration%20(AED%20490)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-06.svg" 
-                  alt="The Gentleman's Executive Box" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-06.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  Men
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Executive & Grooming</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Gentleman's Executive</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Full-grain leather cardholder, sandalwood eau de parfum & smoked nuts.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 460</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Gentleman's%20Executive%20(AED%20460)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 7 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-07.svg" 
-                  alt="The Sanctuary Spa Trunk" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-07.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  VIP
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Luxury Spa</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Sanctuary Spa Trunk</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Handmade vegan bath soak, raw silk eye mask, rose quartz roller & shea butter.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 680</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Sanctuary%20Spa%20Trunk%20(AED%20680)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
-              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
-                <img 
-                  src="PRODUCT_IMAGES/product-08.svg" 
-                  alt="Artisanal Tea & Bloom Hamper" 
-                  class="w-full h-full object-contain"
-                  onerror="this.src='frontend/public/images/products/product-08.svg';"
-                />
-                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
-                  Teatime
-                </span>
-              </div>
-              <div class="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Afternoon Tea</div>
-                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Artisanal Tea & Bloom</h3>
-                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Rare white peony tea tin, porcelain teacup, dried botanical posy & Scottish shortbread.</p>
-                </div>
-                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 295</span>
-                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Artisanal%20Tea%20%26%20Bloom%20(AED%20295)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                    Order
-                  </a>
-                </div>
-              </div>
-            </div>
-
+          <!-- Product Grid - Dynamic Products Container -->
+          <div id="catalogue-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Dynamically populated from JS array -->
           </div>
         </div>
       </section>
@@ -520,7 +301,6 @@
 
           <!-- Interactive Concierge Form -->
           <div class="bg-white rounded-3xl border border-[#EAE2D8] p-6 sm:p-10 shadow-sm space-y-6">
-            
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Occasion *</label>
@@ -835,10 +615,258 @@
       </section>
     </div>
 
+    <!-- ========================================== -->
+    <!-- 7. ADMIN DASHBOARD TAB (PORTAL)           -->
+    <!-- ========================================== -->
+    <div id="tab-admin" class="tab-content">
+      
+      <!-- Admin Login Gate (if not logged in) -->
+      <div id="admin-login-view" class="py-16 px-4">
+        <div class="max-w-md mx-auto bg-white rounded-3xl border border-[#EAE0D5] p-8 sm:p-10 shadow-sm text-center">
+          <div class="w-16 h-16 rounded-full bg-[#FAECE8] text-[#7A2832] flex items-center justify-center mx-auto mb-4 text-2xl border border-[#E8DFD5]">
+            ✨
+          </div>
+          <span class="text-[11px] font-sans tracking-[0.25em] text-[#7A706B] uppercase block font-semibold">
+            The Gift Curator Dubai
+          </span>
+          <h2 class="font-serif text-3xl font-bold text-[#2E2826] mt-1">
+            Admin Access Portal
+          </h2>
+          <p class="text-xs text-[#524945] mt-2 leading-relaxed">
+            Manage your boutique catalogue, update prices in AED, upload product photos, and monitor customer orders.
+          </p>
+
+          <form onsubmit="handleAdminLogin(event)" class="mt-6 space-y-4 text-left">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">
+                Curator Security PIN
+              </label>
+              <input
+                id="admin-pin-input"
+                type="password"
+                placeholder="Enter PIN (e.g. curator2026)"
+                class="w-full px-4 py-3.5 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none tracking-widest text-center text-lg font-mono"
+                autoFocus
+              />
+            </div>
+            <div id="admin-login-error" class="hidden text-xs text-red-600 bg-red-50 p-2.5 rounded-lg border border-red-200">
+              Incorrect PIN. (Default: curator2026)
+            </div>
+            <button
+              type="submit"
+              class="w-full py-3.5 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white font-semibold text-xs tracking-wider uppercase shadow-xs transition-all"
+            >
+              Unlock Dashboard
+            </button>
+          </form>
+
+          <div class="mt-6 pt-4 border-t border-[#F0EBE3] flex items-center justify-between text-xs text-[#7A706B]">
+            <button onclick="showTab('home')" class="hover:text-[#7A2832] font-medium">← Back to Website</button>
+            <span class="text-[11px] font-mono text-[#9E533F]">PIN: curator2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logged-in Admin Application View -->
+      <div id="admin-dashboard-view" class="hidden">
+        
+        <!-- Admin Top Navigation Bar -->
+        <div class="bg-white border-b border-[#EAE2D8] py-4 px-4 sm:px-8">
+          <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#FAECE8] text-[#7A2832] flex items-center justify-center font-serif font-bold text-sm">
+                TGC
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-serif text-xl font-bold text-[#2E2826]">Admin Control Center</h3>
+                  <span class="text-[10px] bg-[#7A2832] text-white px-2 py-0.5 rounded-full font-bold uppercase">Active</span>
+                </div>
+                <span class="text-xs text-[#7A706B]">Logged in as Chaitally • Founder & Lead Curator</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button onclick="showTab('home')" class="px-4 py-2 rounded-xl border border-[#D5CEC9] hover:bg-[#FAF7F2] text-xs font-semibold text-[#524945]">
+                👁️ View Live Website
+              </button>
+              <button onclick="handleAdminLogout()" class="px-3.5 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-xs font-semibold text-gray-700">
+                Logout
+              </button>
+            </div>
+          </div>
+
+          <!-- Admin Subtabs -->
+          <div class="max-w-7xl mx-auto flex items-center gap-2 sm:gap-4 mt-4 pt-3 border-t border-[#F0EBE3] overflow-x-auto text-xs sm:text-sm font-semibold">
+            <button id="btn-sub-overview" onclick="showAdminSubtab('overview')" class="px-4 py-2 rounded-xl bg-[#2E2826] text-white">
+              📊 Overview
+            </button>
+            <button id="btn-sub-products" onclick="showAdminSubtab('products')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+              🛍️ Products (<span id="admin-product-count">8</span>)
+            </button>
+            <button id="btn-sub-orders" onclick="showAdminSubtab('orders')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+              📦 Customer Orders (<span id="admin-order-count">5</span>)
+            </button>
+            <button id="btn-sub-customers" onclick="showAdminSubtab('customers')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+              👥 Customers (<span id="admin-customer-count">5</span>)
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Subtab 1: Overview -->
+        <div id="subtab-overview" class="admin-subtab active py-8 px-4 sm:px-8 max-w-7xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+            <div class="bg-white p-6 rounded-3xl border border-[#EAE2D8]">
+              <span class="text-[11px] uppercase tracking-wider text-[#7A706B] font-semibold block">Total Revenue</span>
+              <div id="metric-revenue" class="font-serif text-3xl font-bold text-[#7A2832] mt-1">AED 3,365</div>
+              <span class="text-[11px] text-emerald-700 font-medium block mt-1">↑ 18% vs last month</span>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-[#EAE2D8]">
+              <span class="text-[11px] uppercase tracking-wider text-[#7A706B] font-semibold block">Customer Orders</span>
+              <div id="metric-orders" class="font-serif text-3xl font-bold text-[#2E2826] mt-1">5</div>
+              <span class="text-[11px] text-amber-700 font-medium block mt-1">2 in preparation</span>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-[#EAE2D8]">
+              <span class="text-[11px] uppercase tracking-wider text-[#7A706B] font-semibold block">Products in Catalogue</span>
+              <div id="metric-products" class="font-serif text-3xl font-bold text-[#2E2826] mt-1">8</div>
+              <span class="text-[11px] text-emerald-700 font-medium block mt-1">All in stock</span>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-[#EAE2D8]">
+              <span class="text-[11px] uppercase tracking-wider text-[#7A706B] font-semibold block">Active Clients</span>
+              <div id="metric-customers" class="font-serif text-3xl font-bold text-[#2E2826] mt-1">5</div>
+              <span class="text-[11px] text-[#7A706B] font-medium block mt-1">2 VIP Clients</span>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            <button onclick="openNewProductModal()" class="bg-white p-6 rounded-3xl border border-[#EAE2D8] hover:border-[#7A2832] text-left transition-all group">
+              <div class="text-3xl mb-2">🎁</div>
+              <h4 class="font-serif text-lg font-bold text-[#2E2826] group-hover:text-[#7A2832]">Add New Product</h4>
+              <p class="text-xs text-[#524945] mt-1">Upload photos, set AED prices, and list new hampers instantly.</p>
+            </button>
+            <button onclick="showAdminSubtab('orders')" class="bg-white p-6 rounded-3xl border border-[#EAE2D8] hover:border-[#7A2832] text-left transition-all group">
+              <div class="text-3xl mb-2">📦</div>
+              <h4 class="font-serif text-lg font-bold text-[#2E2826] group-hover:text-[#7A2832]">Check Orders</h4>
+              <p class="text-xs text-[#524945] mt-1">Update order statuses and chat directly with clients on WhatsApp.</p>
+            </button>
+            <button onclick="showAdminSubtab('customers')" class="bg-white p-6 rounded-3xl border border-[#EAE2D8] hover:border-[#7A2832] text-left transition-all group">
+              <div class="text-3xl mb-2">👥</div>
+              <h4 class="font-serif text-lg font-bold text-[#2E2826] group-hover:text-[#7A2832]">Client Directory</h4>
+              <p class="text-xs text-[#524945] mt-1">View client history, preferences, and total spend.</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Subtab 2: Products Manager -->
+        <div id="subtab-products" class="admin-subtab py-8 px-4 sm:px-8 max-w-7xl mx-auto">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-white p-5 rounded-3xl border border-[#EAE2D8]">
+            <div>
+              <h3 class="font-serif text-2xl font-bold text-[#2E2826]">Products Catalogue</h3>
+              <p class="text-xs text-[#7A706B]">Change prices on the fly or upload new hampers</p>
+            </div>
+            <button onclick="openNewProductModal()" class="px-5 py-2.5 rounded-xl bg-[#7A2832] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#682029]">
+              + Add New Hamper
+            </button>
+          </div>
+
+          <div id="admin-products-table" class="bg-white rounded-3xl border border-[#EAE2D8] p-6 divide-y divide-[#F0EBE3]">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Admin Subtab 3: Customer Orders -->
+        <div id="subtab-orders" class="admin-subtab py-8 px-4 sm:px-8 max-w-7xl mx-auto">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-white p-5 rounded-3xl border border-[#EAE2D8]">
+            <div>
+              <h3 class="font-serif text-2xl font-bold text-[#2E2826]">Customer Orders</h3>
+              <p class="text-xs text-[#7A706B]">Track fulfillment, payments, and delivery dates</p>
+            </div>
+            <button onclick="exportOrdersToCSV()" class="px-4 py-2 rounded-xl border border-[#D5CEC9] text-xs font-semibold text-[#524945] hover:bg-[#FAF7F2]">
+              📥 Export Orders CSV
+            </button>
+          </div>
+
+          <div id="admin-orders-list" class="space-y-4">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Admin Subtab 4: Customers Management -->
+        <div id="subtab-customers" class="admin-subtab py-8 px-4 sm:px-8 max-w-7xl mx-auto">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-white p-5 rounded-3xl border border-[#EAE2D8]">
+            <div>
+              <h3 class="font-serif text-2xl font-bold text-[#2E2826]">Client Directory</h3>
+              <p class="text-xs text-[#7A706B]">Manage clients, order counts, and preferences</p>
+            </div>
+          </div>
+
+          <div id="admin-customers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </main>
 
+  <!-- MODAL: ADD NEW PRODUCT -->
+  <div id="modal-add-product" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-xl max-h-[90vh] overflow-y-auto border border-[#EAE2D8]">
+      <div class="flex items-center justify-between pb-4 border-b border-[#F0EBE3]">
+        <h3 class="font-serif text-2xl font-bold text-[#2E2826]">Add New Hamper</h3>
+        <button onclick="closeNewProductModal()" class="text-gray-400 hover:text-[#2E2826] text-xl">&times;</button>
+      </div>
+
+      <form onsubmit="handleAddNewProductSubmit(event)" class="mt-6 space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Hamper Title *</label>
+          <input id="np-title" type="text" required placeholder="e.g. Royal Jasmine & Oud Chest" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-xs outline-none focus:border-[#7A2832]" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Price in AED *</label>
+            <input id="np-price" type="number" required placeholder="e.g. 480" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-xs font-bold font-serif outline-none focus:border-[#7A2832]" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Category</label>
+            <select id="np-category" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-xs outline-none bg-white">
+              <option value="Self-Care & Pampering">Self-Care & Pampering</option>
+              <option value="Heritage & Luxe">Heritage & Luxe</option>
+              <option value="Gourmet & Rituals">Gourmet & Rituals</option>
+              <option value="Baby & New Parents">Baby & New Parents</option>
+              <option value="Milestones & Celebrations">Milestones & Celebrations</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Image Upload from computer -->
+        <div>
+          <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Upload Product Photo</label>
+          <input id="np-file" type="file" accept="image/*" onchange="handleProductPhotoUpload(event)" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#FAECE8] file:text-[#7A2832] hover:file:bg-[#F5D8D0]" />
+          <div id="np-img-preview" class="hidden mt-2">
+            <img id="np-preview-img" src="" alt="Preview" class="w-20 h-20 object-cover rounded-xl border border-[#EAE2D8]" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Contents (Short summary)</label>
+          <textarea id="np-desc" rows="2" placeholder="e.g. Handmade soy candle, organic mountain honey, artisan cookies..." class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-xs outline-none focus:border-[#7A2832]"></textarea>
+        </div>
+
+        <div class="pt-4 border-t border-[#F0EBE3] flex items-center justify-end gap-3">
+          <button type="button" onclick="closeNewProductModal()" class="px-4 py-2 rounded-xl border text-xs font-semibold text-gray-600">Cancel</button>
+          <button type="submit" class="px-6 py-2 rounded-xl bg-[#7A2832] text-white text-xs font-semibold uppercase tracking-wider">Publish Hamper</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- FOOTER -->
-  <footer class="bg-[#2E2826] text-[#FAF7F2] border-t border-[#3A3330] py-12">
+  <footer id="main-footer" class="bg-[#2E2826] text-[#FAF7F2] border-t border-[#3A3330] py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div class="space-y-3 md:col-span-2">
         <h3 class="font-serif text-2xl font-bold">The Gift Curator</h3>
@@ -860,6 +888,11 @@
         <p>WhatsApp: +971 50 123 4567</p>
         <p>Instagram: @thegiftcuratordubai</p>
         <p>Dubai Same-Day & Next-Day UAE</p>
+        <p class="pt-2">
+          <button onclick="showTab('admin')" class="text-xs text-[#D4AF37] hover:underline font-mono">
+            🔒 Admin Portal
+          </button>
+        </p>
       </div>
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-[#3D3735] text-center text-xs text-[#8C827D]">
@@ -867,9 +900,39 @@
     </div>
   </footer>
 
-  <!-- SCRIPT FOR TAB SWITCHING & WHATSAPP LOGIC -->
+  <!-- SCRIPT FOR TAB SWITCHING, ADMIN ACTIONS & PERSISTENCE -->
   <script>
-    const tabs = ['home', 'hampers', 'personalised', 'corporate', 'story', 'contact'];
+    // In-memory data structures
+    let liveProducts = [
+      { id: 'TGC-RDY-01', title: 'The Serenity Haven', price: 385, category: 'Wellness & Self-Care', image: 'PRODUCT_IMAGES/product-01.svg', desc: 'Artisan soy candle, lavender mist, organic herbal tea & raw honeycomb.' },
+      { id: 'TGC-RDY-02', title: 'Oud & Amber Indulgence', price: 520, category: 'Heritage & Luxe', image: 'PRODUCT_IMAGES/product-02.svg', desc: 'Smoked amber diffuser, brass bakhoor burner, Emirates medjool dates & brass tray.' },
+      { id: 'TGC-RDY-03', title: 'Coffee Ritual', price: 340, category: 'Gourmet & Rituals', image: 'PRODUCT_IMAGES/product-03.svg', desc: 'Dubai micro-lot single origin beans, handcrafted ceramic dripper & dark truffles.' },
+      { id: 'TGC-RDY-04', title: 'Sweet Welcome Baby', price: 420, category: 'Baby & New Parents', image: 'PRODUCT_IMAGES/product-04.svg', desc: 'GOTS certified organic cotton swaddle, wooden teething ring & natural baby balm.' },
+      { id: 'TGC-RDY-05', title: 'The Golden Celebration', price: 490, category: 'Milestones', image: 'PRODUCT_IMAGES/product-05.svg', desc: 'Artisan non-alcoholic sparkling grape beverage, crystal flutes & artisan gold chocolates.' },
+      { id: 'TGC-RDY-06', title: "Gentleman's Executive", price: 460, category: 'Executive & Grooming', image: 'PRODUCT_IMAGES/product-06.svg', desc: 'Full-grain leather cardholder, sandalwood eau de parfum & smoked nuts.' },
+      { id: 'TGC-RDY-07', title: 'Sanctuary Spa Trunk', price: 680, category: 'Luxury Spa', image: 'PRODUCT_IMAGES/product-07.svg', desc: 'Handmade vegan bath soak, raw silk eye mask, rose quartz roller & shea butter.' },
+      { id: 'TGC-RDY-08', title: 'Artisanal Tea & Bloom', price: 295, category: 'Afternoon Tea', image: 'PRODUCT_IMAGES/product-08.svg', desc: 'Rare white peony tea tin, porcelain teacup, dried botanical posy & Scottish shortbread.' }
+    ];
+
+    let liveOrders = [
+      { id: 'ORD-2026-1082', customer: 'Fatima Al-Maktoum', phone: '+971 50 892 1144', area: 'Downtown Dubai', total: 605, status: 'In Preparation', items: '2x The Serenity Haven' },
+      { id: 'ORD-2026-1081', customer: 'Marcus Vance', phone: '+971 55 412 8890', area: 'DIFC, Gate 4', total: 520, status: 'Ready for Dispatch', items: '1x Oud & Amber Indulgence' },
+      { id: 'ORD-2026-1080', customer: 'Sara Al-Hashimi', phone: '+971 52 733 9012', area: 'Palm Jumeirah', total: 455, status: 'New', items: '1x Sweet Welcome Baby' },
+      { id: 'ORD-2026-1079', customer: 'Elena Rostova', phone: '+971 58 661 2940', area: 'Dubai Hills Estate', total: 715, status: 'Delivered', items: '1x Sanctuary Spa Trunk' },
+      { id: 'ORD-2026-1078', customer: 'Tariq Mansoor', phone: '+971 50 119 4432', area: 'Abu Dhabi', total: 1070, status: 'Delivered', items: '3x Coffee Ritual' }
+    ];
+
+    let liveCustomers = [
+      { id: 'CUST-001', name: 'Fatima Al-Maktoum', phone: '+971 50 892 1144', location: 'Downtown Dubai', tier: 'VIP Client', totalSpend: 2480, orders: 4, prefs: 'Prefers fig & amber scents, sage silk ribbon.' },
+      { id: 'CUST-002', name: 'Marcus Vance', phone: '+971 55 412 8890', location: 'DIFC, Dubai', tier: 'Corporate', totalSpend: 3840, orders: 3, prefs: 'Executive corporate gift sets with brass details.' },
+      { id: 'CUST-003', name: 'Sara Al-Hashimi', phone: '+971 52 733 9012', location: 'Palm Jumeirah', tier: 'Regular', totalSpend: 875, orders: 2, prefs: 'Organic cotton baby gifts in pastel tones.' },
+      { id: 'CUST-004', name: 'Elena Rostova', phone: '+971 58 661 2940', location: 'Dubai Hills', tier: 'VIP Client', totalSpend: 1950, orders: 3, prefs: 'Luxury bath soaks and silk eye masks.' },
+      { id: 'CUST-005', name: 'Tariq Mansoor', phone: '+971 50 119 4432', location: 'Abu Dhabi', tier: 'Corporate', totalSpend: 6250, orders: 5, prefs: 'Single-origin coffee hampers with custom branding.' }
+    ];
+
+    let uploadedPhotoBase64 = '';
+
+    const tabs = ['home', 'hampers', 'personalised', 'corporate', 'story', 'contact', 'admin'];
 
     function showTab(tabId) {
       tabs.forEach(t => {
@@ -891,6 +954,296 @@
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       if (menu) menu.classList.toggle('hidden');
+    }
+
+    // Render Public Catalogue Grid
+    function renderPublicCatalogue() {
+      const grid = document.getElementById('catalogue-grid');
+      if (!grid) return;
+
+      grid.innerHTML = liveProducts.map(p => `
+        <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+          <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+            <img 
+              src="${p.image}" 
+              alt="${p.title}" 
+              class="w-full h-full object-contain"
+              onerror="this.src='PRODUCT_IMAGES/product-01.svg';"
+            />
+            <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+              In Stock
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-[11px] text-[#7A706B] uppercase font-semibold">${p.category}</div>
+              <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">${p.title}</h3>
+              <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">${p.desc}</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+              <span class="font-serif text-lg font-bold text-[#7A2832]">AED ${p.price}</span>
+              <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20${encodeURIComponent(p.title)}%20(AED%20${p.price})." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                Order
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // ADMIN DASHBOARD FUNCTIONS
+    // ==========================================
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const pin = document.getElementById('admin-pin-input').value;
+      const errorDiv = document.getElementById('admin-login-error');
+
+      if (pin === 'curator2026' || pin === 'admin123') {
+        errorDiv.classList.add('hidden');
+        document.getElementById('admin-login-view').classList.add('hidden');
+        document.getElementById('admin-dashboard-view').classList.remove('hidden');
+        refreshAdminData();
+      } else {
+        errorDiv.classList.remove('hidden');
+      }
+    }
+
+    function handleAdminLogout() {
+      document.getElementById('admin-dashboard-view').classList.add('hidden');
+      document.getElementById('admin-login-view').classList.remove('hidden');
+      showTab('home');
+    }
+
+    function showAdminSubtab(subtabId) {
+      ['overview', 'products', 'orders', 'customers'].forEach(s => {
+        const el = document.getElementById('subtab-' + s);
+        const btn = document.getElementById('btn-sub-' + s);
+        if (el) el.classList.remove('active');
+        if (btn) {
+          btn.classList.remove('bg-[#2E2826]', 'bg-[#7A2832]', 'text-white');
+          btn.classList.add('text-[#524945]');
+        }
+      });
+
+      const targetEl = document.getElementById('subtab-' + subtabId);
+      const targetBtn = document.getElementById('btn-sub-' + subtabId);
+      if (targetEl) targetEl.classList.add('active');
+      if (targetBtn) {
+        targetBtn.classList.remove('text-[#524945]');
+        targetBtn.classList.add('bg-[#7A2832]', 'text-white');
+      }
+    }
+
+    function refreshAdminData() {
+      // Metrics
+      const totalRev = liveOrders.reduce((sum, o) => sum + o.total, 0);
+      document.getElementById('metric-revenue').textContent = `AED ${totalRev.toLocaleString()}`;
+      document.getElementById('metric-orders').textContent = liveOrders.length;
+      document.getElementById('metric-products').textContent = liveProducts.length;
+      document.getElementById('metric-customers').textContent = liveCustomers.length;
+
+      document.getElementById('admin-product-count').textContent = liveProducts.length;
+      document.getElementById('admin-order-count').textContent = liveOrders.length;
+      document.getElementById('admin-customer-count').textContent = liveCustomers.length;
+
+      renderAdminProducts();
+      renderAdminOrders();
+      renderAdminCustomers();
+      renderPublicCatalogue();
+    }
+
+    function renderAdminProducts() {
+      const container = document.getElementById('admin-products-table');
+      if (!container) return;
+
+      container.innerHTML = liveProducts.map(p => `
+        <div class="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <img src="${p.image}" class="w-12 h-12 object-contain bg-[#F8F4EE] rounded-lg border border-[#EAE2D8] p-1" onerror="this.src='PRODUCT_IMAGES/product-01.svg';" />
+            <div>
+              <span class="font-mono text-[10px] text-[#7A706B]">${p.id}</span>
+              <h4 class="font-serif font-bold text-sm text-[#2E2826]">${p.title}</h4>
+              <span class="text-[11px] text-[#7A706B]">${p.category}</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 justify-between sm:justify-end">
+            <!-- Inline Price Edit -->
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs font-bold text-[#7A2832]">AED</span>
+              <input 
+                type="number" 
+                value="${p.price}" 
+                onchange="updateProductPrice('${p.id}', this.value)" 
+                class="w-20 px-2 py-1 rounded border border-[#D5CEC9] text-xs font-bold font-serif focus:border-[#7A2832] outline-none"
+              />
+            </div>
+            <button onclick="deleteProduct('${p.id}')" class="text-red-500 hover:text-red-700 text-xs px-2 py-1 rounded hover:bg-red-50">
+              Delete
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateProductPrice(productId, newPrice) {
+      const priceNum = Number(newPrice);
+      if (!priceNum || priceNum <= 0) return;
+      const product = liveProducts.find(p => p.id === productId);
+      if (product) {
+        product.price = priceNum;
+        refreshAdminData();
+        alert(`Price for "${product.title}" updated to AED ${priceNum}!`);
+      }
+    }
+
+    function deleteProduct(productId) {
+      if (confirm('Delete this product from catalogue?')) {
+        liveProducts = liveProducts.filter(p => p.id !== productId);
+        refreshAdminData();
+      }
+    }
+
+    function renderAdminOrders() {
+      const container = document.getElementById('admin-orders-list');
+      if (!container) return;
+
+      container.innerHTML = liveOrders.map(o => `
+        <div class="bg-white p-5 rounded-2xl border border-[#EAE2D8] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-xs font-bold text-[#2E2826] bg-[#F4EDE5] px-2 py-0.5 rounded">${o.id}</span>
+              <span class="font-bold text-sm text-[#2E2826]">${o.customer}</span>
+              <span class="text-xs text-[#7A706B]">• ${o.area}</span>
+            </div>
+            <p class="text-xs text-[#524945] mt-1">Items: <strong>${o.items}</strong></p>
+            <span class="text-xs text-[#7A706B] block mt-0.5">${o.phone}</span>
+          </div>
+          <div class="flex items-center gap-3 justify-between sm:justify-end">
+            <span class="font-serif font-bold text-base text-[#7A2832]">AED ${o.total}</span>
+            <select onchange="updateOrderStatus('${o.id}', this.value)" class="text-xs font-semibold px-2.5 py-1 rounded-lg border border-[#D5CEC9] outline-none">
+              <option value="New" ${o.status === 'New' ? 'selected' : ''}>New</option>
+              <option value="In Preparation" ${o.status === 'In Preparation' ? 'selected' : ''}>In Preparation</option>
+              <option value="Ready for Dispatch" ${o.status === 'Ready for Dispatch' ? 'selected' : ''}>Ready for Dispatch</option>
+              <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+            </select>
+            <a href="https://wa.me/${o.phone.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(o.customer)}!%20Update%20from%20The%20Gift%20Curator%20regarding%20your%20order%20(${o.id})." target="_blank" class="px-3 py-1 bg-[#7A2832] text-white rounded-lg text-xs font-semibold">
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateOrderStatus(orderId, newStatus) {
+      const order = liveOrders.find(o => o.id === orderId);
+      if (order) {
+        order.status = newStatus;
+        refreshAdminData();
+      }
+    }
+
+    function renderAdminCustomers() {
+      const container = document.getElementById('admin-customers-grid');
+      if (!container) return;
+
+      container.innerHTML = liveCustomers.map(c => `
+        <div class="bg-white p-5 rounded-2xl border border-[#EAE2D8] shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-mono text-[#7A706B]">${c.id}</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase bg-[#FAECE8] text-[#7A2832]">${c.tier}</span>
+          </div>
+          <div>
+            <h4 class="font-serif font-bold text-base text-[#2E2826]">${c.name}</h4>
+            <p class="text-xs text-[#7A706B]">${c.location}</p>
+          </div>
+          <div class="pt-2 border-t border-[#F0EBE3] grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <span class="text-[10px] text-[#7A706B] uppercase block">Total Spend</span>
+              <span class="font-serif font-bold text-[#7A2832]">AED ${c.totalSpend.toLocaleString()}</span>
+            </div>
+            <div>
+              <span class="text-[10px] text-[#7A706B] uppercase block">Orders</span>
+              <span class="font-semibold">${c.orders} hampers</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-[#524945] bg-[#FAF7F2] p-2 rounded border border-[#EAE2D8]">${c.prefs}</p>
+          <div class="pt-2 flex items-center justify-between text-xs">
+            <span class="text-[#7A706B]">${c.phone}</span>
+            <a href="https://wa.me/${c.phone.replace(/[^0-9]/g, '')}" target="_blank" class="px-2.5 py-1 rounded bg-[#7A2832] text-white font-semibold">
+              Chat
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function exportOrdersToCSV() {
+      const headers = ['Order ID', 'Customer', 'Phone', 'Area', 'Total AED', 'Status', 'Items'];
+      const rows = liveOrders.map(o => [
+        `"${o.id}"`, `"${o.customer}"`, `"${o.phone}"`, `"${o.area}"`, `"${o.total}"`, `"${o.status}"`, `"${o.items}"`
+      ]);
+      const csv = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csv);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `the_gift_curator_orders_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Modal Add Product
+    function openNewProductModal() {
+      document.getElementById('modal-add-product').classList.remove('hidden');
+    }
+
+    function closeNewProductModal() {
+      document.getElementById('modal-add-product').classList.add('hidden');
+    }
+
+    function handleProductPhotoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onloadend = function() {
+        uploadedPhotoBase64 = reader.result;
+        document.getElementById('np-preview-img').src = uploadedPhotoBase64;
+        document.getElementById('np-img-preview').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleAddNewProductSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('np-title').value;
+      const price = Number(document.getElementById('np-price').value);
+      const category = document.getElementById('np-category').value;
+      const desc = document.getElementById('np-desc').value || `${title} hand-curated in Dubai.`;
+
+      const nextId = `TGC-RDY-0${liveProducts.length + 1}`;
+      const img = uploadedPhotoBase64 || 'PRODUCT_IMAGES/product-01.svg';
+
+      liveProducts.unshift({
+        id: nextId,
+        title,
+        price,
+        category,
+        image: img,
+        desc
+      });
+
+      closeNewProductModal();
+      refreshAdminData();
+      alert(`New hamper "${title}" (AED ${price}) published to catalogue!`);
+      
+      // Reset form
+      document.getElementById('np-title').value = '';
+      document.getElementById('np-price').value = '';
+      document.getElementById('np-desc').value = '';
+      document.getElementById('np-img-preview').classList.add('hidden');
+      uploadedPhotoBase64 = '';
     }
 
     function submitConciergeWhatsApp() {
@@ -916,6 +1269,11 @@
 
       window.open(`https://wa.me/971501234567?text=${msg}`, '_blank');
     }
+
+    // Initialize on load
+    window.onload = function() {
+      renderPublicCatalogue();
+    };
   </script>
 </body>
 </html>
