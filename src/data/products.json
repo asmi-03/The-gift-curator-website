@@ -1,0 +1,228 @@
+[
+  {
+    "id": "TGC-RDY-01",
+    "title": "The Velvet Morning Hamper",
+    "category": "Self-Care & Pampering",
+    "occasion": ["Birthday", "Thank You", "Mother's Day", "Just Because"],
+    "price": 285,
+    "currency": "AED",
+    "leadTime": "Same-day in Dubai (order before 12 PM) / Next-day UAE",
+    "availability": "In Stock",
+    "isBestSeller": true,
+    "badge": "Bestseller",
+    "shortDescription": "A comforting morning ritual in a keepsake linen box featuring artisanal ceramic mugs, organic honeycomb and soothing botanicals.",
+    "description": "Crafted to turn morning routines into a mindful sanctuary. The Velvet Morning combines warm aesthetic tones with sensory indulgence — from organic mountain honey to hand-poured botanical soy candles. Every element is secured in our signature warm-stone rigid keepsake box, tied with natural raw-edge silk ribbon.",
+    "image": "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x Hand-thrown speckled ceramic mug (durable stoneware)",
+      "1x Artisanal Emirati sidr/wildflower honey jar (120g)",
+      "1x Turned natural beechwood honey dipper",
+      "1x Hand-poured amber soy candle — Fig & Wild Amber (45h burn)",
+      "1x Tin of organic chamomile & vanilla loose-leaf infusion (40g)",
+      "1x Gold-tone stainless steel tea strainer ball",
+      "Complimentary embossed handwritten message card & wax seal"
+    ],
+    "packaging": "Signature warm-stone textured rigid gift box (26 x 26 x 11 cm) with magnetic closure, crinkle paper nest, and sage silk ribbon.",
+    "customisation": "Custom handwritten note, choice of ribbon color (Sage Green, Dusty Rose, or Champagne Gold)."
+  },
+  {
+    "id": "TGC-RDY-02",
+    "title": "Botanical Serenity & Tea Ritual",
+    "category": "Wellness & Calm",
+    "occasion": ["Get Well Soon", "Self-Care", "Thank You", "Birthday"],
+    "price": 220,
+    "currency": "AED",
+    "leadTime": "Same-day Dubai / 24h UAE delivery",
+    "availability": "In Stock",
+    "isBestSeller": false,
+    "badge": "Popular",
+    "shortDescription": "A restorative botanical collection designed to invite calm, restful evenings and thoughtful relaxation.",
+    "description": "The perfect gesture to remind someone to pause and breathe. Curated with organic calming botanical tea, lavender linen mist, and soothing bath salts handcrafted in small batches.",
+    "image": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x Restorative sleep botanical tea blend (50g jar)",
+      "1x French lavender & sweet orange calming pillow mist (50ml)",
+      "1x Dead Sea & Himalayan mineral bath soak in glass vial (150g)",
+      "1x 100% natural Mulberry silk eye sleep mask (Pearl White)",
+      "1x Matchbox with long luxury gold-tipped safety matches",
+      "Complimentary embossed handwritten message card & wax seal"
+    ],
+    "packaging": "Earthy kraft slide-drawer box with foil-stamped botanic motif and natural twine.",
+    "customisation": "Custom message on cotton deckle-edge card."
+  },
+  {
+    "id": "TGC-RDY-03",
+    "title": "The Executive Desk Suite",
+    "category": "Corporate & Milestones",
+    "occasion": ["Promotion", "New Job", "Client Appreciation", "Father's Day"],
+    "price": 395,
+    "currency": "AED",
+    "leadTime": "1 – 2 business days",
+    "availability": "In Stock",
+    "isBestSeller": true,
+    "badge": "Executive Pick",
+    "shortDescription": "Sophisticated desk accessories and gourmet artisan treats for colleagues, leaders, and milestone celebrations.",
+    "description": "An elevated curation celebrating professional milestones and leadership. Featuring premium vegan leather desk essentials, single-origin espresso beans, and gold brass details that elevate any workspace.",
+    "image": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x Premium bound vegan leather ruled journal (A5, 192 archival pages)",
+      "1x Solid brushed brass rollerball pen with German ink refill",
+      "1x Bag of specialty Ethiopian single-origin roast coffee beans (250g)",
+      "1x Gourmet chocolate-dipped almond and sea salt bites (150g)",
+      "1x Minimalist brass desk paperweight and clip set",
+      "Complimentary embossed card with bespoke calligraphy message"
+    ],
+    "packaging": "Charcoal matte luxury rigid box with bronze embossed monogramming and satin ribbon.",
+    "customisation": "Corporate logo ribbon or company branded card available for orders of 3+ units."
+  },
+  {
+    "id": "TGC-RDY-04",
+    "title": "Sweet Beginnings: New Mum & Baby",
+    "category": "Newborn & Motherhood",
+    "occasion": ["Baby Shower", "Newborn Arrival", "Mother's Day"],
+    "price": 340,
+    "currency": "AED",
+    "leadTime": "Same-day in Dubai / Next-day UAE",
+    "availability": "In Stock",
+    "isBestSeller": true,
+    "badge": "New Mum Favorite",
+    "shortDescription": "A tender pair of treats celebrating both the newborn and the deserving mother with gentle, certified-organic care.",
+    "description": "Most baby hampers forget about the mother — this box embraces both. Filled with ultra-soft GOTS-certified organic cotton muslin swaddles for baby and restorative organic body butter and nursing tea for mum.",
+    "image": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x GOTS-certified organic double-gauze bamboo/cotton swaddle (120x120cm)",
+      "1x Handmade crocheted bunny rattle toy (natural untreated beechwood ring)",
+      "1x Gentle organic chamomile baby massage oil (100ml)",
+      "1x Mum's Whipped Shea & Cocoa Butter nourishing body cream (150ml)",
+      "1x Caffeine-free organic nursing & serenity botanical tea (50g)",
+      "1x Keepsake baby birth milestone wooden disc",
+      "Complimentary hand-lettered 'Welcome Little One' greeting card"
+    ],
+    "packaging": "Warm oat linen keepsake treasure chest box with cream grosgrain ribbon.",
+    "customisation": "Option to engrave baby's name on wooden milestone disc (if provided in advance)."
+  },
+  {
+    "id": "TGC-RDY-05",
+    "title": "Artisan Host & Housewarming",
+    "category": "Home & Celebration",
+    "occasion": ["Housewarming", "Dinner Host", "Wedding", "Eid Celebration"],
+    "price": 260,
+    "currency": "AED",
+    "leadTime": "Same-day Dubai / 24h UAE delivery",
+    "availability": "In Stock",
+    "isBestSeller": false,
+    "badge": "Warm Welcome",
+    "shortDescription": "The quintessential dinner host gift featuring olive wood kitchenware, gourmet spreads, and culinary spice blends.",
+    "description": "Never arrive empty-handed. This warm culinary host set pairs Mediterranean craftsmanship with artisanal pantry delicacies. Ideal for new homeowners, dinner parties, and festive celebrations.",
+    "image": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x Hand-carved rustic olive wood serving pinch bowl & wooden spoon",
+      "1x Cold-pressed unfiltered extra virgin olive oil with rosemary infusion (250ml)",
+      "1x Artisanal za'atar & toasted sesame heritage blend (100g jar)",
+      "1x Gourmet rosemary & sea salt sourdough crispbread crackers (120g)",
+      "1x Pure French linen kitchen hand towel in warm flax",
+      "Complimentary handwritten message card on handmade textured cotton paper"
+    ],
+    "packaging": "Reusable open woven seagrass basket wrapped in biodegradable clear wrap and tied with jute & olive greenery.",
+    "customisation": "Custom gift tag message."
+  },
+  {
+    "id": "TGC-RDY-06",
+    "title": "Golden Hour: Scent & Sweet Indulgence",
+    "category": "Celebration & Romance",
+    "occasion": ["Anniversary", "Birthday", "Valentine's Day", "Engagement"],
+    "price": 420,
+    "currency": "AED",
+    "leadTime": "Same-day in Dubai / Next-day UAE",
+    "availability": "In Stock",
+    "isBestSeller": true,
+    "badge": "Luxury Gift",
+    "shortDescription": "Rich Belgian chocolate truffles, sparkling non-alcoholic botanical spritz, and a golden amber home scent.",
+    "description": "Designed for momentous occasions. An intoxicating combination of sensory beauty — featuring a 24k gold accented soy candle, sparkling celebration white grape & elderflower spritz, and decadent handcrafted dark chocolate truffles.",
+    "image": "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x Luxury artisanal non-alcoholic sparkling White Grape & Elderflower spritz (750ml)",
+      "1x Box of 9 handcrafted Belgian dark & pistachio chocolate truffles",
+      "1x Large gold vessel scented candle — Oud & Cashmere Rose (60h burn)",
+      "1x Golden wick trimmer & snuffer accessory set",
+      "1x Dried mini floral bouquet keepsake bundle (gypsophila & bunny tails)",
+      "Complimentary luxury embossed card with real wax seal"
+    ],
+    "packaging": "Two-piece matte ivory box with gold foil script, nestled on charcoal velvet lining with heavy satin ribbon.",
+    "customisation": "Choice of wax seal stamp (Floral wreath, Heart, or Initial letter)."
+  },
+  {
+    "id": "TGC-RDY-07",
+    "title": "Gentleman's Grooming & Amber",
+    "category": "Men's Celebration",
+    "occasion": ["Birthday", "Father's Day", "Groomsman", "Thank You"],
+    "price": 310,
+    "currency": "AED",
+    "leadTime": "Same-day Dubai / 24h UAE delivery",
+    "availability": "In Stock",
+    "isBestSeller": false,
+    "badge": "Refined",
+    "shortDescription": "A sophisticated curation for him with sandalwood beard elixir, dark roast coffee, and brushed gunmetal bar tool.",
+    "description": "Masculine, grounded, and unmistakably refined. Ideal for birthdays, fathers, brothers, and groomsmen who value craftsmanship and rich woods.",
+    "image": "https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x Cedarwood & Moroccan Amber solid cologne / balm (30g tin)",
+      "1x Organic cold-pressed sandalwood grooming elixir (50ml)",
+      "1x Heavy brushed gunmetal double-sided jigger & bottle opener bar tool",
+      "1x Artisanal smoked almonds with sea salt & rosemary (140g)",
+      "1x Premium single-origin dark chocolate tablet (72% Madagascar cacao, 90g)",
+      "Complimentary handwritten message card"
+    ],
+    "packaging": "Matte midnight-forest green box with copper debossed detailing and charcoal grosgrain band.",
+    "customisation": "Custom personalized card."
+  },
+  {
+    "id": "TGC-RDY-08",
+    "title": "Midnight Cocoa & Truffle Treat",
+    "category": "Sweet Gestures",
+    "occasion": ["Thinking of You", "Thank You", "Friendship", "Secret Santa"],
+    "price": 175,
+    "currency": "AED",
+    "leadTime": "Same-day Dubai / 24h UAE delivery",
+    "availability": "In Stock",
+    "isBestSeller": false,
+    "badge": "Under AED 200",
+    "shortDescription": "An accessible, beautifully presented gesture of appreciation filled with rich Belgian cocoa, sea-salt caramels, and mini candle.",
+    "description": "Proof that meaningful gifts don't need to break the bank. Thoughtfully scaled for sincere thank-yous, teacher gifts, or brightening a close friend's week.",
+    "image": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+    "additionalImages": [
+      "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
+    ],
+    "contents": [
+      "1x Single-estate Dutch artisan dark hot chocolate powder tin (180g)",
+      "1x Handcrafted salted caramel butter bites in gold foil (100g)",
+      "1x Mini travel tin candle — Roasted Vanilla & Tonka Bean (20h burn)",
+      "1x Mini gold whisk for hot cocoa blending",
+      "Complimentary handwritten message card & wax seal"
+    ],
+    "packaging": "Compact warm-stone boutique box with terracotta ribbon.",
+    "customisation": "Custom handwritten note."
+  }
+]

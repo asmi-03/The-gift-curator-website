@@ -1,0 +1,68 @@
+[
+  {
+    "id": "CREATION-01",
+    "title": "Desert Sunrise Welcome Curation",
+    "occasion": "Bespoke VIP Client Gift",
+    "indicativeBudget": "AED 450 – 550",
+    "category": "Corporate & Hospitality",
+    "image": "/images/creations/desert-sunrise.jpg",
+    "clientStory": "Assembled for an international luxury real estate agency welcoming a high-net-worth investor to their new Palm Jumeirah villa.",
+    "itemsIncluded": "Custom brass key tray with coordinates, organic Bateel stuffed dates, artisanal Emirati oud perfume spray, locally roasted camel milk chocolate, hand-lettered welcome card.",
+    "exampleOnly": true
+  },
+  {
+    "id": "CREATION-02",
+    "title": "Cozy Autumn Hearth & Scent",
+    "occasion": "Milestone 30th Birthday",
+    "indicativeBudget": "AED 280 – 350",
+    "category": "Personalised Indulgence",
+    "image": "/images/creations/cozy-autumn.jpg",
+    "clientStory": "A customer in London wanted to surprise her best friend in Dubai Downtown on her 30th birthday with a cosy self-care hamper delivered right to her door.",
+    "itemsIncluded": "Hand-knit chunky merino wool lap blanket, custom-blended cedar & fig candle with recipient's name, Earl Grey artisan tea jar, stoneware mug, honey stirrers.",
+    "exampleOnly": true
+  },
+  {
+    "id": "CREATION-03",
+    "title": "The Boardroom Founder's Tribute",
+    "occasion": "C-Suite Retirement & Farewell",
+    "indicativeBudget": "AED 650 – 850",
+    "category": "Corporate & VIP",
+    "image": "/images/creations/boardroom-founders.jpg",
+    "clientStory": "Commissioned by a Dubai DIFC law firm partners to honour a retiring founding partner.",
+    "itemsIncluded": "Personalised full-grain Italian leather portfolio folder, Montblanc inkwell and rollerball pen, crystal decanter with engraved initials, smoked almonds in wooden cask.",
+    "exampleOnly": true
+  },
+  {
+    "id": "CREATION-04",
+    "title": "Blushing Bride Morning-Of Hamper",
+    "occasion": "Bridal Suite Surprise",
+    "indicativeBudget": "AED 380 – 480",
+    "category": "Weddings & Romance",
+    "image": "/images/creations/blushing-bride.jpg",
+    "clientStory": "Curated for maid of honour to surprise the bride at her Dubai Marina hotel suite on the morning of her wedding.",
+    "itemsIncluded": "100% white Mulberry silk embroidered kimono robe, chilled elderflower sparkling cider, pearl hairpin set, mini luxury rose candle, handwritten vows journal.",
+    "exampleOnly": true
+  },
+  {
+    "id": "CREATION-05",
+    "title": "Welcome Little Miracle Twins Set",
+    "occasion": "Twin Newborn Arrival",
+    "indicativeBudget": "AED 520 – 620",
+    "category": "Baby & Family",
+    "image": "/images/creations/little-miracle-twins.jpg",
+    "clientStory": "Curated for close grandparents welcoming twin babies in Abu Dhabi with coordinating neutral colours.",
+    "itemsIncluded": "Two matching certified organic alpaca hand-knit bonnets, personalised wooden keepsake rattles, two organic muslin swaddles, postpartum herbal bath blend for mum.",
+    "exampleOnly": true
+  },
+  {
+    "id": "CREATION-06",
+    "title": "Gourmet Mediterranean Host Table",
+    "occasion": "Villa Housewarming",
+    "indicativeBudget": "AED 320 – 400",
+    "category": "Home & Culinary",
+    "image": "/images/creations/mediterranean-host.jpg",
+    "clientStory": "Created for guests attending an intimate housewarming party in Arabian Ranches.",
+    "itemsIncluded": "Live potted dwarf olive tree in terracotta pot, aged balsamic vinegar from Modena (250ml), artisanal sea-salt focaccia crisps, marble cheese board and knife.",
+    "exampleOnly": true
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "brandName": "The Gift Curator",
+  "tagline": "Thoughtfully chosen. Beautifully gifted.",
+  "subTagline": "Tell us who, why, and how much — we take care of the what.",
+  "legalEntity": "Anrudaya Gifts FZE",
+  "instagramHandle": "@thegiftcuratordubai",
+  "instagramUrl": "https://www.instagram.com/thegiftcuratordubai",
+  "websiteUrl": "https://www.thegiftcuratordubai.com",
+  "whatsappNumber": "+971501234567",
+  "whatsappDisplay": "+971 50 123 4567",
+  "email": "hello@thegiftcuratordubai.com",
+  "location": "Dubai, United Arab Emirates",
+  "operatingHours": "Mon – Sat: 9:00 AM – 8:00 PM (GST)",
+  "delivery": {
+    "dubaiSameDayCutoff": "12:00 PM GST",
+    "dubaiStandardTime": "Same-day or next-day delivery",
+    "uaeTime": "1 – 2 business days across all 7 Emirates",
+    "deliveryFeeNote": "Delivery calculated at checkout based on location. Standard Dubai: AED 35. Abu Dhabi & Northern Emirates: AED 50."
+  },
+  "depositPolicy": {
+    "bespokeDepositPercentage": "50%",
+    "balanceTiming": "Balance payable upon photo approval of assembled gift prior to dispatch",
+    "conceptTurnaround": "Within 2–4 business hours via WhatsApp"
+  }
+}

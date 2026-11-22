@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <rect width="800" height="800" fill="#FAF8F5"/>
+  <rect x="40" y="40" width="720" height="720" rx="32" fill="#3D3735" fill-opacity="0.25" stroke="#DDD2C5" stroke-width="4" stroke-dasharray="8 8"/>
+  <circle cx="400" cy="360" r="140" fill="#FFFFFF" filter="drop-shadow(0 10px 20px rgba(0,0,0,0.06))"/>
+  <text x="400" y="400" font-size="100" text-anchor="middle">??</text>
+  <text x="400" y="560" font-family="'Playfair Display', Georgia, serif" font-size="34" font-weight="bold" fill="#2A2524" text-anchor="middle">The Executive Suite</text>
+  <text x="400" y="605" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="600" fill="#B85D47" text-anchor="middle" letter-spacing="3">THE GIFT CURATOR DUBAI</text>
+  <rect x="250" y="640" width="300" height="42" rx="21" fill="#FFFFFF" stroke="#DDD2C5" stroke-width="2"/>
+  <text x="400" y="667" font-family="monospace" font-size="15" fill="#8C827D" text-anchor="middle">Drop image to replace</text>
+</svg>

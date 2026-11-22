@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>The Gift Curator Dubai | Boutique Gifting & Concierge</title>
+  <meta name="description" content="Thoughtfully chosen. Beautifully gifted. UAE boutique gifting offering ready-to-order luxury hampers and bespoke personalised gifting concierge." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cream: '#FAF7F2',
+              creamCard: '#F6EFE9',
+              dark: '#2E2826',
+              textMuted: '#524945',
+              burgundy: '#7A2832',
+              burgundyHover: '#682029',
+              terracotta: '#9E533F',
+              sand: '#EAE0D5',
+              border: '#EFEAE2'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF7F2; color: #2E2826; scroll-behavior: smooth; }
+    h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.25s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .nav-link { position: relative; padding: 4px 0; transition: all 0.2s; color: #3A3330; }
+    .nav-link:hover { color: #7A2832; }
+    .nav-link.active { font-weight: 500; color: #2E2826; border-bottom: 2px solid #2E2826; }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col bg-[#FAF7F2]">
+
+  <!-- Top Announcement Strip -->
+  <div class="bg-[#2E2826] text-[#FAF7F2] py-2 px-4 text-xs tracking-wide">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>Dubai Same-Day Delivery available for orders placed by 12 PM GST • Next-Day across all 7 Emirates</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs">
+        <span class="text-[#D4AF37]">✨ Handwritten wax-sealed card included</span>
+        <a href="https://instagram.com/thegiftcuratordubai" target="_blank" class="hover:underline font-medium">@thegiftcuratordubai</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXACT HEADER MATCHING SCREENSHOT -->
+  <header class="sticky top-0 z-40 bg-[#FAF7F2] border-b border-[#EFEAE2]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo + Monogram -->
+        <button onclick="showTab('home')" class="flex items-center gap-3.5 text-left focus:outline-none group">
+          <img 
+            src="frontend/public/images/brand/logo.png" 
+            alt="The Gift Curator Logo" 
+            class="w-11 h-11 rounded-full object-cover shadow-xs border border-[#E8DFD5]"
+            onerror="this.src='PRODUCT_IMAGES/logo.png'; this.onerror=function(){this.style.display='none';};"
+          />
+          <div>
+            <span class="font-serif text-2xl tracking-tight text-[#2E2826] font-semibold block leading-tight">
+              The Gift Curator
+            </span>
+            <span class="text-[10px] font-sans tracking-[0.25em] text-[#7A706B] uppercase block font-medium mt-0.5">
+              DUBAI
+            </span>
+          </div>
+        </button>
+
+        <!-- Navigation Tabs: [Home] [Our Hampers] [Personalised Gifting] [Corporate Gifting] [Our Story] [Contact] -->
+        <nav class="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[15px]">
+          <button id="nav-home" onclick="showTab('home')" class="nav-link active">Home</button>
+          <button id="nav-hampers" onclick="showTab('hampers')" class="nav-link">Our Hampers</button>
+          <button id="nav-personalised" onclick="showTab('personalised')" class="nav-link">Personalised Gifting</button>
+          <button id="nav-corporate" onclick="showTab('corporate')" class="nav-link">Corporate Gifting</button>
+          <button id="nav-story" onclick="showTab('story')" class="nav-link">Our Story</button>
+          <button id="nav-contact" onclick="showTab('contact')" class="nav-link">Contact</button>
+        </nav>
+
+        <!-- Right Solid Burgundy WhatsApp Button -->
+        <div class="hidden lg:flex items-center">
+          <a 
+            href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20ask%20a%20question%20about%20your%20gifting%20services."
+            target="_blank"
+            class="px-6 py-2.5 rounded-lg bg-[#7A2832] hover:bg-[#682029] text-white text-sm font-semibold tracking-wide shadow-xs transition-all"
+          >
+            WhatsApp
+          </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="flex items-center gap-2 lg:hidden">
+          <a 
+            href="https://wa.me/971501234567?text=Hello!"
+            target="_blank"
+            class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold"
+          >
+            WhatsApp
+          </a>
+          <button onclick="toggleMobileMenu()" class="p-2 text-[#2E2826] focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-[#FAF7F2] border-t border-[#EFEAE2] px-6 py-4 space-y-2.5 text-sm font-medium">
+      <button onclick="showTab('home'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Home</button>
+      <button onclick="showTab('hampers'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Our Hampers</button>
+      <button onclick="showTab('personalised'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Personalised Gifting</button>
+      <button onclick="showTab('corporate'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Corporate Gifting</button>
+      <button onclick="showTab('story'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-[#F0EBE3]">Our Story</button>
+      <button onclick="showTab('contact'); toggleMobileMenu()" class="block w-full text-left py-2">Contact</button>
+    </div>
+  </header>
+
+  <!-- MAIN TABBED CONTENT AREA -->
+  <main class="flex-1">
+
+    <!-- ========================================== -->
+    <!-- 1. HOME TAB                                -->
+    <!-- ========================================== -->
+    <div id="tab-home" class="tab-content active">
+      <!-- Hero -->
+      <section class="py-16 sm:py-24 border-b border-[#EAE2D8]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 space-y-6 text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F4EDE5] border border-[#E0D5C7] text-xs font-semibold text-[#7A2832] uppercase tracking-wide">
+              <span>UAE Boutique Gifting Studio</span>
+            </div>
+            <h1 class="font-serif text-4xl sm:text-6xl text-[#2E2826] leading-[1.15]">
+              Thoughtfully chosen. <br />
+              <span class="italic text-[#7A2832]">Beautifully gifted.</span>
+            </h1>
+            <p class="text-[#524945] text-base sm:text-lg max-w-2xl leading-relaxed">
+              Tell us <strong class="text-[#2E2826]">who</strong>, <strong class="text-[#2E2826]">why</strong>, and <strong class="text-[#2E2826]">how much</strong> — The Gift Curator takes care of the what. Explore ready-to-order curated hampers or commission a bespoke concierge gift.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-xl">
+              <button onclick="showTab('hampers')" class="p-6 rounded-2xl bg-white border border-[#EAE2D8] hover:border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group">
+                <div class="text-3xl mb-2">🎁</div>
+                <h3 class="font-serif text-xl font-bold text-[#2E2826]">Our Hampers</h3>
+                <p class="text-xs text-[#524945] mt-1 leading-relaxed">
+                  Pre-curated luxury hampers with upfront AED pricing and prompt Dubai dispatch.
+                </p>
+                <span class="inline-block mt-3 text-xs font-semibold text-[#7A2832] group-hover:underline">Shop Hampers →</span>
+              </button>
+
+              <button onclick="showTab('personalised')" class="p-6 rounded-2xl bg-[#2E2826] text-white hover:bg-[#1A1716] shadow-xs hover:shadow-md transition-all text-left group">
+                <div class="text-3xl mb-2">✨</div>
+                <h3 class="font-serif text-xl font-bold text-[#FAF7F2]">Personalised Gifting</h3>
+                <p class="text-xs text-[#D5CEC9] mt-1 leading-relaxed">
+                  Concierge curation tailored to your budget and recipient. Zero advance fee for the concept.
+                </p>
+                <span class="inline-block mt-3 text-xs font-semibold text-[#EAE0D5] group-hover:underline">Start Concierge →</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-sm p-4 rounded-3xl bg-[#F6EFE9] border border-[#EAE0D5] shadow-xs text-center">
+              <div class="rounded-2xl overflow-hidden aspect-square bg-[#E8DFD5] flex items-center justify-center p-4">
+                <img 
+                  src="frontend/public/images/products/product-01.svg" 
+                  alt="Curated Hamper" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='PRODUCT_IMAGES/product-01.svg';"
+                />
+              </div>
+              <div class="pt-4 pb-2">
+                <h4 class="font-serif text-lg font-bold text-[#2E2826]">Boutique Hampers & Keepsakes</h4>
+                <p class="text-xs text-[#7A706B] mt-1">Artisanal goods, silk ribbons & wax-sealed cards</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Pillars -->
+      <section class="py-12 border-b border-[#EAE2D8] bg-[#F6EFE9]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left">
+          <div class="p-4 rounded-xl">
+            <div class="text-2xl mb-1">🌿</div>
+            <h4 class="font-serif font-bold text-sm text-[#2E2826]">Artisanal Selection</h4>
+            <p class="text-xs text-[#6B615C] mt-1">Hand-picked sensorial gifts from ethical makers.</p>
+          </div>
+          <div class="p-4 rounded-xl">
+            <div class="text-2xl mb-1">⚡</div>
+            <h4 class="font-serif font-bold text-sm text-[#2E2826]">Same-Day Dubai</h4>
+            <p class="text-xs text-[#6B615C] mt-1">Order by 12 PM GST for prompt delivery today.</p>
+          </div>
+          <div class="p-4 rounded-xl">
+            <div class="text-2xl mb-1">✍️</div>
+            <h4 class="font-serif font-bold text-sm text-[#2E2826]">Wax-Sealed Card</h4>
+            <p class="text-xs text-[#6B615C] mt-1">Complimentary handwritten calligraphy note.</p>
+          </div>
+          <div class="p-4 rounded-xl">
+            <div class="text-2xl mb-1">💬</div>
+            <h4 class="font-serif font-bold text-sm text-[#2E2826]">WhatsApp Ease</h4>
+            <p class="text-xs text-[#6B615C] mt-1">Direct concierge communication at every step.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. OUR HAMPERS (Shop Ready-to-Gift)        -->
+    <!-- ========================================== -->
+    <div id="tab-hampers" class="tab-content">
+      <section class="py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-[#EAE2D8]">
+            <div>
+              <span class="text-xs uppercase tracking-wider text-[#7A2832] font-semibold">Ready to Order</span>
+              <h2 class="font-serif text-3xl sm:text-4xl text-[#2E2826] font-normal mt-1">Our Curated Hampers</h2>
+              <p class="text-[#524945] text-sm mt-1">Actual prices in AED with complete contents. Order directly via WhatsApp.</p>
+            </div>
+            <!-- Photo insertion note for user -->
+            <div class="text-xs bg-[#F4EDE5] border border-[#E0D5C7] rounded-xl px-4 py-2.5 text-[#524945] max-w-md">
+              💡 <strong>Easy Photo Addition:</strong> Drop images in <code class="bg-white px-1.5 py-0.5 rounded font-mono text-[11px]">PRODUCT_IMAGES/</code>. The grid columns stay aligned automatically!
+            </div>
+          </div>
+
+          <!-- Product Grid - Columns Preserved Perfectly (grid-cols-1 sm:grid-cols-2 lg:grid-cols-4) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- Card 1 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-01.svg" 
+                  alt="The Serenity Haven Hamper" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-01.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  Same-Day
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Wellness & Self-Care</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">The Serenity Haven</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Artisan soy candle, lavender mist, organic herbal tea & raw honeycomb.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 385</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20The%20Serenity%20Haven%20(AED%20385)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-02.svg" 
+                  alt="Arabian Oud & Amber Indulgence" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-02.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  Luxury
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Heritage & Luxe</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Oud & Amber Indulgence</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Smoked amber diffuser, brass bakhoor burner, Emirates medjool dates & brass tray.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 520</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Oud%20%26%20Amber%20Indulgence%20(AED%20520)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-03.svg" 
+                  alt="The Connoisseur's Coffee Ritual" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-03.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  Gourmet
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Gourmet & Rituals</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Coffee Ritual</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Dubai micro-lot single origin beans, handcrafted ceramic dripper & dark truffles.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 340</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Coffee%20Ritual%20(AED%20340)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-04.svg" 
+                  alt="Sweet Welcome Baby Hamper" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-04.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  Newborn
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Baby & New Parents</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Sweet Welcome Baby</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">GOTS certified organic cotton swaddle, wooden teething ring & natural baby balm.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 420</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Sweet%20Welcome%20Baby%20(AED%20420)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-05.svg" 
+                  alt="The Golden Celebration Box" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-05.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  Bestseller
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Milestones</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">The Golden Celebration</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Artisan non-alcoholic sparkling grape beverage, crystal flutes & artisan gold chocolates.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 490</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Golden%20Celebration%20(AED%20490)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-06.svg" 
+                  alt="The Gentleman's Executive Box" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-06.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  Men
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Executive & Grooming</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Gentleman's Executive</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Full-grain leather cardholder, sandalwood eau de parfum & smoked nuts.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 460</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Gentleman's%20Executive%20(AED%20460)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-07.svg" 
+                  alt="The Sanctuary Spa Trunk" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-07.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  VIP
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Luxury Spa</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Sanctuary Spa Trunk</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Handmade vegan bath soak, raw silk eye mask, rose quartz roller & shea butter.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 680</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Sanctuary%20Spa%20Trunk%20(AED%20680)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
+                <img 
+                  src="PRODUCT_IMAGES/product-08.svg" 
+                  alt="Artisanal Tea & Bloom Hamper" 
+                  class="w-full h-full object-contain"
+                  onerror="this.src='frontend/public/images/products/product-08.svg';"
+                />
+                <span class="absolute top-3 left-3 bg-[#FAF7F2] text-[#2E2826] text-[10px] font-semibold px-2 py-0.5 rounded-full border border-[#EAE2D8]">
+                  Teatime
+                </span>
+              </div>
+              <div class="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div class="text-[11px] text-[#7A706B] uppercase font-semibold">Afternoon Tea</div>
+                  <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">Artisanal Tea & Bloom</h3>
+                  <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">Rare white peony tea tin, porcelain teacup, dried botanical posy & Scottish shortbread.</p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+                  <span class="font-serif text-lg font-bold text-[#7A2832]">AED 295</span>
+                  <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20Artisanal%20Tea%20%26%20Bloom%20(AED%20295)." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+                    Order
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. PERSONALISED GIFTING CONCIERGE         -->
+    <!-- ========================================== -->
+    <div id="tab-personalised" class="tab-content">
+      <section class="py-12 sm:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+          <div class="text-center space-y-3 mb-10">
+            <span class="text-xs uppercase tracking-wider text-[#7A2832] font-semibold">Bespoke Concierge</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-[#2E2826]">Curate My Gift</h2>
+            <p class="text-[#524945] text-sm max-w-lg mx-auto leading-relaxed">
+              Tell us about your recipient, the occasion, and your budget. We'll send you 1 thoughtful concept within 2–4 hours with zero upfront fee.
+            </p>
+          </div>
+
+          <!-- Interactive Concierge Form -->
+          <div class="bg-white rounded-3xl border border-[#EAE2D8] p-6 sm:p-10 shadow-sm space-y-6">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Occasion *</label>
+                <select id="p-occasion" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none">
+                  <option value="Birthday">Birthday</option>
+                  <option value="Anniversary">Anniversary</option>
+                  <option value="New Baby">New Baby / Baby Shower</option>
+                  <option value="Housewarming">Housewarming</option>
+                  <option value="Thank You">Thank You / Appreciation</option>
+                  <option value="Client Gifting">Corporate / Client Gift</option>
+                  <option value="Other">Other Special Occasion</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Recipient Relationship *</label>
+                <input id="p-recipient" type="text" placeholder="e.g. Best Friend, Mother, VIP Client" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Budget Range (AED) *</label>
+                <select id="p-budget" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none">
+                  <option value="AED 150 – 250">AED 150 – 250 (Thoughtful Essentials)</option>
+                  <option value="AED 250 – 400" selected>AED 250 – 400 (Artisan Classic)</option>
+                  <option value="AED 400 – 650">AED 400 – 650 (Elevated Hamper)</option>
+                  <option value="AED 650 – 1,000+">AED 650 – 1,000+ (Grand Luxury)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Preferred Delivery Date</label>
+                <input id="p-date" type="date" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Recipient Interests, Likes or Exclusions</label>
+              <textarea id="p-notes" rows="3" placeholder="e.g. Loves organic skincare and herbal tea, allergic to nuts, prefers minimalist aesthetic..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
+            </div>
+
+            <div class="pt-2">
+              <button onclick="submitConciergeWhatsApp()" class="w-full py-4 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white font-semibold text-sm tracking-wide uppercase shadow-sm transition-all flex items-center justify-center gap-2">
+                <span>💬 Submit to WhatsApp Concierge</span>
+              </button>
+              <p class="text-[11px] text-[#7A706B] text-center mt-2.5">
+                Zero obligation • Free initial concept • 50% deposit only upon concept approval
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 4. CORPORATE & BULK GIFTING                -->
+    <!-- ========================================== -->
+    <div id="tab-corporate" class="tab-content">
+      <section class="py-12 sm:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+          <div class="text-center space-y-3 mb-10">
+            <span class="text-xs uppercase tracking-wider text-[#7A2832] font-semibold">Business Solutions</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-[#2E2826]">Corporate & Bulk Gifting</h2>
+            <p class="text-[#524945] text-sm max-w-lg mx-auto leading-relaxed">
+              Elevate your employee appreciation, executive client relations, Ramadan hampers, and brand events.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center">
+              <div class="text-2xl mb-2">🏷️</div>
+              <h4 class="font-serif font-bold text-base text-[#2E2826]">Custom Branding</h4>
+              <p class="text-xs text-[#524945] mt-1">Silk ribbon stamping, laser-engraved plaques & custom-printed luxury boxes.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center">
+              <div class="text-2xl mb-2">📊</div>
+              <h4 class="font-serif font-bold text-base text-[#2E2826]">Tiered Pricing</h4>
+              <p class="text-xs text-[#524945] mt-1">Volume price breaks from 10 to 500+ units across Dubai, Abu Dhabi & GCC.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center">
+              <div class="text-2xl mb-2">🚚</div>
+              <h4 class="font-serif font-bold text-base text-[#2E2826]">Multi-Address Dispatch</h4>
+              <p class="text-xs text-[#524945] mt-1">White-glove door-to-door delivery directly to VIP clients or office addresses.</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl border border-[#EAE2D8] p-6 sm:p-10 shadow-sm space-y-6">
+            <h3 class="font-serif text-xl font-bold text-[#2E2826]">Request a Corporate Quotation</h3>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Company Name *</label>
+                <input id="c-company" type="text" placeholder="e.g. Acme Capital Partners" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Estimated Quantity *</label>
+                <select id="c-qty" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none">
+                  <option value="10 – 25 hampers">10 – 25 hampers</option>
+                  <option value="26 – 50 hampers">26 – 50 hampers</option>
+                  <option value="51 – 100 hampers">51 – 100 hampers</option>
+                  <option value="100+ hampers">100+ hampers (Custom Project)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Target Budget Per Unit (AED)</label>
+                <input id="c-budget" type="text" placeholder="e.g. AED 300 - 450 per unit" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Deadline / Event Date</label>
+                <input id="c-date" type="date" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Brief & Brand Requirements</label>
+              <textarea id="c-notes" rows="3" placeholder="Tell us about the project, logo inclusion, dietary requirements..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
+            </div>
+
+            <button onclick="submitCorporateWhatsApp()" class="w-full py-4 rounded-xl bg-[#2E2826] hover:bg-[#1A1716] text-white font-semibold text-sm tracking-wide uppercase transition-all flex items-center justify-center gap-2">
+              <span>Send Corporate Request to Concierge</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 5. OUR STORY (MATCHING USER SCREENSHOT)    -->
+    <!-- ========================================== -->
+    <div id="tab-story" class="tab-content">
+      <section class="py-12 sm:py-20 bg-[#FAF7F2] min-h-[80vh]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <!-- Exact "Meet the Founder" Grid Matching Screenshot -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <!-- Left Column: Narrative -->
+            <div class="lg:col-span-7 space-y-6 text-left">
+              
+              <div class="space-y-2">
+                <h1 class="font-serif text-5xl sm:text-6xl text-[#2E2826] font-normal tracking-tight leading-[1.08]">
+                  Meet the <br />
+                  Founder
+                </h1>
+                
+                <p class="font-serif italic text-2xl sm:text-3xl text-[#9E533F] font-normal pt-1">
+                  The heart behind The Gift Curator Dubai
+                </p>
+              </div>
+
+              <div class="space-y-4 text-[#3A3330] text-base sm:text-lg leading-relaxed pt-2">
+                <p class="font-bold text-[#2E2826]">
+                  Hi, I'm Chaitally, the person behind The Gift Curator Dubai.
+                </p>
+                
+                <p class="text-[#524945]">
+                  And believe it or not, it all started with my children's birthday favours.
+                </p>
+
+                <p class="text-[#524945] text-sm sm:text-base leading-relaxed">
+                  When planning celebrations for my little ones, I found myself frustrated by generic party favours and impersonal plastic trinkets. I wanted to give gifts that felt intentional, memorable, and genuinely appreciated—items that children and parents would cherish long after the party ended.
+                </p>
+
+                <p class="text-[#524945] text-sm sm:text-base leading-relaxed">
+                  I began hand-curating bespoke gift bundles, sourcing lovely artisan keepsakes, hand-tying ribbons, and penning personal notes. The response was immediate: friends and family began asking me to curate gifts for their own milestones, baby showers, birthdays, and corporate celebrations.
+                </p>
+
+                <p class="text-[#524945] text-sm sm:text-base leading-relaxed">
+                  That passion grew into <strong>The Gift Curator Dubai</strong>. Today, our philosophy remains unchanged: you tell us <em>who</em>, <em>why</em>, and <em>how much</em>—and we take care of the <em>what</em>. Every hamper is hand-assembled in Dubai with authentic artisanal goods, custom silk ribbons, and handwritten wax-sealed cards.
+                </p>
+              </div>
+
+              <!-- Quote Block -->
+              <div class="p-5 rounded-2xl bg-[#F4EDE5] border-l-4 border-[#7A2832] text-sm text-[#3A3330] italic">
+                "We believe gifting is not just a transaction—it is a silent letter of gratitude, celebration, and love."
+                <span class="block not-italic font-semibold text-xs text-[#7A2832] mt-2">— Chaitally, Founder</span>
+              </div>
+
+              <!-- Action CTAs -->
+              <div class="pt-4 flex flex-wrap items-center gap-4">
+                <button
+                  onclick="showTab('personalised')"
+                  class="px-6 py-3.5 rounded-xl bg-[#2E2826] hover:bg-[#1A1716] text-white text-xs font-semibold tracking-wider uppercase shadow-xs transition-all flex items-center gap-2"
+                >
+                  <span>Curate My Gift</span>
+                  <span>→</span>
+                </button>
+
+                <a
+                  href="https://wa.me/971501234567?text=Hello%20Chaitally!%20I%20read%20your%20story%20on%20The%20Gift%20Curator%20and%20would%20love%20to%20say%20hello."
+                  target="_blank"
+                  class="px-6 py-3.5 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold tracking-wider uppercase shadow-xs transition-all flex items-center gap-2"
+                >
+                  <span>Say Hello on WhatsApp</span>
+                </a>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Founder Arched Card (Exact Match to Screenshot) -->
+            <div class="lg:col-span-5 flex justify-center">
+              <div class="relative w-full max-w-sm sm:max-w-md p-4 sm:p-5 rounded-t-[160px] rounded-b-3xl bg-[#F6EFE9] border border-[#EAE0D5] shadow-sm text-center">
+                
+                <!-- Arched Photo Frame -->
+                <div class="relative mx-auto rounded-t-[140px] rounded-b-2xl overflow-hidden aspect-[4/5] bg-[#EBE2D8] shadow-inner">
+                  <img
+                    src="PRODUCT_IMAGES/founder-chaitally.jpg"
+                    alt="Chaitally - Founder of The Gift Curator Dubai"
+                    class="w-full h-full object-cover object-top"
+                    onerror="this.src='frontend/public/images/founder-chaitally.jpg';"
+                  />
+                </div>
+
+                <!-- Founder Caption -->
+                <div class="pt-4 pb-2 space-y-1">
+                  <h3 class="font-serif text-2xl font-bold text-[#2E2826]">
+                    Chaitally
+                  </h3>
+                  <p class="text-xs sm:text-sm text-[#736862] font-medium tracking-wide">
+                    Founder, The Gift Curator Dubai
+                  </p>
+                  <span class="inline-block text-[11px] text-[#9E533F] font-serif italic pt-0.5">
+                    Anrudaya Gifts FZE • Dubai, UAE
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Brand Values Strip -->
+          <div class="mt-16 sm:mt-24 pt-12 border-t border-[#EAE2D8] grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-full bg-[#F4EDE5] text-[#7A2832] flex items-center justify-center text-lg">🌿</div>
+              <h4 class="font-serif text-lg font-semibold text-[#2E2826]">Thoughtfully Chosen</h4>
+              <p class="text-xs text-[#6B615C] leading-relaxed">
+                We curate only sensory, delightful, and genuinely useful items from artisanal Emirati makers and ethical global craftspeople.
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-full bg-[#F4EDE5] text-[#7A2832] flex items-center justify-center text-lg">✨</div>
+              <h4 class="font-serif text-lg font-semibold text-[#2E2826]">Handcrafted in Dubai</h4>
+              <p class="text-xs text-[#6B615C] leading-relaxed">
+                Every hamper is hand-assembled in our Dubai studio, tied with raw-edge silk ribbon, and sealed with botanical wax and custom calligraphy.
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <div class="w-10 h-10 rounded-full bg-[#F4EDE5] text-[#7A2832] flex items-center justify-center text-lg">🤍</div>
+              <h4 class="font-serif text-lg font-semibold text-[#2E2826]">Welcoming Across Budgets</h4>
+              <p class="text-xs text-[#6B615C] leading-relaxed">
+                Meaningful gifting should never be intimidating. From accessible thank-you gestures (AED 150) to grand VIP curations, we honour every budget.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 6. CONTACT TAB                             -->
+    <!-- ========================================== -->
+    <div id="tab-contact" class="tab-content">
+      <section class="py-12 sm:py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+          <div class="text-center space-y-3 mb-10">
+            <span class="text-xs uppercase tracking-wider text-[#7A2832] font-semibold">Get in Touch</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-[#2E2826]">Contact The Gift Curator</h2>
+            <p class="text-[#524945] text-sm max-w-lg mx-auto leading-relaxed">
+              We operate via WhatsApp for immediate, personalised service. Feel free to reach out with any question or special request.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
+              <div class="text-3xl">💬</div>
+              <h4 class="font-serif font-bold text-base text-[#2E2826]">WhatsApp</h4>
+              <p class="text-xs text-[#524945]">+971 50 123 4567<br/><span class="text-[11px] text-[#7A706B]">Avg. 15-minute response</span></p>
+              <a href="https://wa.me/971501234567" target="_blank" class="inline-block px-4 py-2 rounded-lg bg-[#7A2832] text-white text-xs font-semibold">Message Us</a>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
+              <div class="text-3xl">📸</div>
+              <h4 class="font-serif font-bold text-base text-[#2E2826]">Instagram</h4>
+              <p class="text-xs text-[#524945]">@thegiftcuratordubai<br/><span class="text-[11px] text-[#7A706B]">Follow our daily curations</span></p>
+              <a href="https://instagram.com/thegiftcuratordubai" target="_blank" class="inline-block px-4 py-2 rounded-lg bg-[#2E2826] text-white text-xs font-semibold">View Feed</a>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
+              <div class="text-3xl">📍</div>
+              <h4 class="font-serif font-bold text-base text-[#2E2826]">Boutique Studio</h4>
+              <p class="text-xs text-[#524945]">Dubai, United Arab Emirates<br/><span class="text-[11px] text-[#7A706B]">Deliveries across all 7 Emirates</span></p>
+              <span class="inline-block text-xs font-semibold text-[#7A2832]">Sunday – Saturday: 9am - 8pm</span>
+            </div>
+          </div>
+
+          <div class="mt-8 bg-white p-6 rounded-2xl border border-[#EAE2D8] text-xs text-[#524945] space-y-2">
+            <h4 class="font-bold text-sm text-[#2E2826]">Legal Entity Information</h4>
+            <p>Customer-facing brand: <strong>The Gift Curator</strong> | Dubai, United Arab Emirates</p>
+            <p>Legal Entity: <strong>Anrudaya Gifts FZE</strong></p>
+            <p>Official Website: <a href="https://www.thegiftcuratordubai.com" target="_blank" class="text-[#7A2832] underline">www.thegiftcuratordubai.com</a></p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#2E2826] text-[#FAF7F2] border-t border-[#3A3330] py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-3 md:col-span-2">
+        <h3 class="font-serif text-2xl font-bold">The Gift Curator</h3>
+        <p class="text-xs text-[#D5CEC9] max-w-md leading-relaxed">
+          Thoughtfully chosen. Beautifully gifted. UAE boutique gifting offering ready-to-order luxury hampers and bespoke personalised gifting concierge.
+        </p>
+        <p class="text-[11px] text-[#8C827D]">Legal Entity: Anrudaya Gifts FZE • Dubai, UAE</p>
+      </div>
+      <div class="space-y-2 text-xs">
+        <h4 class="font-bold text-sm uppercase tracking-wider text-[#D4AF37]">Explore</h4>
+        <p><button onclick="showTab('home')" class="hover:underline">Home</button></p>
+        <p><button onclick="showTab('hampers')" class="hover:underline">Our Hampers</button></p>
+        <p><button onclick="showTab('personalised')" class="hover:underline">Personalised Gifting</button></p>
+        <p><button onclick="showTab('corporate')" class="hover:underline">Corporate Gifting</button></p>
+        <p><button onclick="showTab('story')" class="hover:underline">Our Story (Founder)</button></p>
+      </div>
+      <div class="space-y-2 text-xs">
+        <h4 class="font-bold text-sm uppercase tracking-wider text-[#D4AF37]">Concierge</h4>
+        <p>WhatsApp: +971 50 123 4567</p>
+        <p>Instagram: @thegiftcuratordubai</p>
+        <p>Dubai Same-Day & Next-Day UAE</p>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-[#3D3735] text-center text-xs text-[#8C827D]">
+      &copy; 2026 The Gift Curator Dubai. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- SCRIPT FOR TAB SWITCHING & WHATSAPP LOGIC -->
+  <script>
+    const tabs = ['home', 'hampers', 'personalised', 'corporate', 'story', 'contact'];
+
+    function showTab(tabId) {
+      tabs.forEach(t => {
+        const el = document.getElementById('tab-' + t);
+        const nav = document.getElementById('nav-' + t);
+        if (el) el.classList.remove('active');
+        if (nav) nav.classList.remove('active');
+      });
+
+      const targetEl = document.getElementById('tab-' + tabId);
+      const targetNav = document.getElementById('nav-' + tabId);
+
+      if (targetEl) targetEl.classList.add('active');
+      if (targetNav) targetNav.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    function submitConciergeWhatsApp() {
+      const occasion = document.getElementById('p-occasion').value;
+      const recipient = document.getElementById('p-recipient').value || 'Not specified';
+      const budget = document.getElementById('p-budget').value;
+      const date = document.getElementById('p-date').value || 'Flexible';
+      const notes = document.getElementById('p-notes').value || 'No extra notes';
+
+      const msg = `Hello The Gift Curator! 🎁%0A%0AI would like to commission a Personalised Gift:%0A• Occasion: ${encodeURIComponent(occasion)}%0A• Recipient: ${encodeURIComponent(recipient)}%0A• Budget: ${encodeURIComponent(budget)}%0A• Preferred Date: ${encodeURIComponent(date)}%0A• Notes: ${encodeURIComponent(notes)}%0A%0APlease share an initial concept!`;
+
+      window.open(`https://wa.me/971501234567?text=${msg}`, '_blank');
+    }
+
+    function submitCorporateWhatsApp() {
+      const company = document.getElementById('c-company').value || 'Our Company';
+      const qty = document.getElementById('c-qty').value;
+      const budget = document.getElementById('c-budget').value || 'Flexible';
+      const date = document.getElementById('c-date').value || 'Flexible';
+      const notes = document.getElementById('c-notes').value || 'Standard packaging';
+
+      const msg = `Hello The Gift Curator! 🏢%0A%0ACorporate Gifting Enquiry:%0A• Company: ${encodeURIComponent(company)}%0A• Quantity: ${encodeURIComponent(qty)}%0A• Target Budget/Unit: ${encodeURIComponent(budget)}%0A• Deadline: ${encodeURIComponent(date)}%0A• Brief: ${encodeURIComponent(notes)}%0A%0APlease provide a proposal & quotation!`;
+
+      window.open(`https://wa.me/971501234567?text=${msg}`, '_blank');
+    }
+  </script>
+</body>
+</html>

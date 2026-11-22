@@ -1,0 +1,32 @@
+====================================================================
+  THE GIFT CURATOR — PRODUCT IMAGES FOLDER
+====================================================================
+
+You can easily add or replace product photos here!
+
+HOW TO ADD A PHOTO FOR A PRODUCT:
+1. Take or save your photo (JPG, PNG, or WebP).
+2. Save it directly into this folder:
+   C:\didi website\PRODUCT_IMAGES\
+   (and in: C:\didi website\frontend\public\images\products\)
+
+3. Recommended image filenames:
+   - product-01.jpg -> The Velvet Morning Hamper
+   - product-02.jpg -> Botanical Serenity & Tea Ritual
+   - product-03.jpg -> The Executive Desk Suite
+   - product-04.jpg -> Sweet Beginnings: Mum & Baby
+   - product-05.jpg -> Artisan Host & Housewarming
+   - product-06.jpg -> Golden Hour: Scent & Sweet
+   - product-07.jpg -> Gentleman's Grooming & Amber
+   - product-08.jpg -> Midnight Cocoa & Truffle Treat
+
+HOW TO LINK A NEW PHOTO TO A PRODUCT:
+- Open: C:\didi website\frontend\src\data\products.json
+- Find the product and set:
+  "image": "/images/products/product-01.jpg"
+
+IF NO PHOTO IS ADDED YET:
+- The website automatically shows an elegant boutique placeholder frame 
+  with the hamper's name, so the layout, columns, and cards always look 
+  clean and beautiful!
+====================================================================
