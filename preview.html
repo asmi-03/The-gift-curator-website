@@ -346,7 +346,12 @@
 
             <div>
               <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Recipient Interests, Likes or Exclusions</label>
-              <textarea id="p-notes" rows="3" placeholder="e.g. Loves organic skincare and herbal tea, allergic to nuts, prefers minimalist aesthetic..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
+              <textarea id="p-notes" rows="2" placeholder="e.g. Loves organic skincare and herbal tea, allergic to nuts, prefers minimalist aesthetic..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Delivery Address (Building/Villa, Street, Area / Landmark)</label>
+              <textarea id="p-address" rows="2" placeholder="e.g. Villa 14, Frond E, Palm Jumeirah, Dubai / Apt 1204, Index Tower, DIFC (or 'Will share pin on WhatsApp')" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
             </div>
 
             <div class="pt-2">
@@ -1279,8 +1284,9 @@
       const budget = document.getElementById('p-budget').value;
       const date = document.getElementById('p-date').value || 'Flexible';
       const notes = document.getElementById('p-notes').value || 'No extra notes';
+      const address = document.getElementById('p-address').value || 'To be shared on WhatsApp';
 
-      const msg = `Hello The Gift Curator! 🎁%0A%0AI would like to commission a Personalised Gift:%0A• Occasion: ${encodeURIComponent(occasion)}%0A• Recipient: ${encodeURIComponent(recipient)}%0A• Budget: ${encodeURIComponent(budget)}%0A• Preferred Date: ${encodeURIComponent(date)}%0A• Notes: ${encodeURIComponent(notes)}%0A%0APlease share an initial concept!`;
+      const msg = `Hello The Gift Curator! 🎁%0A%0AI would like to commission a Personalised Gift:%0A• Occasion: ${encodeURIComponent(occasion)}%0A• Recipient: ${encodeURIComponent(recipient)}%0A• Budget: ${encodeURIComponent(budget)}%0A• Preferred Date: ${encodeURIComponent(date)}%0A• Delivery Address: ${encodeURIComponent(address)}%0A• Notes: ${encodeURIComponent(notes)}%0A%0APlease share an initial concept!`;
 
       window.open(`https://wa.me/971501234567?text=${msg}`, '_blank');
     }

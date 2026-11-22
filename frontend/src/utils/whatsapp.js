@@ -52,7 +52,7 @@ I would like to request a Personalised Gifting Concept:
 • Recipient Interests: ${enquiry.interests && enquiry.interests.length > 0 ? enquiry.interests.join(', ') : 'Open to ideas'}
 ${enquiry.exclusions ? `• Dietary / Exclusions: ${enquiry.exclusions}\n` : ''}• Preferred Delivery Date: ${enquiry.deliveryDate || 'Flexible / To be confirmed'}
 • Delivery Emirate: ${enquiry.deliveryArea || 'Dubai'}
-• Sender Name: ${enquiry.senderName || 'Anonymous'}
+${enquiry.deliveryAddress ? `• Delivery Address: ${enquiry.deliveryAddress}\n` : ''}• Sender Name: ${enquiry.senderName || 'Anonymous'}
 
 Looking forward to your complimentary concept and indicative quotation!`;
 

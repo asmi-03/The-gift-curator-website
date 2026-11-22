@@ -15,6 +15,7 @@ export default function CurateMyGift() {
     exclusions: '',
     deliveryDate: '',
     deliveryArea: 'Dubai',
+    deliveryAddress: '',
     senderName: '',
     senderContact: '',
     consent: true,
@@ -410,6 +411,24 @@ Sender: ${submittedRef.senderName} (${submittedRef.senderContact})`;
                     onChange={(e) => setFormData({ ...formData, deliveryDate: e.target.value })}
                     className="w-full text-xs p-3 rounded-xl bg-cream-50 border border-cream-300 focus:outline-none focus:ring-2 focus:ring-rosewood-400"
                   />
+                </div>
+
+                {/* Delivery Address Field in Step 4 */}
+                <div className="sm:col-span-2 space-y-1.5">
+                  <label htmlFor="delivery-address-input" className="text-xs font-semibold text-slatewarm-800 block">
+                    Delivery Address (Building/Villa, Street, Area / Landmark):
+                  </label>
+                  <textarea
+                    id="delivery-address-input"
+                    rows="2"
+                    value={formData.deliveryAddress}
+                    onChange={(e) => setFormData({ ...formData, deliveryAddress: e.target.value })}
+                    placeholder="e.g. Villa 14, Frond E, Palm Jumeirah, Dubai / Apt 1204, Index Tower, DIFC (or 'Will share pin on WhatsApp')"
+                    className="w-full text-xs p-3 rounded-xl bg-cream-50 border border-cream-300 focus:outline-none focus:ring-2 focus:ring-rosewood-400"
+                  ></textarea>
+                  <span className="text-[11px] text-slatewarm-500 block">
+                    Specify building/villa, floor, or approximate area. You can also share your WhatsApp live location pin later.
+                  </span>
                 </div>
 
                 {/* Sender Name */}
