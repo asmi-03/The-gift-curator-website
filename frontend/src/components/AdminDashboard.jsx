@@ -324,8 +324,13 @@ export default function AdminDashboard({ onExit }) {
       <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white rounded-3xl border border-[#EAE0D5] p-8 sm:p-10 shadow-sm text-center">
           
-          <div className="w-16 h-16 rounded-full bg-[#FAECE8] text-[#7A2832] flex items-center justify-center mx-auto mb-4 border border-[#E8DFD5]">
-            <Sparkles className="w-8 h-8" />
+          <div className="w-20 h-20 rounded-full bg-[#FAECE8] flex items-center justify-center mx-auto mb-4 border border-[#E8DFD5] overflow-hidden">
+            <img 
+              src="/images/brand/logo.png" 
+              alt="The Gift Curator Logo" 
+              className="w-full h-full object-contain rounded-full"
+              onError={(e) => { e.target.src = '/logo.png'; }}
+            />
           </div>
 
           <span className="text-[11px] font-sans tracking-[0.25em] text-[#7A706B] uppercase block font-semibold">
@@ -402,8 +407,13 @@ export default function AdminDashboard({ onExit }) {
             
             {/* Brand + Portal Label */}
             <div className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-full bg-[#FAECE8] text-[#7A2832] flex items-center justify-center font-serif font-bold text-sm border border-[#E8DFD5]">
-                TGC
+              <div className="w-12 h-12 rounded-full bg-[#FAECE8] flex items-center justify-center overflow-hidden shrink-0 border border-[#E8DFD5]">
+                <img 
+                  src="/images/brand/logo.png" 
+                  alt="The Gift Curator Logo" 
+                  className="w-full h-full object-contain rounded-full"
+                  onError={(e) => { e.target.src = '/logo.png'; }}
+                />
               </div>
               <div>
                 <div className="flex items-center gap-2">

@@ -17,17 +17,19 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Brand Logo & Name (Matching Screenshot Exactly) */}
+          {/* Brand Logo & Name (HD Adjustable Circular Logo) */}
           <button 
             onClick={() => handleNavClick('home')} 
             className="flex items-center gap-3.5 text-left group focus:outline-none"
           >
-            <img 
-              src="/images/brand/logo.png" 
-              alt="The Gift Curator Logo" 
-              className="w-11 h-11 rounded-full object-cover shadow-xs border border-[#E8DFD5]"
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden shrink-0 flex items-center justify-center transition-transform group-hover:scale-105">
+              <img 
+                src="/images/brand/logo.png" 
+                alt="The Gift Curator Dubai Logo" 
+                className="w-full h-full object-contain rounded-full drop-shadow-xs"
+                onError={(e) => { e.target.src = '/logo.png'; }}
+              />
+            </div>
             <div>
               <span className="font-serif text-2xl tracking-tight text-[#2E2826] font-semibold block leading-tight">
                 The Gift Curator
