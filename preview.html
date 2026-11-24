@@ -43,6 +43,12 @@
     }
   </script>
   <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+    }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF7F2; color: #2E2826; scroll-behavior: smooth; }
     h1, h2, h3, h4, .font-serif { font-family: 'Playfair Display', Georgia, serif; }
     .tab-content { display: none; }
@@ -53,33 +59,42 @@
     .nav-link.active { font-weight: 500; color: #2E2826; border-bottom: 2px solid #2E2826; }
     .admin-subtab { display: none; }
     .admin-subtab.active { display: block; }
+    /* Mobile Form Optimizations (prevents iOS Safari auto-zoom) */
+    @media (max-width: 640px) {
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+    }
+    /* Hide scrollbars for horizontal pill bars */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col bg-[#FAF7F2]">
 
   <!-- Top Announcement Strip -->
-  <div class="bg-[#2E2826] text-[#FAF7F2] py-2 px-4 text-xs tracking-wide">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
-      <div class="flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-        <span>Dubai Same-Day Delivery available for orders placed by 12 PM GST • Next-Day across all 7 Emirates</span>
+  <div class="bg-[#2E2826] text-[#FAF7F2] py-2 px-3 sm:px-4 text-[11px] sm:text-xs tracking-wide">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 text-center sm:text-left">
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+        <span class="line-clamp-1 sm:line-clamp-none">Dubai Same-Day Delivery before 12 PM GST • Next-Day across all 7 Emirates</span>
       </div>
-      <div class="flex items-center gap-4 text-xs">
-        <span class="text-[#D4AF37]">✨ Handwritten wax-sealed card included</span>
+      <div class="flex items-center gap-3 sm:gap-4 text-[10px] sm:text-xs">
+        <span class="text-[#D4AF37] hidden md:inline">✨ Handwritten wax-sealed card included</span>
         <a href="https://instagram.com/thegiftcuratordubai" target="_blank" class="hover:underline font-medium">@thegiftcuratordubai</a>
-        <button onclick="showTab('admin')" class="text-xs text-[#D4AF37] hover:underline font-mono">🔒 Admin</button>
+        <button onclick="showTab('admin')" class="text-[#D4AF37] hover:underline font-mono">🔒 Admin</button>
       </div>
     </div>
   </div>
 
-  <!-- EXACT HEADER MATCHING SCREENSHOT -->
-  <header id="main-header" class="sticky top-0 z-40 bg-[#FAF7F2] border-b border-[#EFEAE2]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
+  <!-- EXACT HEADER MATCHING SCREENSHOT (Fully Responsive) -->
+  <header id="main-header" class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#EFEAE2]">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
         
         <!-- Brand Logo + Monogram -->
-        <button onclick="showTab('home')" class="flex items-center gap-3.5 text-left focus:outline-none group">
-          <div class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden shrink-0 flex items-center justify-center transition-transform group-hover:scale-105">
+        <button onclick="showTab('home')" class="flex items-center gap-2.5 sm:gap-3.5 text-left focus:outline-none group">
+          <div class="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden shrink-0 flex items-center justify-center transition-transform group-hover:scale-105 border border-[#E8DFD5]">
             <img 
               src="frontend/public/images/brand/logo.png" 
               alt="The Gift Curator Logo" 
@@ -88,17 +103,17 @@
             />
           </div>
           <div>
-            <span class="font-serif text-2xl tracking-tight text-[#2E2826] font-semibold block leading-tight">
+            <span class="font-serif text-lg sm:text-2xl tracking-tight text-[#2E2826] font-semibold block leading-tight">
               The Gift Curator
             </span>
-            <span class="text-[10px] font-sans tracking-[0.25em] text-[#7A706B] uppercase block font-medium mt-0.5">
+            <span class="text-[9px] sm:text-[10px] font-sans tracking-[0.25em] text-[#7A706B] uppercase block font-medium mt-0.5">
               DUBAI
             </span>
           </div>
         </button>
 
         <!-- Navigation Tabs: [Home] [Our Hampers] [Personalised Gifting] [Corporate Gifting] [Our Story] [Contact] -->
-        <nav class="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[15px]">
+        <nav class="hidden lg:flex items-center space-x-6 xl:space-x-8 text-[14px] xl:text-[15px]">
           <button id="nav-home" onclick="showTab('home')" class="nav-link active">Home</button>
           <button id="nav-hampers" onclick="showTab('hampers')" class="nav-link">Our Hampers</button>
           <button id="nav-personalised" onclick="showTab('personalised')" class="nav-link">Personalised Gifting</button>
@@ -113,7 +128,7 @@
             id="nav-whatsapp-link-desktop"
             href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20ask%20a%20question%20about%20your%20gifting%20services."
             target="_blank"
-            class="px-6 py-2.5 rounded-lg bg-[#7A2832] hover:bg-[#682029] text-white text-sm font-semibold tracking-wide shadow-xs transition-all"
+            class="px-5 py-2.5 rounded-lg bg-[#7A2832] hover:bg-[#682029] text-white text-xs sm:text-sm font-semibold tracking-wide shadow-xs transition-all"
           >
             WhatsApp
           </a>
@@ -125,11 +140,11 @@
             id="nav-whatsapp-link-mobile"
             href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!"
             target="_blank"
-            class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold"
+            class="px-3 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold shadow-xs"
           >
             WhatsApp
           </a>
-          <button onclick="toggleMobileMenu()" class="p-2 text-[#2E2826] focus:outline-none">
+          <button onclick="toggleMobileMenu()" class="p-2 text-[#2E2826] focus:outline-none rounded-lg hover:bg-[#F2ECE4] transition-colors" aria-label="Toggle Menu">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
@@ -159,28 +174,28 @@
     <!-- ========================================== -->
     <div id="tab-home" class="tab-content active">
       <!-- Hero -->
-      <section class="py-16 sm:py-24 border-b border-[#EAE2D8]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div class="lg:col-span-7 space-y-6 text-left">
+      <section class="py-10 sm:py-16 lg:py-24 border-b border-[#EAE2D8]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5 sm:space-y-6 text-left">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F4EDE5] border border-[#E0D5C7] text-xs font-semibold text-[#7A2832] uppercase tracking-wide">
               <span>UAE Boutique Gifting Studio</span>
             </div>
-            <h1 class="font-serif text-4xl sm:text-6xl text-[#2E2826] leading-[1.15]">
+            <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#2E2826] leading-[1.15]">
               Thoughtfully chosen. <br />
               <span class="italic text-[#7A2832]">Beautifully gifted.</span>
             </h1>
-            <p class="text-[#524945] text-base sm:text-lg max-w-2xl leading-relaxed">
+            <p class="text-[#524945] text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed">
               Tell us <strong class="text-[#2E2826]">who</strong>, <strong class="text-[#2E2826]">why</strong>, and <strong class="text-[#2E2826]">how much</strong> — The Gift Curator takes care of the what. Explore ready-to-order curated hampers or commission a bespoke concierge gift.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-xl">
               <!-- Journey 1: Ready-to-Gift -->
-              <button onclick="showTab('hampers')" class="p-6 rounded-2xl bg-white border border-[#EAE2D8] hover:border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between">
+              <button onclick="showTab('hampers')" class="p-5 sm:p-6 rounded-2xl bg-white border border-[#EAE2D8] hover:border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between">
                 <div class="space-y-2">
                   <div class="w-10 h-10 rounded-xl bg-[#FAECE8] text-[#7A2832] flex items-center justify-center text-xl">
                     🎁
                   </div>
                   <div>
-                    <h3 class="font-serif text-2xl font-bold text-[#2E2826]">Shop Ready-to-Gift</h3>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#2E2826]">Shop Ready-to-Gift</h3>
                     <p class="text-xs text-[#524945] mt-1.5 leading-relaxed">
                       Pre-curated luxury hampers with upfront AED pricing and prompt Dubai dispatch.
                     </p>
@@ -193,7 +208,7 @@
               </button>
 
               <!-- Journey 2: Curate My Gift (High Visibility & Rich Boutique Contrast) -->
-              <button onclick="showTab('personalised')" class="p-6 rounded-2xl bg-[#FFFBF8] border-2 border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between">
+              <button onclick="showTab('personalised')" class="p-5 sm:p-6 rounded-2xl bg-[#FFFBF8] border-2 border-[#7A2832] shadow-xs hover:shadow-md transition-all text-left group flex flex-col justify-between">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between">
                     <div class="w-10 h-10 rounded-xl bg-[#7A2832] text-white flex items-center justify-center text-xl shadow-xs">
@@ -204,7 +219,7 @@
                     </span>
                   </div>
                   <div>
-                    <h3 class="font-serif text-2xl font-bold text-[#7A2832] group-hover:text-[#682029] transition-colors leading-tight">
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#7A2832] group-hover:text-[#682029] transition-colors leading-tight">
                       Curate My Gift
                     </h3>
                     <p class="text-xs font-medium text-[#2E2826] mt-1.5 leading-relaxed">
@@ -221,7 +236,7 @@
           </div>
 
           <div class="lg:col-span-5 flex justify-center">
-            <div class="relative w-full max-w-sm p-4 rounded-3xl bg-[#F6EFE9] border border-[#EAE0D5] shadow-xs text-center">
+            <div class="relative w-full max-w-xs sm:max-w-sm p-4 rounded-3xl bg-[#F6EFE9] border border-[#EAE0D5] shadow-xs text-center">
               <div class="rounded-2xl overflow-hidden aspect-square bg-[#E8DFD5] flex items-center justify-center p-4">
                 <img 
                   src="frontend/public/images/products/product-01.svg" 
@@ -231,7 +246,7 @@
                 />
               </div>
               <div class="pt-4 pb-2">
-                <h4 class="font-serif text-lg font-bold text-[#2E2826]">Boutique Hampers & Keepsakes</h4>
+                <h4 class="font-serif text-base sm:text-lg font-bold text-[#2E2826]">Boutique Hampers & Keepsakes</h4>
                 <p class="text-xs text-[#7A706B] mt-1">Artisanal goods, silk ribbons & wax-sealed cards</p>
               </div>
             </div>
@@ -240,27 +255,27 @@
       </section>
 
       <!-- Trust Pillars -->
-      <section class="py-12 border-b border-[#EAE2D8] bg-[#F6EFE9]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left">
-          <div class="p-4 rounded-xl">
+      <section class="py-8 sm:py-12 border-b border-[#EAE2D8] bg-[#F6EFE9]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center md:text-left">
+          <div class="p-3 sm:p-4 rounded-xl bg-white/40 md:bg-transparent">
             <div class="text-2xl mb-1">🌿</div>
-            <h4 class="font-serif font-bold text-sm text-[#2E2826]">Artisanal Selection</h4>
-            <p class="text-xs text-[#6B615C] mt-1">Hand-picked sensorial gifts from ethical makers.</p>
+            <h4 class="font-serif font-bold text-xs sm:text-sm text-[#2E2826]">Artisanal Selection</h4>
+            <p class="text-[11px] sm:text-xs text-[#6B615C] mt-0.5 sm:mt-1">Hand-picked sensorial gifts from ethical makers.</p>
           </div>
-          <div class="p-4 rounded-xl">
+          <div class="p-3 sm:p-4 rounded-xl bg-white/40 md:bg-transparent">
             <div class="text-2xl mb-1">⚡</div>
-            <h4 class="font-serif font-bold text-sm text-[#2E2826]">Same-Day Dubai</h4>
-            <p class="text-xs text-[#6B615C] mt-1">Order by 12 PM GST for prompt delivery today.</p>
+            <h4 class="font-serif font-bold text-xs sm:text-sm text-[#2E2826]">Same-Day Dubai</h4>
+            <p class="text-[11px] sm:text-xs text-[#6B615C] mt-0.5 sm:mt-1">Order by 12 PM GST for prompt delivery today.</p>
           </div>
-          <div class="p-4 rounded-xl">
+          <div class="p-3 sm:p-4 rounded-xl bg-white/40 md:bg-transparent">
             <div class="text-2xl mb-1">✍️</div>
-            <h4 class="font-serif font-bold text-sm text-[#2E2826]">Wax-Sealed Card</h4>
-            <p class="text-xs text-[#6B615C] mt-1">Complimentary handwritten calligraphy note.</p>
+            <h4 class="font-serif font-bold text-xs sm:text-sm text-[#2E2826]">Wax-Sealed Card</h4>
+            <p class="text-[11px] sm:text-xs text-[#6B615C] mt-0.5 sm:mt-1">Complimentary handwritten calligraphy note.</p>
           </div>
-          <div class="p-4 rounded-xl">
+          <div class="p-3 sm:p-4 rounded-xl bg-white/40 md:bg-transparent">
             <div class="text-2xl mb-1">💬</div>
-            <h4 class="font-serif font-bold text-sm text-[#2E2826]">WhatsApp Ease</h4>
-            <p class="text-xs text-[#6B615C] mt-1">Direct concierge communication at every step.</p>
+            <h4 class="font-serif font-bold text-xs sm:text-sm text-[#2E2826]">WhatsApp Ease</h4>
+            <p class="text-[11px] sm:text-xs text-[#6B615C] mt-0.5 sm:mt-1">Direct concierge communication at every step.</p>
           </div>
         </div>
       </section>
@@ -270,14 +285,14 @@
     <!-- 2. OUR HAMPERS (Shop Ready-to-Gift)        -->
     <!-- ========================================== -->
     <div id="tab-hampers" class="tab-content">
-      <section class="py-12 sm:py-16">
+      <section class="py-10 sm:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-[#EAE2D8]">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-5 sm:pb-6 border-b border-[#EAE2D8]">
             <div>
               <span class="text-xs uppercase tracking-wider text-[#7A2832] font-semibold">Ready to Order</span>
-              <h2 class="font-serif text-3xl sm:text-4xl text-[#2E2826] font-normal mt-1">Our Curated Hampers</h2>
-              <p class="text-[#524945] text-sm mt-1">Actual prices in AED with complete contents. Order directly via WhatsApp.</p>
+              <h2 class="font-serif text-2xl sm:text-4xl text-[#2E2826] font-normal mt-1">Our Curated Hampers</h2>
+              <p class="text-[#524945] text-xs sm:text-sm mt-1">Actual prices in AED with complete contents. Order directly via WhatsApp.</p>
             </div>
             <!-- Photo insertion note for user -->
             <div class="text-xs bg-[#F4EDE5] border border-[#E0D5C7] rounded-xl px-4 py-2.5 text-[#524945] max-w-md">
@@ -285,8 +300,8 @@
             </div>
           </div>
 
-          <!-- Product Grid - Dynamic Products Container -->
-          <div id="catalogue-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Product Grid - Dynamic Products Container (Responsive for all screens) -->
+          <div id="catalogue-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             <!-- Dynamically populated from JS array -->
           </div>
         </div>
@@ -297,22 +312,22 @@
     <!-- 3. PERSONALISED GIFTING CONCIERGE         -->
     <!-- ========================================== -->
     <div id="tab-personalised" class="tab-content">
-      <section class="py-12 sm:py-16">
+      <section class="py-8 sm:py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
-          <div class="text-center space-y-3 mb-10">
+          <div class="text-center space-y-2 sm:space-y-3 mb-6 sm:mb-10">
             <span class="text-xs uppercase tracking-wider text-[#7A2832] font-semibold">Bespoke Concierge</span>
-            <h2 class="font-serif text-3xl sm:text-4xl text-[#2E2826]">Curate My Gift</h2>
-            <p class="text-[#524945] text-sm max-w-lg mx-auto leading-relaxed">
+            <h2 class="font-serif text-2xl sm:text-4xl text-[#2E2826]">Curate My Gift</h2>
+            <p class="text-[#524945] text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
               Tell us about your recipient, the occasion, and your budget. We'll send you 1 thoughtful concept within 2–4 hours with zero upfront fee.
             </p>
           </div>
 
           <!-- Interactive Concierge Form -->
-          <div class="bg-white rounded-3xl border border-[#EAE2D8] p-6 sm:p-10 shadow-sm space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div class="bg-white rounded-2xl sm:rounded-3xl border border-[#EAE2D8] p-5 sm:p-8 lg:p-10 shadow-sm space-y-4 sm:space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Occasion *</label>
-                <select id="p-occasion" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Occasion *</label>
+                <select id="p-occasion" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none bg-white">
                   <option value="Birthday">Birthday</option>
                   <option value="Anniversary">Anniversary</option>
                   <option value="New Baby">New Baby / Baby Shower</option>
@@ -324,15 +339,15 @@
               </div>
 
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Recipient Relationship *</label>
-                <input id="p-recipient" type="text" placeholder="e.g. Best Friend, Mother, VIP Client" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Recipient Relationship *</label>
+                <input id="p-recipient" type="text" placeholder="e.g. Best Friend, Mother, VIP Client" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none" />
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Budget Range (AED) *</label>
-                <select id="p-budget" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Budget Range (AED) *</label>
+                <select id="p-budget" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none bg-white">
                   <option value="AED 150 – 250">AED 150 – 250 (Thoughtful Essentials)</option>
                   <option value="AED 250 – 400" selected>AED 250 – 400 (Artisan Classic)</option>
                   <option value="AED 400 – 650">AED 400 – 650 (Elevated Hamper)</option>
@@ -341,23 +356,23 @@
               </div>
 
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Preferred Delivery Date</label>
-                <input id="p-date" type="date" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Preferred Delivery Date</label>
+                <input id="p-date" type="date" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none bg-white" />
               </div>
             </div>
 
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Recipient Interests, Likes or Exclusions</label>
-              <textarea id="p-notes" rows="2" placeholder="e.g. Loves organic skincare and herbal tea, allergic to nuts, prefers minimalist aesthetic..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Recipient Interests, Likes or Exclusions</label>
+              <textarea id="p-notes" rows="2" placeholder="e.g. Loves organic skincare and herbal tea, allergic to nuts, prefers minimalist aesthetic..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none"></textarea>
             </div>
 
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Delivery Address (Building/Villa, Street, Area / Landmark)</label>
-              <textarea id="p-address" rows="2" placeholder="e.g. Villa 14, Frond E, Palm Jumeirah, Dubai / Apt 1204, Index Tower, DIFC (or 'Will share pin on WhatsApp')" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Delivery Address (Building/Villa, Street, Area / Landmark)</label>
+              <textarea id="p-address" rows="2" placeholder="e.g. Villa 14, Frond E, Palm Jumeirah, Dubai / Apt 1204, Index Tower, DIFC (or 'Will share pin on WhatsApp')" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none"></textarea>
             </div>
 
             <div class="pt-2">
-              <button onclick="submitConciergeWhatsApp()" class="w-full py-4 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white font-semibold text-sm tracking-wide uppercase shadow-sm transition-all flex items-center justify-center gap-2">
+              <button onclick="submitConciergeWhatsApp()" class="w-full py-3.5 sm:py-4 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white font-semibold text-xs sm:text-sm tracking-wide uppercase shadow-sm transition-all flex items-center justify-center gap-2">
                 <span>💬 Submit to WhatsApp Concierge</span>
               </button>
               <p class="text-[11px] text-[#7A706B] text-center mt-2.5">
@@ -402,17 +417,17 @@
             </div>
           </div>
 
-          <div class="bg-white rounded-3xl border border-[#EAE2D8] p-6 sm:p-10 shadow-sm space-y-6">
-            <h3 class="font-serif text-xl font-bold text-[#2E2826]">Request a Corporate Quotation</h3>
+          <div class="bg-white rounded-2xl sm:rounded-3xl border border-[#EAE2D8] p-5 sm:p-8 lg:p-10 shadow-sm space-y-5 sm:space-y-6">
+            <h3 class="font-serif text-lg sm:text-xl font-bold text-[#2E2826]">Request a Corporate Quotation</h3>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Company Name *</label>
-                <input id="c-company" type="text" placeholder="e.g. Acme Capital Partners" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Company Name *</label>
+                <input id="c-company" type="text" placeholder="e.g. Acme Capital Partners" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none" />
               </div>
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Estimated Quantity *</label>
-                <select id="c-qty" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Estimated Quantity *</label>
+                <select id="c-qty" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none bg-white">
                   <option value="10 – 25 hampers">10 – 25 hampers</option>
                   <option value="26 – 50 hampers">26 – 50 hampers</option>
                   <option value="51 – 100 hampers">51 – 100 hampers</option>
@@ -421,23 +436,23 @@
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Target Budget Per Unit (AED)</label>
-                <input id="c-budget" type="text" placeholder="e.g. AED 300 - 450 per unit" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Target Budget Per Unit (AED)</label>
+                <input id="c-budget" type="text" placeholder="e.g. AED 300 - 450 per unit" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none" />
               </div>
               <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Deadline / Event Date</label>
-                <input id="c-date" type="date" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none" />
+                <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Deadline / Event Date</label>
+                <input id="c-date" type="date" class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none bg-white" />
               </div>
             </div>
 
             <div>
-              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-2">Brief & Brand Requirements</label>
-              <textarea id="c-notes" rows="3" placeholder="Tell us about the project, logo inclusion, dietary requirements..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm focus:border-[#7A2832] outline-none"></textarea>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-[#524945] mb-1.5 sm:mb-2">Brief & Brand Requirements</label>
+              <textarea id="c-notes" rows="3" placeholder="Tell us about the project, logo inclusion, dietary requirements..." class="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm focus:border-[#7A2832] outline-none"></textarea>
             </div>
 
-            <button onclick="submitCorporateWhatsApp()" class="w-full py-4 rounded-xl bg-[#2E2826] hover:bg-[#1A1716] text-white font-semibold text-sm tracking-wide uppercase transition-all flex items-center justify-center gap-2">
+            <button onclick="submitCorporateWhatsApp()" class="w-full py-3.5 sm:py-4 rounded-xl bg-[#2E2826] hover:bg-[#1A1716] text-white font-semibold text-xs sm:text-sm tracking-wide uppercase transition-all flex items-center justify-center gap-2 shadow-xs">
               <span>Send Corporate Request to Concierge</span>
             </button>
           </div>
@@ -456,20 +471,20 @@
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             <!-- Left Column: Narrative -->
-            <div class="lg:col-span-7 space-y-6 text-left">
+            <div class="lg:col-span-7 space-y-5 sm:space-y-6 text-left">
               
               <div class="space-y-2">
-                <h1 class="font-serif text-5xl sm:text-6xl text-[#2E2826] font-normal tracking-tight leading-[1.08]">
+                <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#2E2826] font-normal tracking-tight leading-[1.1]">
                   Meet the <br />
                   Founder
                 </h1>
                 
-                <p class="font-serif italic text-2xl sm:text-3xl text-[#9E533F] font-normal pt-1">
+                <p class="font-serif italic text-xl sm:text-2xl lg:text-3xl text-[#9E533F] font-normal pt-1">
                   The heart behind The Gift Curator Dubai
                 </p>
               </div>
 
-              <div class="space-y-4 text-[#3A3330] text-base sm:text-lg leading-relaxed pt-2">
+              <div class="space-y-3.5 sm:space-y-4 text-[#3A3330] text-sm sm:text-base lg:text-lg leading-relaxed pt-2">
                 <p class="font-bold text-[#2E2826]">
                   Hi, I'm Chaitally, the person behind The Gift Curator Dubai.
                 </p>
@@ -478,21 +493,21 @@
                   And believe it or not, it all started with my children's birthday favours.
                 </p>
 
-                <p class="text-[#524945] text-sm sm:text-base leading-relaxed">
+                <p class="text-[#524945] text-xs sm:text-sm lg:text-base leading-relaxed">
                   When planning celebrations for my little ones, I found myself frustrated by generic party favours and impersonal plastic trinkets. I wanted to give gifts that felt intentional, memorable, and genuinely appreciated—items that children and parents would cherish long after the party ended.
                 </p>
 
-                <p class="text-[#524945] text-sm sm:text-base leading-relaxed">
+                <p class="text-[#524945] text-xs sm:text-sm lg:text-base leading-relaxed">
                   I began hand-curating bespoke gift bundles, sourcing lovely artisan keepsakes, hand-tying ribbons, and penning personal notes. The response was immediate: friends and family began asking me to curate gifts for their own milestones, baby showers, birthdays, and corporate celebrations.
                 </p>
 
-                <p class="text-[#524945] text-sm sm:text-base leading-relaxed">
+                <p class="text-[#524945] text-xs sm:text-sm lg:text-base leading-relaxed">
                   That passion grew into <strong>The Gift Curator Dubai</strong>. Today, our philosophy remains unchanged: you tell us <em>who</em>, <em>why</em>, and <em>how much</em>—and we take care of the <em>what</em>. Every hamper is hand-assembled in Dubai with authentic artisanal goods, custom silk ribbons, and handwritten wax-sealed cards.
                 </p>
               </div>
 
               <!-- Quote Block -->
-              <div class="p-5 rounded-2xl bg-[#F4EDE5] border-l-4 border-[#7A2832] text-sm text-[#3A3330] italic">
+              <div class="p-4 sm:p-5 rounded-2xl bg-[#F4EDE5] border-l-4 border-[#7A2832] text-xs sm:text-sm text-[#3A3330] italic">
                 "We believe gifting is not just a transaction—it is a silent letter of gratitude, celebration, and love."
                 <span class="block not-italic font-semibold text-xs text-[#7A2832] mt-2">— Chaitally, Founder</span>
               </div>
@@ -607,22 +622,22 @@
             </p>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
               <div class="text-3xl">💬</div>
               <h4 class="font-serif font-bold text-base text-[#2E2826]">WhatsApp</h4>
               <p class="text-xs text-[#524945]"><span id="contact-whatsapp-display">+971 56 679 9672</span><br/><span class="text-[11px] text-[#7A706B]">Avg. 15-minute response</span></p>
-              <a id="contact-whatsapp-link" href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!%20I%20have%20an%20enquiry." target="_blank" class="inline-block px-4 py-2 rounded-lg bg-[#7A2832] text-white text-xs font-semibold">Message Us</a>
+              <a id="contact-whatsapp-link" href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!%20I%20have%20an%20enquiry." target="_blank" class="inline-block px-5 py-2.5 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold shadow-xs">Message Us</a>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
+            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
               <div class="text-3xl">📸</div>
               <h4 class="font-serif font-bold text-base text-[#2E2826]">Instagram</h4>
               <p class="text-xs text-[#524945]">@thegiftcuratordubai<br/><span class="text-[11px] text-[#7A706B]">Follow our daily curations</span></p>
-              <a href="https://instagram.com/thegiftcuratordubai" target="_blank" class="inline-block px-4 py-2 rounded-lg bg-[#2E2826] text-white text-xs font-semibold">View Feed</a>
+              <a href="https://instagram.com/thegiftcuratordubai" target="_blank" class="inline-block px-5 py-2.5 rounded-xl bg-[#2E2826] hover:bg-[#1A1716] text-white text-xs font-semibold shadow-xs">View Feed</a>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
+            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
               <div class="text-3xl">📍</div>
               <h4 class="font-serif font-bold text-base text-[#2E2826]">Boutique Studio</h4>
               <p class="text-xs text-[#524945]">Dubai, United Arab Emirates<br/><span class="text-[11px] text-[#7A706B]">Deliveries across all 7 Emirates</span></p>
@@ -731,21 +746,21 @@
             </div>
           </div>
 
-          <!-- Admin Subtabs -->
-          <div class="max-w-7xl mx-auto flex items-center gap-2 sm:gap-4 mt-4 pt-3 border-t border-[#F0EBE3] overflow-x-auto text-xs sm:text-sm font-semibold">
-            <button id="btn-sub-overview" onclick="showAdminSubtab('overview')" class="px-4 py-2 rounded-xl bg-[#2E2826] text-white">
+          <!-- Admin Subtabs (Horizontally scrollable with smooth touch on mobile) -->
+          <div class="max-w-7xl mx-auto flex items-center gap-2 sm:gap-3 mt-4 pt-3 border-t border-[#F0EBE3] overflow-x-auto no-scrollbar text-xs sm:text-sm font-semibold pb-1">
+            <button id="btn-sub-overview" onclick="showAdminSubtab('overview')" class="px-3.5 sm:px-4 py-2 rounded-xl bg-[#2E2826] text-white shrink-0 whitespace-nowrap">
               📊 Overview
             </button>
-            <button id="btn-sub-products" onclick="showAdminSubtab('products')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+            <button id="btn-sub-products" onclick="showAdminSubtab('products')" class="px-3.5 sm:px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2] shrink-0 whitespace-nowrap">
               🛍️ Products (<span id="admin-product-count">8</span>)
             </button>
-            <button id="btn-sub-orders" onclick="showAdminSubtab('orders')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+            <button id="btn-sub-orders" onclick="showAdminSubtab('orders')" class="px-3.5 sm:px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2] shrink-0 whitespace-nowrap">
               📦 Customer Orders (<span id="admin-order-count">5</span>)
             </button>
-            <button id="btn-sub-customers" onclick="showAdminSubtab('customers')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+            <button id="btn-sub-customers" onclick="showAdminSubtab('customers')" class="px-3.5 sm:px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2] shrink-0 whitespace-nowrap">
               👥 Customers (<span id="admin-customer-count">5</span>)
             </button>
-            <button id="btn-sub-settings" onclick="showAdminSubtab('settings')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+            <button id="btn-sub-settings" onclick="showAdminSubtab('settings')" class="px-3.5 sm:px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2] shrink-0 whitespace-nowrap">
               ⚙️ WhatsApp & Settings
             </button>
           </div>
@@ -862,14 +877,14 @@
                 <label class="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-2">
                   Business WhatsApp Phone Number
                 </label>
-                <div class="flex gap-2">
+                <div class="flex flex-col sm:flex-row gap-2.5">
                   <input
                     id="admin-setting-whatsapp"
                     type="text"
                     required
                     value="+971566799672"
                     placeholder="e.g. +971566799672"
-                    class="flex-1 px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm font-mono outline-none focus:border-[#7A2832]"
+                    class="flex-1 px-4 py-3 rounded-xl border border-[#D5CEC9] text-base sm:text-sm font-mono outline-none focus:border-[#7A2832]"
                   />
                   <button
                     type="submit"
@@ -925,14 +940,14 @@
           <input id="np-title" type="text" required placeholder="e.g. Royal Jasmine & Oud Chest" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-xs outline-none focus:border-[#7A2832]" />
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Price in AED *</label>
-            <input id="np-price" type="number" required placeholder="e.g. 480" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-xs font-bold font-serif outline-none focus:border-[#7A2832]" />
+            <input id="np-price" type="number" required placeholder="e.g. 480" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs font-bold font-serif outline-none focus:border-[#7A2832]" />
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Category</label>
-            <select id="np-category" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-xs outline-none bg-white">
+            <select id="np-category" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none bg-white">
               <option value="Self-Care & Pampering">Self-Care & Pampering</option>
               <option value="Heritage & Luxe">Heritage & Luxe</option>
               <option value="Gourmet & Rituals">Gourmet & Rituals</option>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Lock, Download, Phone, RefreshCw, CheckCircle, FileSpreadsheet, Eye, Save, Trash2 } from 'lucide-react';
 import { getStoredEnquiries, updateEnquiryStatus } from '../utils/whatsapp';
+import { getOwnerEnquiries, updateStatus } from '../api/apiClient';
 import siteConfig from '../data/siteConfig.json';
 
 export default function OwnerPortalModal({ isOpen, onClose }) {
@@ -24,13 +25,18 @@ export default function OwnerPortalModal({ isOpen, onClose }) {
   ];
 
   useEffect(() => {
-    setEnquiries(getStoredEnquiries());
+    async function load() {
+      const data = await getOwnerEnquiries();
+      setEnquiries(data);
+    }
+    load();
     const saved = localStorage.getItem('tgc_owner_whatsapp') || siteConfig.whatsappNumber;
     setWhatsappPhone(saved);
   }, [isOpen]);
 
-  const handleStatusChange = (refId, newStatus) => {
-    const updated = updateEnquiryStatus(refId, newStatus);
+  const handleStatusChange = async (refId, newStatus) => {
+    await updateStatus(refId, newStatus);
+    const updated = await getOwnerEnquiries();
     setEnquiries(updated);
   };
 

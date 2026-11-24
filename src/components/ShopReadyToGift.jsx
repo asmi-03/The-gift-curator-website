@@ -3,6 +3,7 @@ import productsData from '../data/products.json';
 import { formatAED, createProductWhatsAppUrl } from '../utils/whatsapp';
 import { Filter, ShoppingBag, Eye, MessageCircle, Clock, Check, Sparkles } from 'lucide-react';
 import ProductModal from './ProductModal';
+import ImageFrame from './ImageFrame';
 
 export default function ShopReadyToGift({ onNavigateToCurate }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -125,8 +126,8 @@ export default function ShopReadyToGift({ onNavigateToCurate }) {
 
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-4">
+        {/* Product Grid (Responsive: 1-col on mobile, 2-col on tablet, 3-col on laptops, 4-col on wide screens) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 lg:gap-8 pt-4">
           {filteredProducts.map((product) => {
             const whatsappUrl = createProductWhatsAppUrl(product);
 
@@ -135,31 +136,22 @@ export default function ShopReadyToGift({ onNavigateToCurate }) {
                 key={product.id}
                 className="group relative bg-white rounded-3xl border border-cream-300 overflow-hidden shadow-soft hover:shadow-card transition-all flex flex-col justify-between"
               >
-                {/* Image & Badges */}
-                <div className="relative aspect-square overflow-hidden bg-cream-200 cursor-pointer" onClick={() => setActiveProduct(product)}>
-                  <img
+                {/* Image Frame with Boutique Placeholder (Keeps Columns Intact) */}
+                <div className="cursor-pointer relative group" onClick={() => setActiveProduct(product)}>
+                  <ImageFrame
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
+                    title={product.title}
+                    category={product.category}
+                    badge={product.badge}
                   />
-                  
-                  {/* Top Badge */}
-                  {product.badge && (
-                    <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-rosewood-600 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm border border-cream-200">
-                      {product.badge}
-                    </span>
-                  )}
 
                   {/* Quick View Floating Button */}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <button
-                      onClick={(e) => { e.stopPropagation(); setActiveProduct(product); }}
-                      className="px-4 py-2 rounded-full bg-white/90 hover:bg-white text-slatewarm-800 text-xs font-semibold shadow-md flex items-center gap-1.5 backdrop-blur-sm"
-                    >
+                  <div className="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <span className="px-4 py-2 rounded-full bg-white/95 text-slatewarm-800 text-xs font-semibold shadow-md flex items-center gap-1.5 backdrop-blur-sm">
                       <Eye className="w-3.5 h-3.5" />
                       <span>View Inclusions</span>
-                    </button>
+                    </span>
                   </div>
                 </div>
 

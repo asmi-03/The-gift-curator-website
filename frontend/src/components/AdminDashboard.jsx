@@ -483,8 +483,8 @@ export default function AdminDashboard({ onExit }) {
 
           </div>
 
-          {/* Tab Navigation Navigation Bar */}
-          <div className="flex items-center space-x-2 sm:space-x-4 border-t border-[#F0EBE3] py-2 overflow-x-auto text-xs sm:text-sm font-semibold">
+          {/* Tab Navigation Navigation Bar (Horizontally scrollable with smooth touch on mobile) */}
+          <div className="flex items-center space-x-2 sm:space-x-4 border-t border-[#F0EBE3] py-2.5 overflow-x-auto no-scrollbar text-xs sm:text-sm font-semibold">
             <button
               onClick={() => setActiveTab('overview')}
               className={`px-3 sm:px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 whitespace-nowrap ${

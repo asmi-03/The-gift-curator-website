@@ -1,0 +1,122 @@
+[
+  {
+    "id": "ORD-2026-1082",
+    "customerName": "Fatima Al-Maktoum",
+    "phone": "+971 50 892 1144",
+    "email": "fatima.m@example.ae",
+    "deliveryArea": "Downtown Dubai, Opera District",
+    "deliveryDate": "2026-11-23",
+    "items": [
+      {
+        "productId": "TGC-RDY-01",
+        "title": "The Velvet Morning Hamper",
+        "quantity": 2,
+        "price": 285
+      }
+    ],
+    "subtotal": 570,
+    "deliveryFee": 35,
+    "total": 605,
+    "paymentStatus": "Paid (50% Deposit Confirmed)",
+    "orderStatus": "In Preparation",
+    "channel": "WhatsApp Concierge",
+    "notes": "Custom gold wax seal with letter 'F'. Include complimentary handwritten calligraphy card.",
+    "createdAt": "2026-11-22T09:15:00Z"
+  },
+  {
+    "id": "ORD-2026-1081",
+    "customerName": "Marcus Vance",
+    "phone": "+971 55 412 8890",
+    "email": "m.vance@difcpartners.com",
+    "deliveryArea": "DIFC Gate Precinct 4, Dubai",
+    "deliveryDate": "2026-11-22",
+    "items": [
+      {
+        "productId": "TGC-RDY-02",
+        "title": "Arabian Oud & Amber Indulgence",
+        "quantity": 1,
+        "price": 520
+      }
+    ],
+    "subtotal": 520,
+    "deliveryFee": 0,
+    "total": 520,
+    "paymentStatus": "Paid (100% Full)",
+    "orderStatus": "Ready for Dispatch",
+    "channel": "Online Catalogue",
+    "notes": "VIP client appreciation gift. Delivery between 2 PM - 5 PM.",
+    "createdAt": "2026-11-22T08:30:00Z"
+  },
+  {
+    "id": "ORD-2026-1080",
+    "customerName": "Sara Al-Hashimi",
+    "phone": "+971 52 733 9012",
+    "email": "sara.hashimi@gmail.com",
+    "deliveryArea": "Palm Jumeirah, Frond N",
+    "deliveryDate": "2026-11-24",
+    "items": [
+      {
+        "productId": "TGC-RDY-04",
+        "title": "Sweet Welcome Baby Hamper",
+        "quantity": 1,
+        "price": 420
+      }
+    ],
+    "subtotal": 420,
+    "deliveryFee": 35,
+    "total": 455,
+    "paymentStatus": "Awaiting Payment",
+    "orderStatus": "New",
+    "channel": "Personalised Gifting Form",
+    "notes": "Baby shower gift for baby girl. Soft dusty rose ribbon preferred.",
+    "createdAt": "2026-11-21T18:45:00Z"
+  },
+  {
+    "id": "ORD-2026-1079",
+    "customerName": "Elena Rostova",
+    "phone": "+971 58 661 2940",
+    "email": "elena.design@dubaihills.ae",
+    "deliveryArea": "Dubai Hills Estate, Maple 2",
+    "deliveryDate": "2026-11-20",
+    "items": [
+      {
+        "productId": "TGC-RDY-07",
+        "title": "The Sanctuary Spa Trunk",
+        "quantity": 1,
+        "price": 680
+      }
+    ],
+    "subtotal": 680,
+    "deliveryFee": 35,
+    "total": 715,
+    "paymentStatus": "Paid (100% Full)",
+    "orderStatus": "Delivered",
+    "channel": "Instagram Enquiry",
+    "notes": "Delivered by white-glove courier on 20 Nov. Customer loved the presentation.",
+    "createdAt": "2026-11-19T14:10:00Z"
+  },
+  {
+    "id": "ORD-2026-1078",
+    "customerName": "Tariq Mansoor",
+    "phone": "+971 50 119 4432",
+    "email": "tmansoor@adgm.ae",
+    "deliveryArea": "Abu Dhabi, Saadiyat Cultural District",
+    "deliveryDate": "2026-11-19",
+    "items": [
+      {
+        "productId": "TGC-RDY-03",
+        "title": "The Connoisseur's Coffee Ritual",
+        "quantity": 3,
+        "price": 340
+      }
+    ],
+    "subtotal": 1020,
+    "deliveryFee": 50,
+    "total": 1070,
+    "paymentStatus": "Paid (100% Full)",
+    "orderStatus": "Delivered",
+    "channel": "Corporate RFQ",
+    "notes": "Executive corporate gift boxes for regional directors.",
+    "createdAt": "2026-11-18T11:20:00Z"
+  }
+]

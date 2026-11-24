@@ -126,8 +126,8 @@ export default function ShopReadyToGift({ onNavigateToCurate }) {
 
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pt-4">
+        {/* Product Grid (Responsive: 1-col on mobile, 2-col on tablet, 3-col on laptops, 4-col on wide screens) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 lg:gap-8 pt-4">
           {filteredProducts.map((product) => {
             const whatsappUrl = createProductWhatsAppUrl(product);
 

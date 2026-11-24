@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Check, MessageCircle, Truck, Clock, ShieldCheck, Heart, Sparkles } from 'lucide-react';
 import { createProductWhatsAppUrl, formatAED } from '../utils/whatsapp';
+import ImageFrame from './ImageFrame';
 
 export default function ProductModal({ product, onClose }) {
   if (!product) return null;
@@ -37,17 +38,15 @@ export default function ProductModal({ product, onClose }) {
             
             {/* Left: Product Images Gallery */}
             <div className="md:col-span-6 space-y-4">
-              <div className="relative rounded-2xl overflow-hidden aspect-square bg-cream-200 border border-cream-300 shadow-sm">
-                <img 
+              {/* Product Image Frame */}
+              <div className="rounded-2xl overflow-hidden border border-cream-300 shadow-sm">
+                <ImageFrame 
                   src={activeImage} 
                   alt={product.title} 
-                  className="w-full h-full object-cover transition-all duration-300"
+                  title={product.title}
+                  category={product.category}
+                  badge={product.badge}
                 />
-                {product.badge && (
-                  <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-rosewood-600 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm border border-cream-200">
-                    {product.badge}
-                  </span>
-                )}
               </div>
 
               {/* Thumbnails */}

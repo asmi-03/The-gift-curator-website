@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Building2, MessageCircle, Send, CheckCircle2, Check, ArrowRight, ShieldCheck } from 'lucide-react';
 import { generateReferenceId, createCorporateWhatsAppUrl, saveEnquiryLocally } from '../utils/whatsapp';
+import { submitCorporateRfq } from '../api/apiClient';
 
 export default function CorporateGifting() {
   const [formData, setFormData] = useState({
@@ -40,15 +41,14 @@ export default function CorporateGifting() {
     'VIP Summit / Conference Gifts'
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const referenceId = generateReferenceId('TGC-CORP');
-    const rfqRecord = {
+    const result = await submitCorporateRfq(formData);
+    const rfqRecord = result.rfq || {
       ...formData,
-      referenceId,
+      referenceId: result.referenceId,
       createdAt: new Date().toISOString()
     };
-    saveEnquiryLocally(rfqRecord);
     setSubmittedRFQ(rfqRecord);
   };
 

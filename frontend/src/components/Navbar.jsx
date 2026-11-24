@@ -15,14 +15,14 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
   return (
     <header className="sticky top-0 z-40 bg-[#FAF7F2] border-b border-[#EFEAE2] transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Brand Logo & Name (HD Adjustable Circular Logo) */}
           <button 
             onClick={() => handleNavClick('home')} 
-            className="flex items-center gap-3.5 text-left group focus:outline-none"
+            className="flex items-center gap-2.5 sm:gap-3.5 text-left group focus:outline-none"
           >
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden shrink-0 flex items-center justify-center transition-transform group-hover:scale-105">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full overflow-hidden shrink-0 flex items-center justify-center transition-transform group-hover:scale-105">
               <img 
                 src="/images/brand/logo.png" 
                 alt="The Gift Curator Dubai Logo" 
@@ -31,10 +31,10 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
               />
             </div>
             <div>
-              <span className="font-serif text-2xl tracking-tight text-[#2E2826] font-semibold block leading-tight">
+              <span className="font-serif text-lg sm:text-2xl tracking-tight text-[#2E2826] font-semibold block leading-tight">
                 The Gift Curator
               </span>
-              <span className="text-[10px] font-sans tracking-[0.25em] text-[#7A706B] uppercase block font-medium mt-0.5">
+              <span className="text-[9px] sm:text-[10px] font-sans tracking-[0.25em] text-[#7A706B] uppercase block font-medium mt-0.5">
                 DUBAI
               </span>
             </div>

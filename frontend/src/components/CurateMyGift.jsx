@@ -139,11 +139,17 @@ ${submittedRef.deliveryAddress ? `Delivery Address: ${submittedRef.deliveryAddre
         {/* Progress Stepper Bar (if not submitted) */}
         {step < 5 && (
           <div className="mb-8 max-w-xl mx-auto">
-            <div className="flex items-center justify-between text-xs font-medium text-slatewarm-500 mb-2">
-              <span className={step >= 1 ? 'text-rosewood-600 font-bold' : ''}>1. Occasion & Recipient</span>
+            <div className="flex items-center justify-between text-[11px] sm:text-xs font-medium text-slatewarm-500 mb-2">
+              <span className={step >= 1 ? 'text-rosewood-600 font-bold' : ''}>
+                1. <span className="hidden sm:inline">Occasion & </span>Recipient
+              </span>
               <span className={step >= 2 ? 'text-rosewood-600 font-bold' : ''}>2. Budget</span>
-              <span className={step >= 3 ? 'text-rosewood-600 font-bold' : ''}>3. Preferences</span>
-              <span className={step >= 4 ? 'text-rosewood-600 font-bold' : ''}>4. Delivery & Details</span>
+              <span className={step >= 3 ? 'text-rosewood-600 font-bold' : ''}>
+                3. <span className="hidden sm:inline">Preferences</span><span className="sm:hidden">Prefs</span>
+              </span>
+              <span className={step >= 4 ? 'text-rosewood-600 font-bold' : ''}>
+                4. Delivery<span className="hidden sm:inline"> & Details</span>
+              </span>
             </div>
             <div className="w-full bg-cream-300 h-2 rounded-full overflow-hidden">
               <div 
