@@ -40,7 +40,7 @@ export default function Footer({ onNavigate, onOpenPrivacyModal, onOpenOwnerPort
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a
-                href={`https://wa.me/${whatsappPhone}`}
+                href={`https://api.whatsapp.com/send?phone=${whatsappPhone}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-slatewarm-800 hover:bg-emerald-600 hover:text-white flex items-center justify-center text-slatewarm-300 transition-colors"

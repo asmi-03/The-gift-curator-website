@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { 
   Package, Plus, Search, Edit2, Trash2, Upload, Check, X, 
   Users, ShoppingBag, TrendingUp, LogOut, ArrowLeft, Download, 
-  Sparkles, Clock, Truck, Phone, MessageCircle, AlertCircle, Eye
+  Sparkles, Clock, Truck, Phone, MessageCircle, AlertCircle, Eye, Settings
 } from 'lucide-react';
 import initialProducts from '../data/products.json';
 import initialOrders from '../data/orders.json';
 import initialCustomers from '../data/customers.json';
 import siteConfig from '../data/siteConfig.json';
-import { formatAED, getCleanWhatsAppNumber } from '../utils/whatsapp';
+import { formatAED, getCleanWhatsAppNumber, openWhatsAppDirect } from '../utils/whatsapp';
 
 export default function AdminDashboard({ onExit }) {
   // Authentication State
@@ -26,6 +26,15 @@ export default function AdminDashboard({ onExit }) {
   const [orders, setOrders] = useState(initialOrders);
   const [customers, setCustomers] = useState(initialCustomers);
   const [config, setConfig] = useState(siteConfig);
+
+  // WhatsApp & Settings State
+  const [whatsappPhone, setWhatsappPhone] = useState(() => {
+    return localStorage.getItem('tgc_owner_whatsapp') || siteConfig.whatsappNumber || '+971566799672';
+  });
+  const [ownerEmail, setOwnerEmail] = useState(() => {
+    return localStorage.getItem('tgc_owner_email') || siteConfig.email || 'thegiftcuratordubai@gmail.com';
+  });
+  const [settingsSaved, setSettingsSaved] = useState(false);
 
   // Search & Filter States
   const [productSearch, setProductSearch] = useState('');
@@ -284,6 +293,28 @@ export default function AdminDashboard({ onExit }) {
     showToast('Orders exported to CSV spreadsheet!');
   };
 
+  // Save WhatsApp & Settings
+  const handleSaveSettings = (e) => {
+    e.preventDefault();
+    const cleanDigits = whatsappPhone.replace(/[^0-9]/g, '');
+    if (cleanDigits.length < 7) {
+      alert('Please enter a valid WhatsApp phone number with country code (e.g. +971566799672).');
+      return;
+    }
+    localStorage.setItem('tgc_owner_whatsapp', whatsappPhone);
+    localStorage.setItem('tgc_owner_email', ownerEmail);
+    setSettingsSaved(true);
+    showToast('WhatsApp & business settings saved successfully!');
+    setTimeout(() => setSettingsSaved(false), 3500);
+  };
+
+  // Test WhatsApp Connection
+  const handleTestWhatsApp = () => {
+    const cleanDigits = whatsappPhone.replace(/[^0-9]/g, '');
+    const testMsg = "Hello The Gift Curator! 🌸 This is a test message from your Admin Portal. WhatsApp messaging is connected and working!";
+    openWhatsAppDirect(`https://api.whatsapp.com/send?phone=${cleanDigits}&text=${encodeURIComponent(testMsg)}`);
+  };
+
   // ----------------------------------------------------
   // STATS CALCULATIONS
   // ----------------------------------------------------
@@ -503,6 +534,18 @@ export default function AdminDashboard({ onExit }) {
             >
               <Users className="w-4 h-4" />
               <span>Customers ({customers.length})</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('settings')}
+              className={`px-3 sm:px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 whitespace-nowrap ${
+                activeTab === 'settings'
+                  ? 'bg-[#7A2832] text-white shadow-xs'
+                  : 'text-[#524945] hover:bg-[#FAF7F2]'
+              }`}
+            >
+              <Settings className="w-4 h-4" />
+              <span>WhatsApp & Settings</span>
             </button>
           </div>
 
@@ -1000,7 +1043,7 @@ export default function AdminDashboard({ onExit }) {
 
                   <div className="pt-2 flex items-center justify-end gap-3">
                     <a
-                      href={`https://wa.me/${order.phone ? order.phone.replace(/[^0-9]/g, '') : ''}?text=${encodeURIComponent(`Hello ${order.customerName}! This is Chaitally from The Gift Curator Dubai regarding your order (${order.id}).`)}`}
+                      href={`https://api.whatsapp.com/send?phone=${order.phone ? order.phone.replace(/[^0-9]/g, '') : ''}&text=${encodeURIComponent(`Hello ${order.customerName}! This is Chaitally from The Gift Curator Dubai regarding your order (${order.id}).`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold flex items-center gap-1.5 shadow-xs transition-all"
@@ -1084,7 +1127,7 @@ export default function AdminDashboard({ onExit }) {
                   <div className="pt-2 border-t border-[#F0EBE3] flex items-center justify-between">
                     <span className="text-xs text-[#524945]">{customer.phone}</span>
                     <a
-                      href={`https://wa.me/${customer.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${customer.name}! This is Chaitally from The Gift Curator Dubai.`)}`}
+                      href={`https://api.whatsapp.com/send?phone=${customer.phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(`Hello ${customer.name}! This is Chaitally from The Gift Curator Dubai.`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029] flex items-center gap-1.5"
@@ -1098,6 +1141,100 @@ export default function AdminDashboard({ onExit }) {
               ))}
             </div>
 
+          </div>
+        )}
+
+        {/* ======================================================== */}
+        {/* 5. WHATSAPP & STORE SETTINGS                             */}
+        {/* ======================================================== */}
+        {activeTab === 'settings' && (
+          <div className="space-y-6 animate-fadeIn max-w-3xl">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#EAE2D8] shadow-xs">
+              <div className="flex items-center gap-3.5 pb-5 border-b border-[#F0EBE3]">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl">
+                  <MessageCircle className="w-6 h-6 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-2xl font-bold text-[#2E2826]">
+                    WhatsApp Concierge Settings
+                  </h3>
+                  <p className="text-xs text-[#7A706B]">
+                    Configure where customer orders, briefs, and inquiries arrive on WhatsApp.
+                  </p>
+                </div>
+              </div>
+
+              <form onSubmit={handleSaveSettings} className="mt-6 space-y-6">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-2">
+                    Business WhatsApp Phone Number
+                  </label>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="text"
+                      required
+                      value={whatsappPhone}
+                      onChange={(e) => setWhatsappPhone(e.target.value)}
+                      placeholder="+971566799672"
+                      className="flex-1 px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm font-mono outline-none focus:border-[#7A2832]"
+                    />
+                    <button
+                      type="submit"
+                      className="px-6 py-3 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold uppercase tracking-wider transition-all"
+                    >
+                      Save Number
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-[#7A706B] mt-2">
+                    Official Registered Number: <strong className="text-[#2E2826] font-mono">+971 56 679 9672</strong>. Any number entered here is saved to your browser and immediately updates all buttons across the entire storefront.
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-2">
+                    Store Contact Email
+                  </label>
+                  <input
+                    type="email"
+                    value={ownerEmail}
+                    onChange={(e) => setOwnerEmail(e.target.value)}
+                    placeholder="thegiftcuratordubai@gmail.com"
+                    className="w-full px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm outline-none focus:border-[#7A2832]"
+                  />
+                  <p className="text-[11px] text-[#7A706B] mt-1.5">
+                    Official email: thegiftcuratordubai@gmail.com
+                  </p>
+                </div>
+
+                {/* Instant Live Test Card */}
+                <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#EAE2D8] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <h4 className="text-xs font-bold text-[#2E2826] flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                      Instant WhatsApp Test
+                    </h4>
+                    <p className="text-[11px] text-[#7A706B] mt-1">
+                      Click to test opening WhatsApp with your configured number to verify message delivery.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleTestWhatsApp}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-2 shrink-0 transition-all shadow-xs"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Test WhatsApp Now</span>
+                  </button>
+                </div>
+
+                {settingsSaved && (
+                  <div className="text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl flex items-center gap-2">
+                    <Check className="w-4 h-4 text-emerald-600" />
+                    <span>WhatsApp settings successfully saved and applied to all customer buttons!</span>
+                  </div>
+                )}
+              </form>
+            </div>
           </div>
         )}
 

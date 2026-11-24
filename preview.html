@@ -110,7 +110,8 @@
         <!-- Right Solid Burgundy WhatsApp Button -->
         <div class="hidden lg:flex items-center gap-3">
           <a 
-            href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20ask%20a%20question%20about%20your%20gifting%20services."
+            id="nav-whatsapp-link-desktop"
+            href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20ask%20a%20question%20about%20your%20gifting%20services."
             target="_blank"
             class="px-6 py-2.5 rounded-lg bg-[#7A2832] hover:bg-[#682029] text-white text-sm font-semibold tracking-wide shadow-xs transition-all"
           >
@@ -121,7 +122,8 @@
         <!-- Mobile Menu Toggle Button -->
         <div class="flex items-center gap-2 lg:hidden">
           <a 
-            href="https://wa.me/971501234567?text=Hello!"
+            id="nav-whatsapp-link-mobile"
+            href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!"
             target="_blank"
             class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold"
           >
@@ -506,7 +508,8 @@
                 </button>
 
                 <a
-                  href="https://wa.me/971501234567?text=Hello%20Chaitally!%20I%20read%20your%20story%20on%20The%20Gift%20Curator%20and%20would%20love%20to%20say%20hello."
+                  id="story-whatsapp-link"
+                  href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20Chaitally!%20I%20read%20your%20story%20on%20The%20Gift%20Curator%20and%20would%20love%20to%20say%20hello."
                   target="_blank"
                   class="px-6 py-3.5 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold tracking-wider uppercase shadow-xs transition-all flex items-center gap-2"
                 >
@@ -608,8 +611,8 @@
             <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
               <div class="text-3xl">💬</div>
               <h4 class="font-serif font-bold text-base text-[#2E2826]">WhatsApp</h4>
-              <p class="text-xs text-[#524945]">+971 50 123 4567<br/><span class="text-[11px] text-[#7A706B]">Avg. 15-minute response</span></p>
-              <a href="https://wa.me/971501234567" target="_blank" class="inline-block px-4 py-2 rounded-lg bg-[#7A2832] text-white text-xs font-semibold">Message Us</a>
+              <p class="text-xs text-[#524945]"><span id="contact-whatsapp-display">+971 56 679 9672</span><br/><span class="text-[11px] text-[#7A706B]">Avg. 15-minute response</span></p>
+              <a id="contact-whatsapp-link" href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!%20I%20have%20an%20enquiry." target="_blank" class="inline-block px-4 py-2 rounded-lg bg-[#7A2832] text-white text-xs font-semibold">Message Us</a>
             </div>
 
             <div class="bg-white p-6 rounded-2xl border border-[#EAE2D8] text-center space-y-3">
@@ -742,6 +745,9 @@
             <button id="btn-sub-customers" onclick="showAdminSubtab('customers')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
               👥 Customers (<span id="admin-customer-count">5</span>)
             </button>
+            <button id="btn-sub-settings" onclick="showAdminSubtab('settings')" class="px-4 py-2 rounded-xl text-[#524945] hover:bg-[#FAF7F2]">
+              ⚙️ WhatsApp & Settings
+            </button>
           </div>
         </div>
 
@@ -838,6 +844,67 @@
           </div>
         </div>
 
+        <!-- Admin Subtab 5: WhatsApp & Settings -->
+        <div id="subtab-settings" class="admin-subtab py-8 px-4 sm:px-8 max-w-7xl mx-auto">
+          <div class="bg-white p-6 sm:p-8 rounded-3xl border border-[#EAE2D8] max-w-2xl shadow-xs">
+            <div class="flex items-center gap-3 pb-5 border-b border-[#F0EBE3]">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl">
+                💬
+              </div>
+              <div>
+                <h3 class="font-serif text-2xl font-bold text-[#2E2826]">WhatsApp Concierge Settings</h3>
+                <p class="text-xs text-[#7A706B]">Configure the WhatsApp number where customer orders and enquiries arrive.</p>
+              </div>
+            </div>
+
+            <form onsubmit="saveAdminWhatsAppSettings(event)" class="mt-6 space-y-5">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-2">
+                  Business WhatsApp Phone Number
+                </label>
+                <div class="flex gap-2">
+                  <input
+                    id="admin-setting-whatsapp"
+                    type="text"
+                    required
+                    value="+971566799672"
+                    placeholder="e.g. +971566799672"
+                    class="flex-1 px-4 py-3 rounded-xl border border-[#D5CEC9] text-sm font-mono outline-none focus:border-[#7A2832]"
+                  />
+                  <button
+                    type="submit"
+                    class="px-6 py-3 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold uppercase tracking-wider transition-all"
+                  >
+                    Save Number
+                  </button>
+                </div>
+                <p class="text-[11px] text-[#7A706B] mt-2">
+                  Official Registered Number: <strong class="text-[#2E2826] font-mono">+971 56 679 9672</strong>. Any number entered here is saved to your browser and instantly updates all website buttons.
+                </p>
+              </div>
+
+              <!-- Instant Test Button -->
+              <div class="p-4 rounded-2xl bg-[#FAF7F2] border border-[#EAE2D8] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <h4 class="text-xs font-bold text-[#2E2826]">Instant WhatsApp Test</h4>
+                  <p class="text-[11px] text-[#7A706B]">Click to test that WhatsApp opens with your number and pre-fills a greeting.</p>
+                </div>
+                <button
+                  type="button"
+                  onclick="testWhatsAppConnection()"
+                  class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-2 shrink-0 transition-all shadow-xs"
+                >
+                  <span>💬 Test WhatsApp Now</span>
+                </button>
+              </div>
+
+              <div id="settings-save-success" class="hidden text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 p-3 rounded-xl">
+                ✓ WhatsApp number successfully saved and applied across the website!
+              </div>
+            </form>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -917,7 +984,7 @@
       </div>
       <div class="space-y-2 text-xs">
         <h4 class="font-bold text-sm uppercase tracking-wider text-[#D4AF37]">Concierge</h4>
-        <p>WhatsApp: +971 50 123 4567</p>
+        <p>WhatsApp: <span id="footer-whatsapp-display">+971 56 679 9672</span></p>
         <p>Instagram: @thegiftcuratordubai</p>
         <p>Dubai Same-Day & Next-Day UAE</p>
         <p class="pt-2">
@@ -1014,7 +1081,7 @@
             </div>
             <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
               <span class="font-serif text-lg font-bold text-[#7A2832]">AED ${p.price}</span>
-              <a href="https://wa.me/971501234567?text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20order%20${encodeURIComponent(p.title)}%20(AED%20${p.price})." target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+              <a href="https://api.whatsapp.com/send?phone=${getWhatsAppNumber()}&text=${encodeURIComponent(`Hello The Gift Curator! I'd like to order ${p.title} (AED ${p.price}).`)}" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
                 Order
               </a>
             </div>
@@ -1048,7 +1115,7 @@
     }
 
     function showAdminSubtab(subtabId) {
-      ['overview', 'products', 'orders', 'customers'].forEach(s => {
+      ['overview', 'products', 'orders', 'customers', 'settings'].forEach(s => {
         const el = document.getElementById('subtab-' + s);
         const btn = document.getElementById('btn-sub-' + s);
         if (el) el.classList.remove('active');
@@ -1278,6 +1345,96 @@
       uploadedPhotoBase64 = '';
     }
 
+    // ==========================================
+    // WHATSAPP HELPER FUNCTIONS & INTEGRATION
+    // ==========================================
+    function getWhatsAppNumber() {
+      const stored = localStorage.getItem('tgc_owner_whatsapp');
+      const num = stored || '971566799672';
+      return num.replace(/[^0-9]/g, '');
+    }
+
+    function getWhatsAppDisplay() {
+      const stored = localStorage.getItem('tgc_owner_whatsapp');
+      return stored || '+971 56 679 9672';
+    }
+
+    function openWhatsApp(url) {
+      const win = window.open(url, '_blank');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        window.location.href = url;
+      }
+    }
+
+    function updateAllWhatsAppLinks() {
+      const phone = getWhatsAppNumber();
+      const display = getWhatsAppDisplay();
+
+      // Desktop and mobile top header
+      const navDesktop = document.getElementById('nav-whatsapp-link-desktop');
+      if (navDesktop) {
+        navDesktop.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello The Gift Curator! I'd like to ask a question about your gifting services.")}`;
+      }
+      const navMobile = document.getElementById('nav-whatsapp-link-mobile');
+      if (navMobile) {
+        navMobile.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello The Gift Curator!")}`;
+      }
+
+      // Our Story link
+      const storyLink = document.getElementById('story-whatsapp-link');
+      if (storyLink) {
+        storyLink.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello Chaitally! I read your story on The Gift Curator and would love to say hello.")}`;
+      }
+
+      // Contact card
+      const contactLink = document.getElementById('contact-whatsapp-link');
+      if (contactLink) {
+        contactLink.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello The Gift Curator! I have an enquiry.")}`;
+      }
+      const contactDisp = document.getElementById('contact-whatsapp-display');
+      if (contactDisp) {
+        contactDisp.textContent = display.startsWith('+') ? display : '+' + display;
+      }
+
+      // Footer
+      const footerDisp = document.getElementById('footer-whatsapp-display');
+      if (footerDisp) {
+        footerDisp.textContent = display.startsWith('+') ? display : '+' + display;
+      }
+
+      // Setting input in admin portal
+      const settingInput = document.getElementById('admin-setting-whatsapp');
+      if (settingInput) {
+        settingInput.value = localStorage.getItem('tgc_owner_whatsapp') || '+971566799672';
+      }
+    }
+
+    function saveAdminWhatsAppSettings(e) {
+      e.preventDefault();
+      const val = document.getElementById('admin-setting-whatsapp').value.trim();
+      if (!val) return;
+      const clean = val.replace(/[^0-9]/g, '');
+      if (clean.length < 7) {
+        alert('Please enter a valid phone number with country code (e.g. +971566799672).');
+        return;
+      }
+      localStorage.setItem('tgc_owner_whatsapp', val);
+      updateAllWhatsAppLinks();
+      renderPublicCatalogue();
+      const successAlert = document.getElementById('settings-save-success');
+      if (successAlert) {
+        successAlert.classList.remove('hidden');
+        setTimeout(() => successAlert.classList.add('hidden'), 4000);
+      }
+      alert(`WhatsApp number updated to ${val}! All website buttons and links now send directly to this number.`);
+    }
+
+    function testWhatsAppConnection() {
+      const phone = getWhatsAppNumber();
+      const testMsg = "Hello The Gift Curator! 🌸 This is a test message from your Admin Portal. WhatsApp messaging is connected and working perfectly!";
+      openWhatsApp(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(testMsg)}`);
+    }
+
     function submitConciergeWhatsApp() {
       const occasion = document.getElementById('p-occasion').value;
       const recipient = document.getElementById('p-recipient').value || 'Not specified';
@@ -1286,9 +1443,21 @@
       const notes = document.getElementById('p-notes').value || 'No extra notes';
       const address = document.getElementById('p-address').value || 'To be shared on WhatsApp';
 
-      const msg = `Hello The Gift Curator! 🎁%0A%0AI would like to commission a Personalised Gift:%0A• Occasion: ${encodeURIComponent(occasion)}%0A• Recipient: ${encodeURIComponent(recipient)}%0A• Budget: ${encodeURIComponent(budget)}%0A• Preferred Date: ${encodeURIComponent(date)}%0A• Delivery Address: ${encodeURIComponent(address)}%0A• Notes: ${encodeURIComponent(notes)}%0A%0APlease share an initial concept!`;
+      const msg = `Hello The Gift Curator! 🎁
 
-      window.open(`https://wa.me/971501234567?text=${msg}`, '_blank');
+I would like to commission a Personalised Gift:
+• Occasion: ${occasion}
+• Recipient: ${recipient}
+• Budget: ${budget}
+• Preferred Date: ${date}
+• Delivery Address: ${address}
+• Notes: ${notes}
+
+Please share an initial concept!`;
+
+      const phone = getWhatsAppNumber();
+      const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+      openWhatsApp(url);
     }
 
     function submitCorporateWhatsApp() {
@@ -1298,13 +1467,25 @@
       const date = document.getElementById('c-date').value || 'Flexible';
       const notes = document.getElementById('c-notes').value || 'Standard packaging';
 
-      const msg = `Hello The Gift Curator! 🏢%0A%0ACorporate Gifting Enquiry:%0A• Company: ${encodeURIComponent(company)}%0A• Quantity: ${encodeURIComponent(qty)}%0A• Target Budget/Unit: ${encodeURIComponent(budget)}%0A• Deadline: ${encodeURIComponent(date)}%0A• Brief: ${encodeURIComponent(notes)}%0A%0APlease provide a proposal & quotation!`;
+      const msg = `Hello The Gift Curator! 🏢
 
-      window.open(`https://wa.me/971501234567?text=${msg}`, '_blank');
+Corporate Gifting Enquiry:
+• Company: ${company}
+• Quantity: ${qty}
+• Target Budget/Unit: ${budget}
+• Deadline: ${date}
+• Brief: ${notes}
+
+Please provide a proposal & quotation!`;
+
+      const phone = getWhatsAppNumber();
+      const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+      openWhatsApp(url);
     }
 
     // Initialize on load
     window.onload = function() {
+      updateAllWhatsAppLinks();
       renderPublicCatalogue();
     };
   </script>

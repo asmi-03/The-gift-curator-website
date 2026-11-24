@@ -456,7 +456,7 @@ ${submittedRef.deliveryAddress ? `Delivery Address: ${submittedRef.deliveryAddre
                     required
                     value={formData.senderContact}
                     onChange={(e) => setFormData({ ...formData, senderContact: e.target.value })}
-                    placeholder="e.g. +971 50 123 4567"
+                    placeholder="e.g. +971 50 892 1144"
                     className="w-full text-xs p-3 rounded-xl bg-cream-50 border border-cream-300 focus:outline-none focus:ring-2 focus:ring-rosewood-400"
                   />
                 </div>

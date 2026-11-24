@@ -66,7 +66,7 @@ export default function OurStory({ onNavigate }) {
               </button>
 
               <a
-                href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello Chaitally! I read your story on The Gift Curator and would love to ask about gifting.")}`}
+                href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello Chaitally! I read your story on The Gift Curator and would love to ask about gifting.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold tracking-wider uppercase shadow-xs transition-all flex items-center gap-2"

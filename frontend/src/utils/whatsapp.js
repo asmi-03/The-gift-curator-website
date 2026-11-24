@@ -2,8 +2,24 @@ import siteConfig from '../data/siteConfig.json';
 
 // Clean phone number for WhatsApp URL (digits only)
 export const getCleanWhatsAppNumber = (overrideNumber) => {
-  const num = overrideNumber || localStorage.getItem('tgc_owner_whatsapp') || siteConfig.whatsappNumber;
+  const stored = typeof window !== 'undefined' ? localStorage.getItem('tgc_owner_whatsapp') : null;
+  const num = overrideNumber || stored || siteConfig.whatsappNumber || '971566799672';
   return num.replace(/[^0-9]/g, '');
+};
+
+// Open WhatsApp link with fallback for pop-up blockers
+export const openWhatsAppDirect = (url) => {
+  if (typeof window === 'undefined') return;
+  const win = window.open(url, '_blank');
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+    window.location.href = url;
+  }
+};
+
+// Build generic WhatsApp link
+export const buildWhatsAppUrl = (text = '', customNumber = null) => {
+  const phone = getCleanWhatsAppNumber(customNumber);
+  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
 };
 
 // Generate unique enquiry reference TGC-2026-XXXX
@@ -29,13 +45,13 @@ I would like to order / enquire about a Ready-to-Gift hamper:
 • Hamper: ${product.title}
 • Reference: ${product.id}
 • Price: AED ${product.price}
-• Availability: ${product.availability}
+• Availability: ${product.availability || 'In Stock'}
 ${customNote ? `• Card Note: "${customNote}"\n` : ''}
 Could you please confirm availability, delivery charges for my address, and payment details?
 
 Thank you!`;
 
-  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
 };
 
 // Generate WhatsApp link for Curate My Gift enquiry
@@ -56,7 +72,7 @@ ${enquiry.deliveryAddress ? `• Delivery Address: ${enquiry.deliveryAddress}\n`
 
 Looking forward to your complimentary concept and indicative quotation!`;
 
-  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
 };
 
 // Generate WhatsApp link for Corporate Enquiry
@@ -77,7 +93,7 @@ We would like to request a Corporate / Bulk Gifting Quote:
 
 Please share your proposal and catalogue for bulk volume.`;
 
-  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
 };
 
 // Store enquiry to local storage for Owner Dashboard / CSV export (Section 9)

@@ -293,11 +293,11 @@ export default function OwnerPortalModal({ isOpen, onClose }) {
                     required
                     value={whatsappPhone}
                     onChange={(e) => setWhatsappPhone(e.target.value)}
-                    placeholder="+971501234567"
+                    placeholder="+971566799672"
                     className="w-full text-xs p-3 rounded-xl bg-cream-50 border border-cream-300 focus:outline-none focus:ring-2 focus:ring-rosewood-400 font-mono text-sm"
                   />
                   <span className="text-[11px] text-slatewarm-400">
-                    Example: +971501234567 (no spaces or hyphens)
+                    Example: +971566799672 (UAE country code 971 followed by mobile number)
                   </span>
                 </div>
 

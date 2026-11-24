@@ -66,7 +66,7 @@ export default function AboutContact() {
               
               {/* WhatsApp Card */}
               <a
-                href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent("Hello! I would like to enquire about The Gift Curator.")}`}
+                href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello! I would like to enquire about The Gift Curator.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-2xl bg-white border border-cream-300 hover:border-emerald-500 shadow-soft transition-all group flex items-start gap-3"
