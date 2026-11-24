@@ -12,9 +12,12 @@ import Footer from './components/Footer';
 import PrivacyPolicyModal from './components/PrivacyPolicyModal';
 import OwnerPortalModal from './components/OwnerPortalModal';
 import AdminDashboard from './components/AdminDashboard';
+import AuthModal from './components/AuthModal';
+import UserProfileModal from './components/UserProfileModal';
+import CheckoutModal from './components/CheckoutModal';
 import WhatsAppFloatingButton from './components/WhatsAppFloatingButton';
 import ImageFrame from './components/ImageFrame';
-import { Sparkles, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Sparkles, ShoppingBag, ArrowRight, CreditCard } from 'lucide-react';
 import productsData from './data/products.json';
 import { formatAED } from './utils/whatsapp';
 
@@ -22,6 +25,35 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   const [ownerPortalOpen, setOwnerPortalOpen] = useState(false);
+
+  // Authentication & Profile States
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('tgc_auth_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  // Payment & Checkout State
+  const [checkoutProduct, setCheckoutProduct] = useState(null);
+
+  const handleAuthSuccess = (user) => {
+    setCurrentUser(user);
+    if (user.role === 'admin') {
+      sessionStorage.setItem('tgc_admin_auth', 'true');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('tgc_auth_user');
+    localStorage.removeItem('tgc_auth_token');
+    sessionStorage.removeItem('tgc_admin_auth');
+    setCurrentUser(null);
+  };
 
   // Sync with URL hash (e.g. #our-story, #personalised-gifting, #hampers, #admin)
   useEffect(() => {
@@ -70,7 +102,10 @@ export default function App() {
       {/* Attractive Clean Navbar (Matching Screenshot) */}
       <Navbar 
         onNavigate={switchTab} 
-        activeTab={activeTab} 
+        activeTab={activeTab}
+        currentUser={currentUser}
+        onOpenAuthModal={() => setAuthModalOpen(true)}
+        onOpenProfileModal={() => setProfileModalOpen(true)}
         onOpenOwnerPortal={() => switchTab('admin')}
       />
 
@@ -132,6 +167,16 @@ export default function App() {
                           <span className="font-serif text-lg font-bold text-[#2E2826]">{formatAED(p.price)}</span>
                           <span className="text-[11px] text-emerald-700 font-medium">Same-Day Dubai</span>
                         </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCheckoutProduct(p);
+                          }}
+                          className="w-full mt-2 py-2 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-[11px] font-semibold uppercase tracking-wider shadow-2xs flex items-center justify-center gap-1.5 transition-all"
+                        >
+                          <CreditCard className="w-3.5 h-3.5" />
+                          <span>Order & Pay Now</span>
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -172,7 +217,10 @@ export default function App() {
         {/* ======================================================== */}
         {activeTab === 'hampers' && (
           <div className="animate-fadeIn">
-            <ShopReadyToGift onNavigateToCurate={() => switchTab('personalised-gifting')} />
+            <ShopReadyToGift 
+              onNavigateToCurate={() => switchTab('personalised-gifting')} 
+              onCheckoutProduct={(prod) => setCheckoutProduct(prod)}
+            />
           </div>
         )}
 
@@ -249,6 +297,31 @@ export default function App() {
       <OwnerPortalModal 
         isOpen={ownerPortalOpen} 
         onClose={() => setOwnerPortalOpen(false)} 
+      />
+
+      {/* Customer Database Auth Modal (Sign In / Register) */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onAuthSuccess={handleAuthSuccess}
+      />
+
+      {/* Customer User Profile & My Orders Modal */}
+      <UserProfileModal
+        isOpen={profileModalOpen}
+        onClose={() => setProfileModalOpen(false)}
+        user={currentUser}
+        onLogout={handleLogout}
+        onNavigateToShop={() => switchTab('hampers')}
+      />
+
+      {/* Luxury Payment & Checkout Modal */}
+      <CheckoutModal
+        isOpen={Boolean(checkoutProduct)}
+        onClose={() => setCheckoutProduct(null)}
+        product={checkoutProduct}
+        user={currentUser}
+        onOrderComplete={(order) => {}}
       />
 
     </div>

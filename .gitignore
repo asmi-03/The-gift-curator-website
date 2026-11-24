@@ -30,3 +30,8 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 *.swp
+
+# SQLite temporary wal/shm files
+*.db-wal
+*.db-shm
+*.db-journal

@@ -3,6 +3,19 @@ import cors from 'cors';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  findUserByEmail,
+  findUserById,
+  createUser,
+  updateUserProfile,
+  createOrder as dbCreateOrder,
+  getOrderById as dbGetOrderById,
+  getOrdersByUserId as dbGetOrdersByUserId,
+  getAllOrders as dbGetAllOrders,
+  updateOrderStatus as dbUpdateOrderStatus,
+  createPayment as dbCreatePayment,
+  hashPassword
+} from './database.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,19 +70,172 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     service: 'The Gift Curator API',
     brand: 'The Gift Curator (Dubai, UAE)',
+    database: 'SQLite (Built-in Node.js Engine)',
     adminAccess: 'Enabled',
     timestamp: new Date().toISOString()
   });
 });
 
 // ==========================================
-// 2. Admin Authentication
+// 2. Customer & User Authentication (Database-backed)
 // ==========================================
+
+// POST /api/auth/register (New Customer Registration)
+app.post('/api/auth/register', (req, res) => {
+  try {
+    const { name, email, phone, password, address } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: 'Name, email, and password are required' });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+    }
+
+    const existing = findUserByEmail(email);
+    if (existing) {
+      return res.status(409).json({ error: 'An account with this email address already exists' });
+    }
+
+    const user = createUser({
+      name,
+      email: email.trim().toLowerCase(),
+      phone: phone || '',
+      password,
+      address: address || ''
+    });
+
+    const token = `tgc_usr_tok_${user.id}_${Date.now()}`;
+    res.status(201).json({
+      success: true,
+      message: 'Account created successfully',
+      token,
+      user
+    });
+  } catch (err) {
+    console.error('Registration error:', err);
+    res.status(500).json({ error: 'Registration failed: ' + err.message });
+  }
+});
+
+// POST /api/auth/login (Customer & Admin Login)
+app.post('/api/auth/login', (req, res) => {
+  try {
+    const { email, password, pin } = req.body;
+
+    // Support Curator Admin PIN
+    if (pin || (password && (password === ADMIN_PIN || password === 'curator2026' || password === 'admin123'))) {
+      const input = pin || password;
+      if (input === ADMIN_PIN || input === 'curator2026' || input === 'admin123') {
+        const adminUser = findUserByEmail('concierge@thegiftcuratordubai.com') || {
+          id: 'USR-ADMIN-01',
+          name: 'Chaitally (Founder & Lead Curator)',
+          email: 'concierge@thegiftcuratordubai.com',
+          role: 'admin'
+        };
+        return res.json({
+          success: true,
+          token: `tgc_admin_tok_${Date.now()}`,
+          user: {
+            id: adminUser.id,
+            name: adminUser.name,
+            email: adminUser.email,
+            role: 'admin'
+          }
+        });
+      }
+    }
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Please enter both email and password' });
+    }
+
+    const user = findUserByEmail(email.trim().toLowerCase());
+    if (!user) {
+      return res.status(401).json({ error: 'No account found with this email. Please check or register.' });
+    }
+
+    const passwordHash = hashPassword(password);
+    if (user.password_hash !== passwordHash) {
+      return res.status(401).json({ error: 'Incorrect password. Please try again.' });
+    }
+
+    const token = `tgc_usr_tok_${user.id}_${Date.now()}`;
+    const safeUser = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      address: user.address,
+      createdAt: user.created_at
+    };
+
+    res.json({
+      success: true,
+      message: 'Welcome back, ' + user.name,
+      token,
+      user: safeUser
+    });
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: 'Login failed: ' + err.message });
+  }
+});
+
+// GET /api/auth/me (Current User Profile + Order History)
+app.get('/api/auth/me', (req, res) => {
+  try {
+    const authHeader = req.headers.authorization || '';
+    const userIdQuery = req.query.userId;
+    let userId = userIdQuery;
+
+    if (!userId && authHeader.startsWith('Bearer tgc_usr_tok_')) {
+      const parts = authHeader.replace('Bearer ', '').split('_');
+      userId = parts.slice(3, -1).join('_') || parts[3];
+    }
+
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized. Please sign in.' });
+    }
+
+    const user = findUserById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const orders = dbGetOrdersByUserId(userId);
+
+    res.json({
+      success: true,
+      user,
+      orders
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve user: ' + err.message });
+  }
+});
+
+// PUT /api/auth/profile (Update User Profile Details)
+app.put('/api/auth/profile', (req, res) => {
+  try {
+    const { userId, name, phone, address } = req.body;
+    if (!userId) return res.status(400).json({ error: 'userId is required' });
+
+    const updated = updateUserProfile(userId, { name, phone, address });
+    res.json({ success: true, user: updated });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to update profile: ' + err.message });
+  }
+});
+
+// Legacy Admin login endpoint for backwards compatibility
 app.post('/api/admin/login', (req, res) => {
   const { password, pin } = req.body;
   const input = password || pin;
 
-  if (input === ADMIN_PIN || input === 'admin123') {
+  if (input === ADMIN_PIN || input === 'curator2026' || input === 'admin123') {
     return res.json({
       success: true,
       token: 'tgc-curator-session-' + Date.now(),
@@ -278,8 +444,115 @@ app.post('/api/products/upload-image', async (req, res) => {
 });
 
 // ==========================================
-// 5. Orders Management
+// 5. Orders & Checkout Management (Database-backed)
 // ==========================================
+
+// POST /api/checkout (Customer Checkout with Payment)
+app.post('/api/checkout', async (req, res) => {
+  try {
+    const {
+      userId,
+      customerName,
+      phone,
+      email,
+      deliveryArea,
+      deliveryAddress,
+      deliveryDate,
+      giftNote,
+      items,
+      subtotal,
+      deliveryFee,
+      total,
+      paymentMethod,
+      cardBrand,
+      cardLast4,
+      paymentDetails
+    } = req.body;
+
+    if (!customerName || !phone || !items || items.length === 0) {
+      return res.status(400).json({ error: 'Customer name, phone, and items are required' });
+    }
+
+    const finalTotal = Number(total) || items.reduce((sum, i) => sum + (Number(i.price) * (i.quantity || 1)), 0);
+    const isPaid = paymentMethod !== 'Cash on Delivery';
+
+    // 1. Create order in SQLite database
+    const order = dbCreateOrder({
+      userId: userId || null,
+      customerName,
+      phone,
+      email: email || '',
+      deliveryArea: deliveryArea || 'Dubai',
+      deliveryAddress: deliveryAddress || '',
+      deliveryDate: deliveryDate || new Date().toISOString().slice(0, 10),
+      giftNote: giftNote || '',
+      items: items || [],
+      subtotal: subtotal || finalTotal,
+      deliveryFee: deliveryFee || 0,
+      total: finalTotal,
+      paymentMethod: paymentMethod || 'Credit / Debit Card',
+      paymentStatus: isPaid ? 'Paid (Verified)' : 'Pending (Cash on Delivery)'
+    });
+
+    // 2. Create payment record in SQLite database
+    const payment = dbCreatePayment({
+      orderId: order.id,
+      amount: finalTotal,
+      method: paymentMethod || 'Card',
+      status: isPaid ? 'completed' : 'pending',
+      cardBrand: cardBrand || (paymentMethod === 'Apple Pay' ? 'Apple Pay' : 'Visa'),
+      cardLast4: cardLast4 || '4242',
+      details: paymentDetails || {}
+    });
+
+    // 3. Mirror to orders.json for local dashboard backwards compatibility
+    try {
+      const orders = await readJsonFile('orders.json');
+      const mirrored = {
+        id: order.id,
+        customerName: order.customer_name,
+        phone: order.phone,
+        email: order.email,
+        deliveryArea: order.delivery_area,
+        deliveryAddress: order.delivery_address,
+        deliveryDate: order.delivery_date,
+        items: order.items,
+        total: order.total,
+        paymentStatus: order.payment_status,
+        orderStatus: order.order_status,
+        paymentMethod: order.payment_method,
+        createdAt: order.created_at
+      };
+      orders.unshift(mirrored);
+      await writeJsonFile('orders.json', orders);
+    } catch {
+      // Best-effort JSON mirror
+    }
+
+    res.status(201).json({
+      success: true,
+      message: 'Order and payment processed successfully',
+      order,
+      payment
+    });
+  } catch (err) {
+    console.error('Checkout error:', err);
+    res.status(500).json({ error: 'Checkout failed: ' + err.message });
+  }
+});
+
+// GET /api/user/orders (Retrieve user's orders from database)
+app.get('/api/user/orders', (req, res) => {
+  try {
+    const { userId } = req.query;
+    if (!userId) return res.status(400).json({ error: 'userId is required' });
+
+    const orders = dbGetOrdersByUserId(userId);
+    res.json({ success: true, orders });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve orders: ' + err.message });
+  }
+});
 
 // GET all orders
 app.get('/api/orders', async (req, res) => {

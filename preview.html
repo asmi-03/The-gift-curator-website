@@ -122,8 +122,16 @@
           <button id="nav-contact" onclick="showTab('contact')" class="nav-link">Contact</button>
         </nav>
 
-        <!-- Right Solid Burgundy WhatsApp Button -->
+        <!-- Right Solid Burgundy WhatsApp Button + User Account Button -->
         <div class="hidden lg:flex items-center gap-3">
+          <button 
+            id="btn-header-auth"
+            onclick="handleHeaderAuthClick()"
+            class="px-3.5 py-2 rounded-lg border border-[#D5CEC9] hover:border-[#7A2832] text-[#2E2826] text-xs font-semibold flex items-center gap-1.5 transition-all bg-white shadow-2xs"
+          >
+            <span>👤 Sign In</span>
+          </button>
+
           <a 
             id="nav-whatsapp-link-desktop"
             href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!%20I'd%20like%20to%20ask%20a%20question%20about%20your%20gifting%20services."
@@ -136,6 +144,15 @@
 
         <!-- Mobile Menu Toggle Button -->
         <div class="flex items-center gap-2 lg:hidden">
+          <button 
+            id="btn-mobile-auth"
+            onclick="handleHeaderAuthClick()"
+            class="p-1.5 rounded-lg border border-[#D5CEC9] text-[#2E2826] text-xs font-semibold bg-white"
+            title="Account"
+          >
+            👤
+          </button>
+
           <a 
             id="nav-whatsapp-link-mobile"
             href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!"
@@ -979,7 +996,339 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- ========================================== -->
+  <!-- MODAL: CUSTOMER AUTH (LOGIN / REGISTER)    -->
+  <!-- ========================================== -->
+  <div id="modal-auth" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#EAE2D8] text-left relative">
+      <button onclick="closeAuthModal()" class="absolute top-5 right-5 p-2 rounded-full text-gray-400 hover:text-[#2E2826] text-xl">&times;</button>
+      
+      <div class="text-center pb-4 border-b border-[#F0EBE3]">
+        <div class="w-14 h-14 rounded-full bg-[#FAECE8] flex items-center justify-center mx-auto mb-2 border border-[#E8DFD5] overflow-hidden">
+          <img src="frontend/public/images/brand/logo.png" alt="Logo" class="w-full h-full object-contain rounded-full" onerror="this.src='PRODUCT_IMAGES/logo.png';" />
+        </div>
+        <span class="text-[10px] font-sans tracking-[0.25em] text-[#7A706B] uppercase font-semibold block">The Gift Curator Dubai</span>
+        <h3 id="auth-modal-title" class="font-serif text-2xl font-bold text-[#2E2826] mt-0.5">Customer Sign In</h3>
+        <p id="auth-modal-subtitle" class="text-xs text-[#524945] mt-1">Access your saved delivery addresses, orders & private concierge notes.</p>
+      </div>
+
+      <!-- Mode Toggle -->
+      <div class="flex bg-[#FAF7F2] p-1 rounded-xl mt-4 border border-[#EAE2D8]">
+        <button type="button" id="tab-btn-signin" onclick="setAuthMode('login')" class="flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-[#7A2832] shadow-xs">
+          Sign In
+        </button>
+        <button type="button" id="tab-btn-register" onclick="setAuthMode('register')" class="flex-1 py-2 text-xs font-semibold rounded-lg text-[#7A706B]">
+          Register
+        </button>
+      </div>
+
+      <div id="auth-error-msg" class="hidden mt-3 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl"></div>
+
+      <!-- Auth Form -->
+      <form onsubmit="handleAuthSubmit(event)" class="mt-4 space-y-3.5">
+        <div id="auth-field-name" class="hidden">
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-1">Full Name *</label>
+          <input id="auth-input-name" type="text" placeholder="e.g. Fatima Al-Maktoum" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-1">Email Address *</label>
+          <input id="auth-input-email" type="email" required placeholder="name@example.com" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]" />
+        </div>
+
+        <div id="auth-field-phone" class="hidden">
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-1">WhatsApp / Phone *</label>
+          <input id="auth-input-phone" type="tel" placeholder="+971 50 123 4567" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]" />
+        </div>
+
+        <div id="auth-field-address" class="hidden">
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-1">Default UAE Delivery Address</label>
+          <input id="auth-input-address" type="text" placeholder="Villa 14, Frond E, Palm Jumeirah, Dubai" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-[#524945] mb-1">Password *</label>
+          <input id="auth-input-password" type="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]" />
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="w-full py-3 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white font-semibold text-xs tracking-wider uppercase shadow-xs transition-all flex items-center justify-center gap-2 mt-2">
+          <span>Sign In to Account</span>
+        </button>
+      </form>
+
+      <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between text-xs text-[#7A706B]">
+        <button type="button" onclick="loginDemoClient()" class="text-[#7A2832] font-semibold hover:underline">
+          ✨ 1-Click Demo Client
+        </button>
+        <span class="text-[11px] text-[#9E533F]">Admin: curator2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: USER PROFILE & MY ORDERS            -->
+  <!-- ========================================== -->
+  <div id="modal-user-profile" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-[#EAE2D8] max-h-[90vh] overflow-y-auto text-left relative">
+      <button onclick="closeUserProfileModal()" class="absolute top-5 right-5 p-2 rounded-full text-gray-400 hover:text-[#2E2826] text-xl">&times;</button>
+      
+      <div class="flex items-center gap-3 pb-4 border-b border-[#F0EBE3]">
+        <div id="profile-avatar" class="w-12 h-12 rounded-full bg-[#FAECE8] text-[#7A2832] flex items-center justify-center font-serif text-lg font-bold border border-[#E8DFD5]">
+          F
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 id="profile-name" class="font-serif text-xl font-bold text-[#2E2826]">Fatima Al-Maktoum</h3>
+            <span id="profile-badge" class="text-[10px] bg-[#FAECE8] text-[#7A2832] font-bold px-2 py-0.5 rounded-full uppercase">Client</span>
+          </div>
+          <span id="profile-email" class="text-xs text-[#7A706B]">client@example.com</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 mt-4 pb-2 border-b border-[#F0EBE3]">
+        <button onclick="showProfileSubtab('orders')" id="btn-sub-myorders" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#7A2832] text-white">
+          📦 My Orders (<span id="profile-order-count">0</span>)
+        </button>
+        <button onclick="showProfileSubtab('details')" id="btn-sub-mydetails" class="px-4 py-2 rounded-xl text-xs font-semibold text-[#524945] hover:bg-[#FAF7F2]">
+          👤 Delivery Details
+        </button>
+      </div>
+
+      <!-- Tab Content: Orders -->
+      <div id="subtab-myorders-content" class="mt-4 space-y-3">
+        <div id="user-orders-container" class="space-y-3">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- Tab Content: Details -->
+      <div id="subtab-mydetails-content" class="hidden mt-4 space-y-3">
+        <div class="bg-[#FAF7F2] p-5 rounded-2xl border border-[#EAE2D8] space-y-3 text-xs text-[#3A3330]">
+          <div>
+            <span class="text-[10px] uppercase font-bold text-[#7A706B] block">WhatsApp Phone</span>
+            <span id="profile-detail-phone" class="text-sm font-semibold text-[#2E2826]">+971 50 892 1144</span>
+          </div>
+          <div>
+            <span class="text-[10px] uppercase font-bold text-[#7A706B] block">Default UAE Delivery Address</span>
+            <span id="profile-detail-address" class="text-sm font-semibold text-[#2E2826]">Villa 12, Frond E, Palm Jumeirah, Dubai</span>
+          </div>
+          <div class="p-3 bg-emerald-50 text-emerald-800 rounded-xl text-[11px] font-medium border border-emerald-200">
+            🛡️ Protected under UAE Personal Data Protection laws.
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-[#F0EBE3] flex items-center justify-between">
+        <button onclick="handleUserLogout()" class="px-4 py-2 rounded-xl text-xs font-semibold text-red-600 hover:bg-red-50">
+          Sign Out
+        </button>
+        <button onclick="closeUserProfileModal()" class="px-5 py-2 rounded-xl bg-[#2E2826] text-white text-xs font-semibold uppercase tracking-wider">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: LUXURY CHECKOUT & MULTI-PAYMENT     -->
+  <!-- ========================================== -->
+  <div id="modal-checkout" class="hidden fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-[#EAE2D8] max-h-[92vh] overflow-y-auto text-left relative">
+      <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 p-2 rounded-full text-gray-400 hover:text-[#2E2826] text-xl">&times;</button>
+      
+      <div class="pb-3 border-b border-[#F0EBE3]">
+        <span class="text-[10px] font-semibold text-[#7A2832] uppercase tracking-wider block">🔒 256-Bit SSL Encrypted Checkout</span>
+        <h3 id="checkout-title" class="font-serif text-2xl font-bold text-[#2E2826] mt-0.5">Delivery & Recipient Details</h3>
+      </div>
+
+      <!-- Item Pill -->
+      <div id="checkout-product-summary" class="mt-4 p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#EAE2D8] flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <img id="chk-img" src="PRODUCT_IMAGES/product-01.svg" class="w-12 h-12 object-contain bg-white rounded-xl p-1 border border-[#EAE2D8]" onerror="this.src='PRODUCT_IMAGES/product-01.svg';" />
+          <div>
+            <h4 id="chk-title" class="font-serif font-bold text-sm text-[#2E2826]">The Serenity Haven</h4>
+            <span class="text-[11px] text-[#7A706B] block">Hand-assembled in Dubai studio</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-[#7A706B] block">Price</span>
+          <span id="chk-price" class="font-serif font-bold text-base text-[#7A2832]">AED 385</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Delivery Details -->
+      <div id="chk-step-details" class="mt-4 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Recipient Name *</label>
+            <input id="chk-input-name" type="text" placeholder="e.g. Sara Al-Hashimi" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">WhatsApp / Phone *</label>
+            <input id="chk-input-phone" type="tel" placeholder="+971 50 123 4567" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Delivery Emirate *</label>
+            <select id="chk-select-emirate" onchange="updateCheckoutDeliveryFee()" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none bg-white focus:border-[#7A2832]">
+              <option value="Dubai">Dubai (Complimentary Free)</option>
+              <option value="Abu Dhabi">Abu Dhabi (+AED 35 Express)</option>
+              <option value="Sharjah">Sharjah (+AED 35)</option>
+              <option value="Ajman">Ajman (+AED 35)</option>
+              <option value="Ras Al Khaimah">Ras Al Khaimah (+AED 35)</option>
+              <option value="Fujairah">Fujairah (+AED 35)</option>
+              <option value="Umm Al Quwain">Umm Al Quwain (+AED 35)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Delivery Date</label>
+            <input id="chk-input-date" type="date" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none bg-white focus:border-[#7A2832]" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Delivery Address (Villa/Building, Street, Area) *</label>
+          <textarea id="chk-input-address" rows="2" placeholder="e.g. Villa 14, Frond E, Palm Jumeirah, Dubai" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Wax-Sealed Handwritten Gift Note</label>
+          <textarea id="chk-input-note" rows="2" placeholder="Write your heartfelt note. Our calligrapher writes it on artisan cotton paper..." class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none focus:border-[#7A2832]"></textarea>
+        </div>
+
+        <div class="pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
+          <span class="text-xs text-[#7A706B]">Step 1 of 2</span>
+          <button type="button" onclick="goToCheckoutPaymentStep()" class="px-6 py-2.5 rounded-xl bg-[#7A2832] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#682029]">
+            Continue to Payment →
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Payment Method -->
+      <div id="chk-step-payment" class="hidden mt-4 space-y-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <button type="button" id="pay-btn-card" onclick="selectPayMethod('card')" class="p-3 rounded-2xl border border-[#7A2832] bg-[#FAECE8] text-[#7A2832] font-bold text-center text-xs shadow-xs">
+            💳 Card
+          </button>
+          <button type="button" id="pay-btn-apple" onclick="selectPayMethod('apple_pay')" class="p-3 rounded-2xl border border-[#EAE2D8] bg-white text-[#524945] text-center text-xs hover:bg-[#FAF7F2]">
+             Apple Pay
+          </button>
+          <button type="button" id="pay-btn-bank" onclick="selectPayMethod('bank_transfer')" class="p-3 rounded-2xl border border-[#EAE2D8] bg-white text-[#524945] text-center text-xs hover:bg-[#FAF7F2]">
+            🏦 Bank Wire
+          </button>
+          <button type="button" id="pay-btn-cod" onclick="selectPayMethod('cod')" class="p-3 rounded-2xl border border-[#EAE2D8] bg-white text-[#524945] text-center text-xs hover:bg-[#FAF7F2]">
+            🚚 COD
+          </button>
+        </div>
+
+        <!-- Method View: Card -->
+        <div id="pay-view-card" class="space-y-3 p-4 rounded-2xl bg-[#FAF7F2] border border-[#EAE2D8]">
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Cardholder Name</label>
+            <input id="chk-card-name" type="text" placeholder="Name on card" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs outline-none bg-white focus:border-[#7A2832]" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Card Number</label>
+            <input id="chk-card-num" type="text" maxlength="19" placeholder="4242 •••• •••• 4242" oninput="formatCardNumberInput(this)" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs font-mono outline-none bg-white focus:border-[#7A2832]" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-[#524945] mb-1">Expiry MM/YY</label>
+              <input id="chk-card-exp" type="text" maxlength="5" placeholder="MM/YY" oninput="formatCardExpiryInput(this)" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs font-mono outline-none bg-white focus:border-[#7A2832]" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-[#524945] mb-1">CVV</label>
+              <input id="chk-card-cvv" type="password" maxlength="4" placeholder="•••" class="w-full px-4 py-2.5 rounded-xl border border-[#D5CEC9] text-base sm:text-xs font-mono outline-none bg-white focus:border-[#7A2832]" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Method View: Apple Pay -->
+        <div id="pay-view-apple" class="hidden p-6 rounded-2xl bg-black text-white text-center space-y-2">
+          <div class="text-3xl">Pay</div>
+          <p class="text-xs text-gray-300">Authorize payment securely with Touch ID / Face ID</p>
+        </div>
+
+        <!-- Method View: Bank Wire -->
+        <div id="pay-view-bank" class="hidden p-4 rounded-2xl bg-[#FAF7F2] border border-[#EAE2D8] space-y-2 text-xs text-[#3A3330]">
+          <div class="font-bold text-[#7A2832]">Direct Bank Wire (Dubai, UAE)</div>
+          <div>Bank: Emirates NBD / First Abu Dhabi Bank (FAB)</div>
+          <div>IBAN: <span class="font-mono font-bold bg-white px-2 py-0.5 rounded border">AE03 0330 0000 1234 5678 901</span></div>
+          <p class="text-[11px] text-[#7A706B]">Hampers are prepared instantly upon placing. Share wire slip via WhatsApp.</p>
+        </div>
+
+        <!-- Method View: COD -->
+        <div id="pay-view-cod" class="hidden p-4 rounded-2xl bg-[#FAF7F2] border border-[#EAE2D8] space-y-1 text-xs text-[#3A3330]">
+          <div class="font-bold text-[#2E2826]">Cash / Wireless Card on Delivery</div>
+          <p class="text-[11px] text-[#524945]">Pay upon arrival via cash or mobile wireless card POS reader with driver.</p>
+        </div>
+
+        <!-- Price Breakdown -->
+        <div class="pt-3 border-t border-[#F0EBE3] space-y-1.5 text-xs text-[#524945]">
+          <div class="flex justify-between">
+            <span>Hamper Price:</span>
+            <span id="chk-breakdown-subtotal" class="font-semibold text-[#2E2826]">AED 385</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Delivery:</span>
+            <span id="chk-breakdown-delivery" class="font-semibold text-emerald-700">Free</span>
+          </div>
+          <div class="flex justify-between pt-1 border-t border-[#F0EBE3] text-sm font-bold text-[#2E2826]">
+            <span>Total to Pay:</span>
+            <span id="chk-breakdown-total" class="text-base text-[#7A2832] font-serif">AED 385</span>
+          </div>
+        </div>
+
+        <div class="pt-3 flex items-center justify-between">
+          <button type="button" onclick="goToCheckoutDetailsStep()" class="px-4 py-2 text-xs font-semibold text-[#7A706B] hover:text-[#2E2826]">
+            ← Back
+          </button>
+          <button type="button" id="btn-process-pay" onclick="handleExecutePayment()" class="px-6 py-2.5 rounded-xl bg-[#7A2832] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#682029] shadow-xs">
+            🔒 Pay Now
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Success Screen -->
+      <div id="chk-step-success" class="hidden mt-4 space-y-5 text-center">
+        <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl">
+          ✓
+        </div>
+        <div>
+          <span class="text-xs uppercase font-bold text-emerald-700 tracking-wider">Payment Received & Verified</span>
+          <h4 id="chk-success-recipient" class="font-serif text-3xl font-bold text-[#2E2826] mt-1">Thank You!</h4>
+          <p class="text-xs text-[#524945] max-w-sm mx-auto mt-1">Your hamper is being hand-assembled in our Dubai studio.</p>
+        </div>
+
+        <div class="bg-[#FAF7F2] p-5 rounded-2xl border border-[#EAE2D8] text-left text-xs space-y-2">
+          <div class="flex justify-between">
+            <span class="text-[#7A706B]">Order Reference:</span>
+            <span id="chk-success-order-id" class="font-mono font-bold text-sm text-[#2E2826]">ORD-2026-1085</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-[#7A706B]">Payment Method:</span>
+            <span id="chk-success-paymethod" class="font-semibold text-[#2E2826]">Credit Card</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-[#7A706B]">Total Paid:</span>
+            <span id="chk-success-total" class="font-serif font-bold text-sm text-[#7A2832]">AED 385</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-1">
+          <button type="button" onclick="sendCheckoutWhatsAppReceipt()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs">
+            <span>💬 Send Order Receipt to WhatsApp Concierge</span>
+          </button>
+          <button type="button" onclick="closeCheckoutModal()" class="w-full py-2.5 rounded-xl border border-[#D5CEC9] text-[#524945] font-semibold text-xs hover:bg-[#FAF7F2]">
+            Close
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <footer id="main-footer" class="bg-[#2E2826] text-[#FAF7F2] border-t border-[#3A3330] py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div class="space-y-3 md:col-span-2">
@@ -1076,7 +1425,7 @@
       if (!grid) return;
 
       grid.innerHTML = liveProducts.map(p => `
-        <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col">
+        <div class="bg-white rounded-2xl border border-[#EAE2D8] overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between">
           <div class="aspect-square bg-[#F8F4EE] relative flex items-center justify-center p-3 border-b border-[#F0EBE3]">
             <img 
               src="${p.image}" 
@@ -1094,11 +1443,19 @@
               <h3 class="font-serif text-lg font-bold text-[#2E2826] mt-1 leading-snug">${p.title}</h3>
               <p class="text-xs text-[#524945] mt-1.5 line-clamp-2">${p.desc}</p>
             </div>
-            <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
-              <span class="font-serif text-lg font-bold text-[#7A2832]">AED ${p.price}</span>
-              <a href="${getDirectWhatsAppUrl(`Hello The Gift Curator! I'd like to order ${p.title} (AED ${p.price}).`)}" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
-                Order
-              </a>
+            <div class="mt-4 pt-3 border-t border-[#F0EBE3] space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-serif text-lg font-bold text-[#7A2832]">AED ${p.price}</span>
+                <span class="text-[11px] text-emerald-700 font-medium">Same-Day Dubai</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="openCheckoutModal('${p.id}')" class="py-2 px-3 rounded-xl bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029] shadow-xs text-center">
+                  Order & Pay
+                </button>
+                <a href="${getDirectWhatsAppUrl(`Hello The Gift Curator! I'd like to order ${p.title} (AED ${p.price}).`)}" target="_blank" class="py-2 px-3 rounded-xl border border-emerald-600 text-emerald-700 hover:bg-emerald-50 text-xs font-semibold text-center">
+                  WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1523,8 +1880,461 @@ Please provide a proposal & quotation!`;
       openWhatsApp(url);
     }
 
+    // ==========================================
+    // DATABASE AUTHENTICATION & LOGIN SYSTEM
+    // ==========================================
+    let currentAuthUser = null;
+    let authMode = 'login'; // 'login' | 'register'
+
+    function initAuthDatabase() {
+      // Ensure seed users in localStorage DB
+      let users = JSON.parse(localStorage.getItem('tgc_db_users') || '[]');
+      if (users.length === 0) {
+        users = [
+          {
+            id: 'USR-CUST-001',
+            name: 'Fatima Al-Maktoum',
+            email: 'client@example.com',
+            phone: '+971 50 892 1144',
+            password: 'client123',
+            address: 'Villa 12, Frond E, Palm Jumeirah, Dubai',
+            role: 'customer'
+          }
+        ];
+        localStorage.setItem('tgc_db_users', JSON.stringify(users));
+      }
+
+      // Check current session
+      const savedUser = localStorage.getItem('tgc_auth_user');
+      if (savedUser) {
+        try {
+          currentAuthUser = JSON.parse(savedUser);
+        } catch {
+          currentAuthUser = null;
+        }
+      }
+      updateAuthUI();
+    }
+
+    function updateAuthUI() {
+      const desktopBtn = document.getElementById('btn-header-auth');
+      const mobileBtn = document.getElementById('btn-mobile-auth');
+
+      if (currentAuthUser) {
+        const firstName = currentAuthUser.name.split(' ')[0];
+        if (desktopBtn) {
+          desktopBtn.innerHTML = `<span>👤 ${firstName}</span>`;
+          desktopBtn.className = "px-3.5 py-2 rounded-lg bg-[#FAECE8] text-[#7A2832] border border-[#E8DFD5] text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs hover:bg-[#F5D8D0]";
+        }
+        if (mobileBtn) {
+          mobileBtn.innerHTML = `<span>${firstName}</span>`;
+          mobileBtn.className = "px-2 py-1.5 rounded-lg bg-[#FAECE8] text-[#7A2832] text-xs font-bold border border-[#E8DFD5]";
+        }
+      } else {
+        if (desktopBtn) {
+          desktopBtn.innerHTML = `<span>👤 Sign In</span>`;
+          desktopBtn.className = "px-3.5 py-2 rounded-lg border border-[#D5CEC9] hover:border-[#7A2832] text-[#2E2826] text-xs font-semibold flex items-center gap-1.5 transition-all bg-white shadow-2xs";
+        }
+        if (mobileBtn) {
+          mobileBtn.innerHTML = `👤`;
+          mobileBtn.className = "p-1.5 rounded-lg border border-[#D5CEC9] text-[#2E2826] text-xs font-semibold bg-white";
+        }
+      }
+    }
+
+    function handleHeaderAuthClick() {
+      if (currentAuthUser) {
+        openUserProfileModal();
+      } else {
+        openAuthModal();
+      }
+    }
+
+    function openAuthModal() {
+      document.getElementById('modal-auth').classList.remove('hidden');
+      document.getElementById('auth-error-msg').classList.add('hidden');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('modal-auth').classList.add('hidden');
+    }
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      const title = document.getElementById('auth-modal-title');
+      const subtitle = document.getElementById('auth-modal-subtitle');
+      const submitBtn = document.getElementById('auth-submit-btn');
+      const tabSignIn = document.getElementById('tab-btn-signin');
+      const tabRegister = document.getElementById('tab-btn-register');
+      const fieldName = document.getElementById('auth-field-name');
+      const fieldPhone = document.getElementById('auth-field-phone');
+      const fieldAddress = document.getElementById('auth-field-address');
+
+      if (mode === 'login') {
+        title.textContent = 'Customer Sign In';
+        subtitle.textContent = 'Access your saved delivery addresses, orders & private concierge notes.';
+        submitBtn.innerHTML = '<span>Sign In to Account</span>';
+        tabSignIn.className = 'flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-[#7A2832] shadow-xs';
+        tabRegister.className = 'flex-1 py-2 text-xs font-semibold rounded-lg text-[#7A706B]';
+        fieldName.classList.add('hidden');
+        fieldPhone.classList.add('hidden');
+        fieldAddress.classList.add('hidden');
+      } else {
+        title.textContent = 'Create Boutique Account';
+        subtitle.textContent = 'Join our private gifting directory for bespoke curations & priority delivery.';
+        submitBtn.innerHTML = '<span>Complete Registration</span>';
+        tabRegister.className = 'flex-1 py-2 text-xs font-semibold rounded-lg bg-white text-[#7A2832] shadow-xs';
+        tabSignIn.className = 'flex-1 py-2 text-xs font-semibold rounded-lg text-[#7A706B]';
+        fieldName.classList.remove('hidden');
+        fieldPhone.classList.remove('hidden');
+        fieldAddress.classList.remove('hidden');
+      }
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('auth-input-email').value.trim().toLowerCase();
+      const password = document.getElementById('auth-input-password').value;
+      const errDiv = document.getElementById('auth-error-msg');
+      errDiv.classList.add('hidden');
+
+      let users = JSON.parse(localStorage.getItem('tgc_db_users') || '[]');
+
+      if (authMode === 'login') {
+        // Curator admin PIN check
+        if (password === 'curator2026' || password === 'admin123') {
+          currentAuthUser = {
+            id: 'USR-ADMIN-01',
+            name: 'Chaitally (Curator Admin)',
+            email: email || 'concierge@thegiftcuratordubai.com',
+            role: 'admin',
+            phone: '+971 56 679 9672'
+          };
+          localStorage.setItem('tgc_auth_user', JSON.stringify(currentAuthUser));
+          updateAuthUI();
+          closeAuthModal();
+          return;
+        }
+
+        const user = users.find(u => u.email.toLowerCase() === email && u.password === password);
+        if (user) {
+          currentAuthUser = user;
+          localStorage.setItem('tgc_auth_user', JSON.stringify(user));
+          updateAuthUI();
+          closeAuthModal();
+        } else {
+          errDiv.textContent = 'Invalid email or password. (Demo: client@example.com / client123)';
+          errDiv.classList.remove('hidden');
+        }
+      } else {
+        // Registration
+        const name = document.getElementById('auth-input-name').value.trim();
+        const phone = document.getElementById('auth-input-phone').value.trim();
+        const address = document.getElementById('auth-input-address').value.trim();
+
+        if (users.some(u => u.email.toLowerCase() === email)) {
+          errDiv.textContent = 'An account with this email already exists.';
+          errDiv.classList.remove('hidden');
+          return;
+        }
+
+        const newUser = {
+          id: `USR-${Date.now()}`,
+          name: name || 'Valued Client',
+          email,
+          phone,
+          address,
+          password,
+          role: 'customer'
+        };
+
+        users.push(newUser);
+        localStorage.setItem('tgc_db_users', JSON.stringify(users));
+
+        currentAuthUser = newUser;
+        localStorage.setItem('tgc_auth_user', JSON.stringify(newUser));
+        updateAuthUI();
+        closeAuthModal();
+      }
+    }
+
+    function loginDemoClient() {
+      currentAuthUser = {
+        id: 'USR-CUST-001',
+        name: 'Fatima Al-Maktoum',
+        email: 'client@example.com',
+        phone: '+971 50 892 1144',
+        address: 'Villa 12, Frond E, Palm Jumeirah, Dubai',
+        role: 'customer'
+      };
+      localStorage.setItem('tgc_auth_user', JSON.stringify(currentAuthUser));
+      updateAuthUI();
+      closeAuthModal();
+    }
+
+    function handleUserLogout() {
+      currentAuthUser = null;
+      localStorage.removeItem('tgc_auth_user');
+      updateAuthUI();
+      closeUserProfileModal();
+    }
+
+    // ==========================================
+    // USER PROFILE & ORDER TRACKING
+    // ==========================================
+    function openUserProfileModal() {
+      if (!currentAuthUser) return;
+      document.getElementById('modal-user-profile').classList.remove('hidden');
+      document.getElementById('profile-name').textContent = currentAuthUser.name;
+      document.getElementById('profile-email').textContent = currentAuthUser.email;
+      document.getElementById('profile-avatar').textContent = currentAuthUser.name.charAt(0).toUpperCase();
+      document.getElementById('profile-detail-phone').textContent = currentAuthUser.phone || 'Not provided';
+      document.getElementById('profile-detail-address').textContent = currentAuthUser.address || 'Not provided';
+      document.getElementById('profile-badge').textContent = currentAuthUser.role === 'admin' ? 'Curator Admin' : 'Client';
+
+      renderUserOrdersList();
+      showProfileSubtab('orders');
+    }
+
+    function closeUserProfileModal() {
+      document.getElementById('modal-user-profile').classList.add('hidden');
+    }
+
+    function showProfileSubtab(tab) {
+      const ordersCont = document.getElementById('subtab-myorders-content');
+      const detailsCont = document.getElementById('subtab-mydetails-content');
+      const btnOrders = document.getElementById('btn-sub-myorders');
+      const btnDetails = document.getElementById('btn-sub-mydetails');
+
+      if (tab === 'orders') {
+        ordersCont.classList.remove('hidden');
+        detailsCont.classList.add('hidden');
+        btnOrders.className = 'px-4 py-2 rounded-xl text-xs font-semibold bg-[#7A2832] text-white';
+        btnDetails.className = 'px-4 py-2 rounded-xl text-xs font-semibold text-[#524945] hover:bg-[#FAF7F2]';
+      } else {
+        ordersCont.classList.add('hidden');
+        detailsCont.classList.remove('hidden');
+        btnDetails.className = 'px-4 py-2 rounded-xl text-xs font-semibold bg-[#7A2832] text-white';
+        btnOrders.className = 'px-4 py-2 rounded-xl text-xs font-semibold text-[#524945] hover:bg-[#FAF7F2]';
+      }
+    }
+
+    function renderUserOrdersList() {
+      const container = document.getElementById('user-orders-container');
+      const countEl = document.getElementById('profile-order-count');
+      if (!container) return;
+
+      const myOrders = liveOrders.filter(o => 
+        (currentAuthUser && currentAuthUser.name && o.customer.toLowerCase().includes(currentAuthUser.name.toLowerCase().split(' ')[0])) ||
+        (currentAuthUser && currentAuthUser.phone && o.phone.replace(/[^0-9]/g, '') === currentAuthUser.phone.replace(/[^0-9]/g, ''))
+      );
+
+      if (countEl) countEl.textContent = myOrders.length;
+
+      if (myOrders.length === 0) {
+        container.innerHTML = `
+          <div class="py-8 text-center bg-[#FAF7F2] rounded-2xl border border-[#EAE2D8] p-5">
+            <span class="text-2xl block mb-1">🎁</span>
+            <h4 class="font-bold text-sm text-[#2E2826]">No Orders Placed Yet</h4>
+            <p class="text-xs text-[#7A706B] mt-1">Select any hamper from our collection to place your order with verified payment.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = myOrders.map(o => `
+        <div class="bg-[#FAF7F2] p-4 rounded-2xl border border-[#EAE2D8] space-y-2 text-xs">
+          <div class="flex items-center justify-between pb-2 border-b border-[#E8DFD5]">
+            <span class="font-mono font-bold text-[#2E2826]">${o.id}</span>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">${o.status}</span>
+          </div>
+          <div>Items: <strong>${o.items}</strong></div>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-[#7A706B]">${o.area}</span>
+            <span class="font-serif font-bold text-[#7A2832]">AED ${o.total}</span>
+          </div>
+          <div class="pt-1 text-right">
+            <a href="https://api.whatsapp.com/send?phone=971566799672&text=Hello%20The%20Gift%20Curator!%20Enquiry%20regarding%20my%20order%20(${o.id})." target="_blank" class="text-[11px] text-[#7A2832] font-semibold hover:underline">
+              💬 Chat about this order
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // LUXURY CHECKOUT & MULTI-PAYMENT SYSTEM
+    // ==========================================
+    let currentCheckoutProduct = null;
+    let selectedPayMethod = 'card'; // 'card' | 'apple_pay' | 'bank_transfer' | 'cod'
+    let lastCompletedOrder = null;
+
+    function openCheckoutModal(productId) {
+      currentCheckoutProduct = liveProducts.find(p => p.id === productId) || liveProducts[0];
+      if (!currentCheckoutProduct) return;
+
+      document.getElementById('chk-img').src = currentCheckoutProduct.image;
+      document.getElementById('chk-title').textContent = currentCheckoutProduct.title;
+      document.getElementById('chk-price').textContent = `AED ${currentCheckoutProduct.price}`;
+
+      // Pre-fill user details if logged in
+      if (currentAuthUser) {
+        document.getElementById('chk-input-name').value = currentAuthUser.name || '';
+        document.getElementById('chk-input-phone').value = currentAuthUser.phone || '';
+        document.getElementById('chk-input-address').value = currentAuthUser.address || '';
+        document.getElementById('chk-card-name').value = currentAuthUser.name || '';
+      }
+
+      // Reset steps
+      goToCheckoutDetailsStep();
+      document.getElementById('modal-checkout').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('modal-checkout').classList.add('hidden');
+    }
+
+    function goToCheckoutDetailsStep() {
+      document.getElementById('checkout-title').textContent = 'Delivery & Recipient Details';
+      document.getElementById('chk-step-details').classList.remove('hidden');
+      document.getElementById('chk-step-payment').classList.add('hidden');
+      document.getElementById('chk-step-success').classList.add('hidden');
+    }
+
+    function goToCheckoutPaymentStep() {
+      const name = document.getElementById('chk-input-name').value.trim();
+      const phone = document.getElementById('chk-input-phone').value.trim();
+      const address = document.getElementById('chk-input-address').value.trim();
+
+      if (!name || !phone || !address) {
+        alert('Please provide recipient name, phone number, and delivery address.');
+        return;
+      }
+
+      updateCheckoutDeliveryFee();
+      document.getElementById('checkout-title').textContent = 'Select Payment Method';
+      document.getElementById('chk-step-details').classList.add('hidden');
+      document.getElementById('chk-step-payment').classList.remove('hidden');
+      document.getElementById('chk-step-success').classList.add('hidden');
+    }
+
+    function updateCheckoutDeliveryFee() {
+      if (!currentCheckoutProduct) return;
+      const emirate = document.getElementById('chk-select-emirate').value;
+      const fee = emirate === 'Dubai' ? 0 : 35;
+      const subtotal = currentCheckoutProduct.price;
+      const total = subtotal + fee;
+
+      document.getElementById('chk-breakdown-subtotal').textContent = `AED ${subtotal}`;
+      document.getElementById('chk-breakdown-delivery').textContent = fee === 0 ? 'Complimentary (Free)' : `AED ${fee}`;
+      document.getElementById('chk-breakdown-total').textContent = `AED ${total}`;
+      document.getElementById('btn-process-pay').textContent = `🔒 Pay AED ${total} Now`;
+    }
+
+    function selectPayMethod(method) {
+      selectedPayMethod = method;
+      ['card', 'apple', 'bank', 'cod'].forEach(m => {
+        const btn = document.getElementById('pay-btn-' + m);
+        const view = document.getElementById('pay-view-' + m);
+        if (btn) {
+          btn.className = 'p-3 rounded-2xl border border-[#EAE2D8] bg-white text-[#524945] text-center text-xs hover:bg-[#FAF7F2]';
+        }
+        if (view) view.classList.add('hidden');
+      });
+
+      const activeKey = method === 'apple_pay' ? 'apple' : method === 'bank_transfer' ? 'bank' : method;
+      const activeBtn = document.getElementById('pay-btn-' + activeKey);
+      const activeView = document.getElementById('pay-view-' + activeKey);
+
+      if (activeBtn) {
+        activeBtn.className = 'p-3 rounded-2xl border border-[#7A2832] bg-[#FAECE8] text-[#7A2832] font-bold text-center text-xs shadow-xs';
+      }
+      if (activeView) activeView.classList.remove('hidden');
+    }
+
+    function formatCardNumberInput(input) {
+      let val = input.value.replace(/\D/g, '').substring(0, 16);
+      val = val.replace(/(\d{4})/g, '$1 ').trim();
+      input.value = val;
+    }
+
+    function formatCardExpiryInput(input) {
+      let val = input.value.replace(/\D/g, '').substring(0, 4);
+      if (val.length >= 2) {
+        input.value = val.substring(0, 2) + '/' + val.substring(2);
+      } else {
+        input.value = val;
+      }
+    }
+
+    function handleExecutePayment() {
+      const btn = document.getElementById('btn-process-pay');
+      btn.disabled = true;
+      btn.textContent = 'Processing Payment...';
+
+      setTimeout(() => {
+        const name = document.getElementById('chk-input-name').value.trim();
+        const phone = document.getElementById('chk-input-phone').value.trim();
+        const emirate = document.getElementById('chk-select-emirate').value;
+        const address = document.getElementById('chk-input-address').value.trim();
+        const note = document.getElementById('chk-input-note').value.trim();
+        const fee = emirate === 'Dubai' ? 0 : 35;
+        const total = currentCheckoutProduct.price + fee;
+
+        const newId = `ORD-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+        const payMethodLabel = selectedPayMethod === 'card' ? 'Credit Card' :
+          selectedPayMethod === 'apple_pay' ? 'Apple Pay' :
+          selectedPayMethod === 'bank_transfer' ? 'UAE Bank Wire' : 'Cash on Delivery';
+
+        lastCompletedOrder = {
+          id: newId,
+          customer: name,
+          phone: phone,
+          area: emirate,
+          address: address,
+          total: total,
+          status: selectedPayMethod === 'cod' ? 'In Preparation (COD)' : 'In Preparation',
+          paymentMethod: payMethodLabel,
+          items: `1x ${currentCheckoutProduct.title}`,
+          note: note
+        };
+
+        liveOrders.unshift(lastCompletedOrder);
+        refreshAdminData();
+
+        // Show Success Step
+        document.getElementById('chk-success-recipient').textContent = `Thank You, ${name}!`;
+        document.getElementById('chk-success-order-id').textContent = newId;
+        document.getElementById('chk-success-paymethod').textContent = payMethodLabel;
+        document.getElementById('chk-success-total').textContent = `AED ${total}`;
+
+        document.getElementById('chk-step-payment').classList.add('hidden');
+        document.getElementById('chk-step-success').classList.remove('hidden');
+
+        btn.disabled = false;
+        btn.textContent = '🔒 Pay Now';
+      }, 700);
+    }
+
+    function sendCheckoutWhatsAppReceipt() {
+      if (!lastCompletedOrder) return;
+      const msg = `*THE GIFT CURATOR DUBAI - ORDER RECEIPT* 🌸\n` +
+        `Order ID: ${lastCompletedOrder.id}\n` +
+        `Hamper: ${lastCompletedOrder.items}\n` +
+        `Total: AED ${lastCompletedOrder.total}\n` +
+        `Payment Method: ${lastCompletedOrder.paymentMethod}\n` +
+        `Recipient: ${lastCompletedOrder.customer} (${lastCompletedOrder.phone})\n` +
+        `Delivery Area: ${lastCompletedOrder.area}\n` +
+        `Delivery Address: ${lastCompletedOrder.address}\n` +
+        `Gift Note: "${lastCompletedOrder.note || 'None'}"\n\n` +
+        `Thank you for confirming dispatch!`;
+
+      openWhatsApp(getDirectWhatsAppUrl(msg));
+    }
+
     // Initialize on load
     window.onload = function() {
+      initAuthDatabase();
       updateAllWhatsAppLinks();
       renderPublicCatalogue();
     };

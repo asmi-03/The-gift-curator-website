@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import productsData from '../data/products.json';
 import { formatAED, createProductWhatsAppUrl } from '../utils/whatsapp';
-import { Filter, ShoppingBag, Eye, MessageCircle, Clock, Check, Sparkles } from 'lucide-react';
+import { Filter, ShoppingBag, Eye, MessageCircle, Clock, Check, Sparkles, CreditCard } from 'lucide-react';
 import ProductModal from './ProductModal';
 import ImageFrame from './ImageFrame';
 
-export default function ShopReadyToGift({ onNavigateToCurate }) {
+export default function ShopReadyToGift({ onNavigateToCurate, onCheckoutProduct }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedBudget, setSelectedBudget] = useState('All');
   const [activeProduct, setActiveProduct] = useState(null);
@@ -198,24 +198,34 @@ export default function ShopReadyToGift({ onNavigateToCurate }) {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="grid grid-cols-2 gap-2 pt-1">
+                    <div className="space-y-2 pt-1">
                       <button
-                        onClick={() => setActiveProduct(product)}
-                        className="py-2.5 px-3 rounded-xl bg-cream-200 hover:bg-cream-300 text-slatewarm-800 text-xs font-semibold transition-colors flex items-center justify-center gap-1"
+                        onClick={() => onCheckoutProduct ? onCheckoutProduct(product) : setActiveProduct(product)}
+                        className="w-full py-2.5 px-3 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold shadow-xs hover:shadow transition-all flex items-center justify-center gap-1.5"
                       >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>Details</span>
+                        <CreditCard className="w-3.5 h-3.5" />
+                        <span>Order & Pay Now ({formatAED(product.price)})</span>
                       </button>
 
-                      <a
-                        href={whatsappUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-xs hover:shadow transition-all flex items-center justify-center gap-1.5"
-                      >
-                        <MessageCircle className="w-3.5 h-3.5" />
-                        <span>WhatsApp</span>
-                      </a>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          onClick={() => setActiveProduct(product)}
+                          className="py-2 px-3 rounded-xl bg-cream-200 hover:bg-cream-300 text-slatewarm-800 text-xs font-medium transition-colors flex items-center justify-center gap-1"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Details</span>
+                        </button>
+
+                        <a
+                          href={whatsappUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-2 px-3 rounded-xl border border-emerald-600 text-emerald-700 hover:bg-emerald-50 text-xs font-medium transition-all flex items-center justify-center gap-1"
+                        >
+                          <MessageCircle className="w-3.5 h-3.5" />
+                          <span>WhatsApp</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User, ShoppingBag } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
 import { getCleanWhatsAppNumber, buildWhatsAppUrl } from '../utils/whatsapp';
 
-export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
+export default function Navbar({ onNavigate, activeTab, currentUser, onOpenAuthModal, onOpenProfileModal, onOpenOwnerPortal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const whatsappPhone = getCleanWhatsAppNumber();
 
@@ -110,8 +110,27 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
             </button>
           </nav>
 
-          {/* Right Action: Clean Burgundy WhatsApp Button (Matching Screenshot) */}
-          <div className="hidden lg:flex items-center">
+          {/* Right Action: Auth / Profile Button & Burgundy WhatsApp Button */}
+          <div className="hidden lg:flex items-center gap-3">
+            {currentUser ? (
+              <button
+                onClick={onOpenProfileModal}
+                className="px-4 py-2 rounded-lg bg-[#FAECE8] hover:bg-[#F5D8D0] text-[#7A2832] border border-[#E8DFD5] text-xs font-bold flex items-center gap-1.5 transition-all shadow-2xs"
+                title="View My Account & Orders"
+              >
+                <User className="w-4 h-4" />
+                <span>{currentUser.name.split(' ')[0]}</span>
+              </button>
+            ) : (
+              <button
+                onClick={onOpenAuthModal}
+                className="px-3.5 py-2 rounded-lg border border-[#D5CEC9] hover:border-[#7A2832] text-[#2E2826] text-xs font-semibold flex items-center gap-1.5 transition-all bg-white"
+              >
+                <User className="w-4 h-4 text-[#7A2832]" />
+                <span>Sign In</span>
+              </button>
+            )}
+
             <a 
               href={buildWhatsAppUrl("Hello The Gift Curator! I'd like to ask a question about your gifting services.")}
               target="_blank"
@@ -122,13 +141,30 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
             </a>
           </div>
 
-          {/* Mobile Menu Hamburger */}
+          {/* Mobile Menu Hamburger + Auth Icon */}
           <div className="flex items-center gap-2 lg:hidden">
+            {currentUser ? (
+              <button
+                onClick={onOpenProfileModal}
+                className="p-1.5 rounded-lg bg-[#FAECE8] text-[#7A2832] text-xs font-bold flex items-center gap-1"
+              >
+                <User className="w-4 h-4" />
+                <span className="text-[11px]">{currentUser.name.split(' ')[0]}</span>
+              </button>
+            ) : (
+              <button
+                onClick={onOpenAuthModal}
+                className="p-1.5 rounded-lg border border-[#D5CEC9] text-[#2E2826] text-xs font-semibold"
+              >
+                <User className="w-4 h-4 text-[#7A2832]" />
+              </button>
+            )}
+
             <a 
               href={buildWhatsAppUrl("Hello! I'd like to enquire about gifts.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold"
+              className="px-3 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold"
             >
               WhatsApp
             </a>
@@ -179,23 +215,33 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
           </button>
           <button 
             onClick={() => handleNavClick('contact')} 
-            className={`w-full text-left py-2 ${activeTab === 'contact' ? 'font-bold text-[#7A2832]' : ''}`}
+            className={`w-full text-left py-2 border-b border-[#F0EBE3] ${activeTab === 'contact' ? 'font-bold text-[#7A2832]' : ''}`}
           >
             Contact
           </button>
 
-          <div className="pt-3 border-t border-[#EAE2D8] flex items-center justify-between text-xs text-[#7A706B]">
-            <span>Anrudaya Gifts FZE • Dubai</span>
-            <button 
-              onClick={() => { setMobileMenuOpen(false); onOpenOwnerPortal(); }}
-              className="underline hover:text-[#2E2826]"
-            >
-              Owner Portal
-            </button>
+          {/* Account Profile action in drawer */}
+          <div className="pt-2">
+            {currentUser ? (
+              <button
+                onClick={() => { setMobileMenuOpen(false); onOpenProfileModal(); }}
+                className="w-full py-2.5 px-4 rounded-xl bg-[#FAECE8] text-[#7A2832] font-semibold text-xs flex items-center justify-between"
+              >
+                <span>👤 Logged in as {currentUser.name}</span>
+                <span className="text-[11px] underline">My Orders →</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => { setMobileMenuOpen(false); onOpenAuthModal(); }}
+                className="w-full py-2.5 px-4 rounded-xl bg-[#2E2826] text-white font-semibold text-xs flex items-center justify-center gap-2"
+              >
+                <User className="w-4 h-4 text-[#D4AF37]" />
+                <span>Customer Sign In / Register</span>
+              </button>
+            )}
           </div>
         </div>
       )}
-
     </header>
   );
 }
