@@ -110,7 +110,7 @@ export default function OurStory({ onNavigate }) {
 
                 <div className="pt-2 flex items-center justify-center gap-3 text-[11px] text-[#9E533F] font-serif italic">
                   <span className="w-8 h-[1px] bg-[#E0D5C7]"></span>
-                  <span>Anrudaya Gifts FZE • Dubai, UAE</span>
+                  <span>Dubai, UAE</span>
                   <span className="w-8 h-[1px] bg-[#E0D5C7]"></span>
                 </div>
               </div>
