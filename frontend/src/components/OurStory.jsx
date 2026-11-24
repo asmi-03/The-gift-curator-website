@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sparkles, MessageCircle, Heart, ArrowRight } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
-import { getCleanWhatsAppNumber } from '../utils/whatsapp';
+import { getCleanWhatsAppNumber, buildWhatsAppUrl } from '../utils/whatsapp';
 
 export default function OurStory({ onNavigate }) {
   const whatsappPhone = getCleanWhatsAppNumber();
@@ -66,7 +66,7 @@ export default function OurStory({ onNavigate }) {
               </button>
 
               <a
-                href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello Chaitally! I read your story on The Gift Curator and would love to ask about gifting.")}`}
+                href={buildWhatsAppUrl("Hello Chaitally! I read your story on The Gift Curator and would love to ask about gifting.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-xl bg-[#7A2832] hover:bg-[#682029] text-white text-xs font-semibold tracking-wider uppercase shadow-xs transition-all flex items-center gap-2"

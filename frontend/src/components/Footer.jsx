@@ -2,7 +2,7 @@ import React from 'react';
 import { Gift, MessageCircle, Mail, ShieldCheck, Heart, Lock } from 'lucide-react';
 import { InstagramIcon } from './Icons';
 import siteConfig from '../data/siteConfig.json';
-import { getCleanWhatsAppNumber } from '../utils/whatsapp';
+import { getCleanWhatsAppNumber, buildWhatsAppUrl } from '../utils/whatsapp';
 
 export default function Footer({ onNavigate, onOpenPrivacyModal, onOpenOwnerPortal }) {
   const whatsappPhone = getCleanWhatsAppNumber();
@@ -40,7 +40,7 @@ export default function Footer({ onNavigate, onOpenPrivacyModal, onOpenOwnerPort
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a
-                href={`https://api.whatsapp.com/send?phone=${whatsappPhone}`}
+                href={buildWhatsAppUrl("Hello The Gift Curator!")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-slatewarm-800 hover:bg-emerald-600 hover:text-white flex items-center justify-center text-slatewarm-300 transition-colors"

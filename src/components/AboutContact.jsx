@@ -2,7 +2,7 @@ import React from 'react';
 import { MessageCircle, Mail, MapPin, Clock, ShieldCheck, Heart } from 'lucide-react';
 import { InstagramIcon } from './Icons';
 import siteConfig from '../data/siteConfig.json';
-import { getCleanWhatsAppNumber } from '../utils/whatsapp';
+import { getCleanWhatsAppNumber, buildWhatsAppUrl } from '../utils/whatsapp';
 
 export default function AboutContact() {
   const whatsappPhone = getCleanWhatsAppNumber();
@@ -66,7 +66,7 @@ export default function AboutContact() {
               
               {/* WhatsApp Card */}
               <a
-                href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello! I would like to enquire about The Gift Curator.")}`}
+                href={buildWhatsAppUrl("Hello! I would like to enquire about The Gift Curator.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-2xl bg-white border border-cream-300 hover:border-emerald-500 shadow-soft transition-all group flex items-start gap-3"

@@ -1,10 +1,24 @@
 import siteConfig from '../data/siteConfig.json';
 
+// Detect whether user is on a mobile device or desktop
+export const isMobileDevice = () => {
+  if (typeof navigator === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
 // Clean phone number for WhatsApp URL (digits only)
 export const getCleanWhatsAppNumber = (overrideNumber) => {
-  const stored = typeof window !== 'undefined' ? localStorage.getItem('tgc_owner_whatsapp') : null;
+  let stored = null;
+  if (typeof window !== 'undefined') {
+    stored = localStorage.getItem('tgc_owner_whatsapp');
+    // Wipe old placeholder if present in user's browser
+    if (stored && (stored.includes('1234567') || stored.includes('123 4567') || stored.includes('+971501234567'))) {
+      try { localStorage.removeItem('tgc_owner_whatsapp'); } catch (_) {}
+      stored = null;
+    }
+  }
   const num = overrideNumber || stored || siteConfig.whatsappNumber || '971566799672';
-  return num.replace(/[^0-9]/g, '');
+  return (num || '971566799672').replace(/[^0-9]/g, '');
 };
 
 // Open WhatsApp link with fallback for pop-up blockers
@@ -16,10 +30,18 @@ export const openWhatsAppDirect = (url) => {
   }
 };
 
-// Build generic WhatsApp link
+// Build smart direct WhatsApp link:
+// - On Desktop: opens WhatsApp Web directly with chat & pre-filled message (no "Download app" barrier)
+// - On Mobile: opens WhatsApp native app directly
 export const buildWhatsAppUrl = (text = '', customNumber = null) => {
   const phone = getCleanWhatsAppNumber(customNumber);
-  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
+  const encoded = encodeURIComponent(text || '');
+  if (typeof window !== 'undefined' && !isMobileDevice()) {
+    // Desktop: Direct to WhatsApp Web chat
+    return `https://web.whatsapp.com/send?phone=${phone}&text=${encoded}`;
+  }
+  // Mobile: Direct to WhatsApp app
+  return `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
 };
 
 // Generate unique enquiry reference TGC-2026-XXXX
@@ -37,7 +59,6 @@ export const formatAED = (amount) => {
 
 // Generate WhatsApp link for Ready-to-Gift hamper
 export const createProductWhatsAppUrl = (product, customNote = '') => {
-  const phone = getCleanWhatsAppNumber();
   const message = `Hello The Gift Curator! 🎁
 
 I would like to order / enquire about a Ready-to-Gift hamper:
@@ -51,12 +72,11 @@ Could you please confirm availability, delivery charges for my address, and paym
 
 Thank you!`;
 
-  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+  return buildWhatsAppUrl(message);
 };
 
 // Generate WhatsApp link for Curate My Gift enquiry
 export const createCurateWhatsAppUrl = (enquiry) => {
-  const phone = getCleanWhatsAppNumber();
   const message = `Hello The Gift Curator! 🌸
 
 I would like to request a Personalised Gifting Concept:
@@ -72,12 +92,11 @@ ${enquiry.deliveryAddress ? `• Delivery Address: ${enquiry.deliveryAddress}\n`
 
 Looking forward to your complimentary concept and indicative quotation!`;
 
-  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+  return buildWhatsAppUrl(message);
 };
 
 // Generate WhatsApp link for Corporate Enquiry
 export const createCorporateWhatsAppUrl = (corporateData) => {
-  const phone = getCleanWhatsAppNumber();
   const message = `Hello The Gift Curator! 🏢
 
 We would like to request a Corporate / Bulk Gifting Quote:
@@ -93,7 +112,7 @@ We would like to request a Corporate / Bulk Gifting Quote:
 
 Please share your proposal and catalogue for bulk volume.`;
 
-  return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+  return buildWhatsAppUrl(message);
 };
 
 // Store enquiry to local storage for Owner Dashboard / CSV export (Section 9)

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Gift, Sparkles, MessageCircle, Menu, X, ShoppingBag, ShieldCheck, Home } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
-import { getCleanWhatsAppNumber } from '../utils/whatsapp';
+import { getCleanWhatsAppNumber, buildWhatsAppUrl } from '../utils/whatsapp';
 
 export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -147,7 +147,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
           {/* Desktop Right CTAs */}
           <div className="hidden lg:flex items-center gap-3">
             <a 
-              href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello The Gift Curator! I'd like to ask a quick question about your gifting services.")}`}
+              href={buildWhatsAppUrl("Hello The Gift Curator! I'd like to ask a quick question about your gifting services.")}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold tracking-wide shadow-sm hover:shadow transition-all"
@@ -160,7 +160,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 lg:hidden">
             <a 
-              href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello! I'd like to enquire about gifts.")}`}
+              href={buildWhatsAppUrl("Hello! I'd like to enquire about gifts.")}
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 text-emerald-600 hover:text-emerald-700"

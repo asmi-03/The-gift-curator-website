@@ -1081,7 +1081,7 @@
             </div>
             <div class="mt-4 pt-3 border-t border-[#F0EBE3] flex items-center justify-between">
               <span class="font-serif text-lg font-bold text-[#7A2832]">AED ${p.price}</span>
-              <a href="https://api.whatsapp.com/send?phone=${getWhatsAppNumber()}&text=${encodeURIComponent(`Hello The Gift Curator! I'd like to order ${p.title} (AED ${p.price}).`)}" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
+              <a href="${getDirectWhatsAppUrl(`Hello The Gift Curator! I'd like to order ${p.title} (AED ${p.price}).`)}" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold hover:bg-[#682029]">
                 Order
               </a>
             </div>
@@ -1348,15 +1348,40 @@
     // ==========================================
     // WHATSAPP HELPER FUNCTIONS & INTEGRATION
     // ==========================================
+    function isMobileDevice() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
     function getWhatsAppNumber() {
-      const stored = localStorage.getItem('tgc_owner_whatsapp');
+      let stored = localStorage.getItem('tgc_owner_whatsapp');
+      // Wipe old placeholder if present in user's browser
+      if (stored && (stored.includes('1234567') || stored.includes('123 4567') || stored.includes('+971501234567'))) {
+        localStorage.removeItem('tgc_owner_whatsapp');
+        stored = null;
+      }
       const num = stored || '971566799672';
       return num.replace(/[^0-9]/g, '');
     }
 
     function getWhatsAppDisplay() {
-      const stored = localStorage.getItem('tgc_owner_whatsapp');
+      let stored = localStorage.getItem('tgc_owner_whatsapp');
+      if (stored && (stored.includes('1234567') || stored.includes('123 4567') || stored.includes('+971501234567'))) {
+        localStorage.removeItem('tgc_owner_whatsapp');
+        stored = null;
+      }
       return stored || '+971 56 679 9672';
+    }
+
+    // Smart WhatsApp link builder:
+    // On Desktop: direct to WhatsApp Web (opens chat immediately with pre-filled text)
+    // On Mobile: direct to WhatsApp App
+    function getDirectWhatsAppUrl(text, customPhone) {
+      const phone = (customPhone || getWhatsAppNumber()).replace(/[^0-9]/g, '');
+      const encoded = encodeURIComponent(text || '');
+      if (!isMobileDevice()) {
+        return `https://web.whatsapp.com/send?phone=${phone}&text=${encoded}`;
+      }
+      return `https://api.whatsapp.com/send?phone=${phone}&text=${encoded}`;
     }
 
     function openWhatsApp(url) {
@@ -1373,23 +1398,23 @@
       // Desktop and mobile top header
       const navDesktop = document.getElementById('nav-whatsapp-link-desktop');
       if (navDesktop) {
-        navDesktop.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello The Gift Curator! I'd like to ask a question about your gifting services.")}`;
+        navDesktop.href = getDirectWhatsAppUrl("Hello The Gift Curator! I'd like to ask a question about your gifting services.", phone);
       }
       const navMobile = document.getElementById('nav-whatsapp-link-mobile');
       if (navMobile) {
-        navMobile.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello The Gift Curator!")}`;
+        navMobile.href = getDirectWhatsAppUrl("Hello The Gift Curator!", phone);
       }
 
       // Our Story link
       const storyLink = document.getElementById('story-whatsapp-link');
       if (storyLink) {
-        storyLink.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello Chaitally! I read your story on The Gift Curator and would love to say hello.")}`;
+        storyLink.href = getDirectWhatsAppUrl("Hello Chaitally! I read your story on The Gift Curator and would love to say hello.", phone);
       }
 
       // Contact card
       const contactLink = document.getElementById('contact-whatsapp-link');
       if (contactLink) {
-        contactLink.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent("Hello The Gift Curator! I have an enquiry.")}`;
+        contactLink.href = getDirectWhatsAppUrl("Hello The Gift Curator! I have an enquiry.", phone);
       }
       const contactDisp = document.getElementById('contact-whatsapp-display');
       if (contactDisp) {
@@ -1432,7 +1457,7 @@
     function testWhatsAppConnection() {
       const phone = getWhatsAppNumber();
       const testMsg = "Hello The Gift Curator! 🌸 This is a test message from your Admin Portal. WhatsApp messaging is connected and working perfectly!";
-      openWhatsApp(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(testMsg)}`);
+      openWhatsApp(getDirectWhatsAppUrl(testMsg, phone));
     }
 
     function submitConciergeWhatsApp() {
@@ -1456,7 +1481,7 @@ I would like to commission a Personalised Gift:
 Please share an initial concept!`;
 
       const phone = getWhatsAppNumber();
-      const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+      const url = getDirectWhatsAppUrl(msg, phone);
       openWhatsApp(url);
     }
 
@@ -1479,7 +1504,7 @@ Corporate Gifting Enquiry:
 Please provide a proposal & quotation!`;
 
       const phone = getWhatsAppNumber();
-      const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`;
+      const url = getDirectWhatsAppUrl(msg, phone);
       openWhatsApp(url);
     }
 

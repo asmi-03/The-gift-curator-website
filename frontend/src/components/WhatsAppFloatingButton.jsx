@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
-import { getCleanWhatsAppNumber } from '../utils/whatsapp';
+import { getCleanWhatsAppNumber, buildWhatsAppUrl } from '../utils/whatsapp';
 
 export default function WhatsAppFloatingButton() {
   const [showTooltip, setShowTooltip] = useState(true);
@@ -25,7 +25,7 @@ export default function WhatsAppFloatingButton() {
 
       {/* Floating Button */}
       <a
-        href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello The Gift Curator! I'm browsing your website and have a quick question.")}`}
+        href={buildWhatsAppUrl("Hello The Gift Curator! I'm browsing your website and have a quick question.")}
         target="_blank"
         rel="noopener noreferrer"
         className="w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-elevated hover:scale-105 transition-all focus:outline-none"

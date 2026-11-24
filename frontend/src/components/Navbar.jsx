@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import siteConfig from '../data/siteConfig.json';
-import { getCleanWhatsAppNumber } from '../utils/whatsapp';
+import { getCleanWhatsAppNumber, buildWhatsAppUrl } from '../utils/whatsapp';
 
 export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -113,7 +113,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
           {/* Right Action: Clean Burgundy WhatsApp Button (Matching Screenshot) */}
           <div className="hidden lg:flex items-center">
             <a 
-              href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello The Gift Curator! I'd like to ask a question about your gifting services.")}`}
+              href={buildWhatsAppUrl("Hello The Gift Curator! I'd like to ask a question about your gifting services.")}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-lg bg-[#7A2832] hover:bg-[#682029] text-white text-sm font-semibold tracking-wide shadow-xs transition-all flex items-center justify-center"
@@ -125,7 +125,7 @@ export default function Navbar({ onNavigate, activeTab, onOpenOwnerPortal }) {
           {/* Mobile Menu Hamburger */}
           <div className="flex items-center gap-2 lg:hidden">
             <a 
-              href={`https://api.whatsapp.com/send?phone=${whatsappPhone}&text=${encodeURIComponent("Hello! I'd like to enquire about gifts.")}`}
+              href={buildWhatsAppUrl("Hello! I'd like to enquire about gifts.")}
               target="_blank"
               rel="noopener noreferrer"
               className="px-3.5 py-1.5 rounded-lg bg-[#7A2832] text-white text-xs font-semibold"
